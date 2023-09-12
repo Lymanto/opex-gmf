@@ -1,0 +1,29 @@
+<aside class="max-w-[331px] w-full p-6 box-border">
+  <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-1 px-[16.5px] box-border">
+      <div class="w-full h-[52px]">
+        <img src="assets/images/logo.png" alt="logo" />
+      </div>
+      <div class="p-lg tracking-[0.5px] font-semibold text-primary-hover">
+        Dashboard Realisasi Anggaran
+      </div>
+    </div>
+    <ul class="flex flex-col gap-3">
+      <li *ngFor="let menuItem of sidebarData" routerLinkActive="active">
+        <a
+          [routerLink]="[menuItem.path]"
+          class="flex flex-row gap-3 items-center"
+          (mouseover)="menuItem.src = menuItem.srcIn"
+          (mouseout)="menuItem.src = menuItem.srcOut"
+        >
+          <div class="w-[48px] h-[48px] bg-white p-3 box-border rounded-[12px]">
+            <img [src]="menuItem.src" alt="dashboard icon" />
+          </div>
+          <span class="text-p-lg tracking-[0.5px] text-neutral-70">
+            {{ menuItem.title }}
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>
