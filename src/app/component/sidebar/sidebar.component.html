@@ -12,17 +12,45 @@
       <li *ngFor="let menuItem of sidebarData" routerLinkActive="active">
         <a
           [routerLink]="[menuItem.path]"
-          class="flex flex-row gap-3 items-center"
-          (mouseover)="menuItem.src = menuItem.srcIn"
-          (mouseout)="menuItem.src = menuItem.srcOut"
+          [ngClass]="
+            menuItem.path === active
+              ? 'flex flex-row gap-3 items-center bg-primary-hover rounded-[12px]'
+              : 'flex flex-row gap-3 items-center'
+          "
         >
-          <div class="w-[48px] h-[48px] bg-white p-3 box-border rounded-[12px]">
-            <img [src]="menuItem.src" alt="dashboard icon" />
+          <div
+            [ngClass]="
+              menuItem.path === active
+                ? 'w-[48px] h-[48px] bg-primary-pressed p-3 box-border rounded-[12px]'
+                : 'w-[48px] h-[48px] bg-white p-3 box-border rounded-[12px]'
+            "
+          >
+            <img
+              [src]="
+                menuItem.path === active ? menuItem.srcActive : menuItem.src
+              "
+              alt="dashboard icon"
+            />
           </div>
-          <span class="text-p-lg tracking-[0.5px] text-neutral-70">
+          <span
+            [ngClass]="
+              menuItem.path === active
+                ? 'text-p-lg tracking-[0.5px] text-neutral-10 '
+                : 'text-p-lg tracking-[0.5px] text-neutral-70'
+            "
+          >
             {{ menuItem.title }}
           </span>
         </a>
+        <div
+          *ngFor="let subMenu of menuItem.subMenu"
+          class="flex flex-row items-center gap-3"
+        >
+          <div class="w-[48px] h-[48px]">
+            <div class="w-[3px] mx-auto h-full bg-primary-pressed"></div>
+          </div>
+          <a href="">{{ subMenu.title }}</a>
+        </div>
       </li>
     </ul>
   </div>

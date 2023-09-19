@@ -1,1 +1,19 @@
-<app-sidebar></app-sidebar>
+<main class="flex flex-row w-full">
+  <div>
+    <app-sidebar active="/dashboard"></app-sidebar>
+  </div>
+  <div class="flex-1 py-6 pr-6 box-border flex flex-col gap-4">
+    <app-topnav></app-topnav>
+    <div class="p-4 border border-primary-border rounded-3xl bg-neutral-10">
+      <div class="flex flex-row justify-between items-center">
+        <h2 class="text-subheading font-medium text-neutral-100">
+          List of Data
+        </h2>
+      </div>
+      <div class="border border-primary-border rounded-3xl bg-neutral-10 p-3">
+        <div><app-select-box></app-select-box></div>
+      </div>
+      <app-table></app-table>
+    </div>
+  </div>
+</main>
