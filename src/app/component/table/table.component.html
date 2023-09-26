@@ -1,42 +1,38 @@
 <table class="w-full">
   <tr
-    class="text-center border border-b-2 border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
-  >
-    <th class="w-12 h-14">No.</th>
-    <th class="w-30 h-14">No. of Request</th>
-    <th class="w-40 h-14">Entry Date</th>
-    <th class="w-30 h-14">Dinas</th>
-    <th class="w-25 h-14">Status</th>
-    <th class="w-18 h-14">Type Submission</th>
-    <th class="w-40 h-14">Status To</th>
-    <th class="w-30 h-14">Department To</th>
-    <th class="w-40 h-14">Submission Value</th>
-    <th class="w-16 h-14">Action</th>
+    class=" text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto">
+    <th *ngFor = "let column of headers" class="p-2">
+      {{column}}
+    </th>
   </tr>
   <tr
-    class="text-center border border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
   >
-    <td>01</td>
-    <td>TD/1079/8/23</td>
-    <td>30 Maret 2023</td>
-    <td>TD</td>
-    <td>
+    <td class="p-2">01</td>
+    <td >TD/1079/8/23</td>
+    <td >30 Maret 2023</td>
+    <td >TD</td>
+    <td >
       <div
-        class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-green text-tertiary-tx-green text-center w-[54px] h-[24px] rounded bg-tertiary-bg-green"
-      >
+        class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-green text-tertiary-tx-green text-center w-[54px] h-[24px] rounded bg-tertiary-bg-green">
         Closed
       </div>
     </td>
-    <td>Uang Muka</td>
-    <td></td>
-    <td></td>
-    <td>20.949,75 USD</td>
-    <td><img src="" alt="Arrow down" /></td>
+    <td >Uang Muka</td>
+    <td  ></td>
+    <td ></td>
+    <td >20.949,75 USD</td>
+    <td> 
+      <div class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+        <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
+      </div>
+    </td>
+       
   </tr>
   <tr
-    class="text-center border border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    class="text-center border  border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
   >
-    <td>02</td>
+    <td class="p-2">02</td>
     <td>TD/1079/8/23</td>
     <td>30 Maret 2023</td>
     <td>TB</td>
@@ -51,12 +47,16 @@
     <td>Ade Ma'rufan Amala</td>
     <td>JKTTDI-2</td>
     <td>20.949,75 USD</td>
-    <td><img src="" alt="Arrow down" /></td>
+    <td> 
+      <div class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+        <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
+      </div>
+    </td>
   </tr>
   <tr
-    class="text-center border border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
   >
-    <td>03</td>
+    <td class="p-2" >03</td>
     <td>TD/1079/8/23</td>
     <td></td>
     <td>TJ</td>
@@ -71,12 +71,16 @@
     <td>Ade Ma'rufan Amala</td>
     <td>JKTTDI-2</td>
     <td>20.949,75 USD</td>
-    <td><img src="" alt="Arrow down" /></td>
+    <td> 
+      <div class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+        <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
+      </div>
+    </td>
   </tr>
   <tr
-    class="text-center border border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
   >
-    <td>04</td>
+    <td class="p-2" >04</td>
     <td>TD/1079/8/23</td>
     <td>30 Maret 2023</td>
     <td>TE</td>
@@ -91,12 +95,16 @@
     <td>Ade Ma'rufan Amala</td>
     <td>JKTTDI-2</td>
     <td>20.949,75 USD</td>
-    <td><img src="" alt="Arrow down" /></td>
+    <td> 
+      <div class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+        <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
+      </div>
+    </td>
   </tr>
   <tr
-    class="text-center border border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
   >
-    <td>05</td>
+    <td class="p-2" >05</td>
     <td>TD/1079/8/23</td>
     <td>30 Maret 2023</td>
     <td>TD</td>
@@ -111,12 +119,16 @@
     <td></td>
     <td></td>
     <td>20.949,75 USD</td>
-    <td><img src="" alt="Arrow down" /></td>
+    <td> 
+      <div class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+        <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
+      </div>
+    </td>
   </tr>
   <tr
-    class="text-center border border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    class="text-center border  border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
   >
-    <td>06</td>
+    <td class="p-2" >06</td>
     <td>TD/1079/8/23</td>
     <td>30 Maret 2023</td>
     <td>TC</td>
@@ -131,12 +143,16 @@
     <td></td>
     <td></td>
     <td>20.949,75 USD</td>
-    <td><img src="" alt="Arrow down" /></td>
+    <td> 
+      <div class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+        <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
+      </div>
+    </td>
   </tr>
   <tr
-    class="text-center border border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
   >
-    <td>07</td>
+    <td class="p-2" >07</td>
     <td>TD/1079/8/23</td>
     <td>30 Maret 2023</td>
     <td>TZ</td>
@@ -151,12 +167,16 @@
     <td></td>
     <td></td>
     <td>20.949,75 USD</td>
-    <td><img src="" alt="Arrow down" /></td>
+    <td> 
+      <div class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+        <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
+      </div>
+    </td>
   </tr>
   <tr
-    class="text-center border border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    class="text-center border  border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
   >
-    <td>08</td>
+    <td class="p-2">08</td>
     <td>TD/1079/8/23</td>
     <td>30 Maret 2023</td>
     <td>TU</td>
@@ -171,12 +191,16 @@
     <td></td>
     <td></td>
     <td>20.949,75 USD</td>
-    <td><img src="" alt="Arrow down" /></td>
+    <td> 
+      <div class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+        <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
+      </div>
+    </td>
   </tr>
   <tr
-    class="text-center border border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
   >
-    <td>09</td>
+    <td class="p-2">09</td>
     <td>TD/1079/8/23</td>
     <td>30 Maret 2023</td>
     <td>TQ</td>
@@ -191,12 +215,16 @@
     <td></td>
     <td></td>
     <td>20.949,75 USD</td>
-    <td><img src="" alt="Arrow down" /></td>
+    <td> 
+      <div class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+        <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
+      </div>
+    </td>
   </tr>
   <tr
-    class="text-center border border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
   >
-    <td>10</td>
+    <td class="p-2">10</td>
     <td>TD/1079/8/23</td>
     <td>30 Maret 2023</td>
     <td>TL</td>
@@ -211,6 +239,30 @@
     <td></td>
     <td></td>
     <td>20.949,75 USD</td>
-    <td><img src="" alt="Arrow down" /></td>
+    <td> 
+      <div class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+        <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
+      </div>
+    </td>
   </tr>
 </table>
+<div class="flex justify-between items-center">
+  <div class="flex gap-1">
+      <div class="text-p-md tracking-[0.5px] text-neutral-60">Row per page</div>
+      <div class="text-p-md tracking-[0.5px] text-neutral-100">10</div>
+      <div><img src="" alt="chevron"></div>
+    </div>
+  <div class="justify-end items-center mt-2">
+    <div class="flex gap-1">    
+      <div class="text-p-md tracking-[0.5px] text-neutral-60">Page</div>
+      <div class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center">1</div>
+      <div class="text-p-md tracking-[0.5px] text-neutral-60">of 200</div>
+      <div class="text-p-md tracking-[0.5px] border-solid border-2 bg-neutral-20 border-neutral-40 text-neutral-60 text-center rounded w-[22px] h-[22px] flex justify-center items-center"><img src="" alt=""></div>
+      <div class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-hover bg-primary-hover text-white text-center rounded w-[22px] h-[22px] flex justify-center items-center">1</div>
+      <div class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center">2</div>
+      <div class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center">3</div>
+      <div class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center">...</div>
+      <div class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center"><img src="assets/images/icons/ic-arrow-right.svg" alt=""></div>
+   </div>
+  </div>
+</div>
