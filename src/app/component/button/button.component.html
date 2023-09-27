@@ -1,0 +1,10 @@
+<button
+  [ngClass]="{
+    'btn-danger-not-active': type == 'danger-not-active',
+    'btn-primary': type == 'primary',
+    'btn-primary-not-active': type == 'primary-not-active'
+  }"
+>
+  <img [src]="icon" alt="icon" class="w-4 h-4" />
+  {{ label }}
+</button>

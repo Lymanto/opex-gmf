@@ -1,0 +1,9 @@
+.btn-primary {
+  @apply text-p-md font-medium text-neutral-10 bg-primary-hover border border-primary-hover rounded-xl p-2 flex flex-row gap-1 items-center;
+}
+.btn-danger-not-active {
+  @apply text-p-md font-medium text-tertiary-tx-red border border-tertiary-tx-red rounded-xl p-2 flex flex-row gap-1 items-center;
+}
+.btn-primary-not-active {
+  @apply text-p-md font-medium text-primary-hover border border-primary-hover rounded-xl p-2 flex flex-row gap-1 items-center;
+}
