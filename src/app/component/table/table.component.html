@@ -5,8 +5,11 @@
       {{column}}
     </th>
   </tr>
-  <tr
-    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]">
+  <tr 
+    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    [ngClass]="{
+      'bg-primary-bg-2':show,
+    }">
     <td class="p-4">01</td>
     <td>TD/1079/8/23</td>
     <td>30 Maret 2023</td>
@@ -38,7 +41,7 @@
     </td>
   </tr>
   <tr *ngIf="show"
-    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-border text-p-md tracking-[0.5px]">
+    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]">
     <td colspan="9">
       <div class="flex gap-1 items-center ">
         <div class="text-p-md tracking-[0.5px] font-medium">Description</div>
@@ -59,10 +62,9 @@
           <img src="assets/images/icons/ic-eyes-blue.svg" alt="">
         </div>
       </button>
-
     </td>
-
   </tr>
+
   <tr
     class="text-center border  border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]">
     <td class="p-4">02</td>
