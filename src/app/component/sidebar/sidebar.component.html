@@ -11,46 +11,116 @@
     <ul class="flex flex-col gap-3">
       <li *ngFor="let menuItem of sidebarData" routerLinkActive="active">
         <a
-          [routerLink]="[menuItem.path]"
-          [ngClass]="
-            menuItem.path === active
-              ? 'flex flex-row gap-3 items-center bg-primary-hover rounded-[12px]'
-              : 'flex flex-row gap-3 items-center'
-          "
+          [routerLink]="menuItem.path"
+          *ngIf="!menuItem.subMenu"
+          class="flex flex-row items-center justify-between pr-3 box-border w-full"
+          [ngClass]="{
+            'bg-primary-hover rounded-[12px]': menuItem.path === active
+          }"
         >
-          <div
-            [ngClass]="
-              menuItem.path === active
-                ? 'w-[48px] h-[48px] bg-primary-pressed p-3 box-border rounded-[12px]'
-                : 'w-[48px] h-[48px] bg-white p-3 box-border rounded-[12px]'
-            "
-          >
-            <img
-              [src]="
-                menuItem.path === active ? menuItem.srcActive : menuItem.src
-              "
-              alt="dashboard icon"
-            />
+          <div class="flex items-center justify-between w-full">
+            <div class="flex flex-row gap-2 items-center">
+              <div
+                class="w-[48px] h-[48px] p-3 box-border rounded-[12px]"
+                [ngClass]="{
+                  'bg-primary-pressed': menuItem.path === active,
+                  'bg-white': menuItem.path !== active
+                }"
+              >
+                <img
+                  [src]="
+                    menuItem.path === active ? menuItem.srcActive : menuItem.src
+                  "
+                  alt="dashboard icon"
+                />
+              </div>
+              <span
+                class="text-p-lg tracking-[0.5px]"
+                [ngClass]="{
+                  'text-neutral-10 ': menuItem.path === active,
+                  'text-neutral-70': menuItem.path !== active
+                }"
+              >
+                {{ menuItem.title }}
+              </span>
+            </div>
+            <ng-container *ngIf="menuItem.needApproval">
+              <div
+                class="bg-neutral-10 p-2 text-p-sm font-medium text-primary-hover rounded-xl"
+              >
+                {{ menuItem.needApproval }}
+              </div>
+            </ng-container>
           </div>
-          <span
-            [ngClass]="
-              menuItem.path === active
-                ? 'text-p-lg tracking-[0.5px] text-neutral-10 '
-                : 'text-p-lg tracking-[0.5px] text-neutral-70'
-            "
-          >
-            {{ menuItem.title }}
-          </span>
         </a>
         <div
-          *ngFor="let subMenu of menuItem.subMenu"
-          class="flex flex-row items-center gap-3"
+          *ngIf="menuItem.subMenu"
+          class="flex flex-row items-center justify-between pr-3 box-border w-full cursor-pointer"
+          (click)="menuItem.isSubMenuActive = !menuItem.isSubMenuActive"
+          [ngClass]="{
+            'bg-primary-hover rounded-[12px]': menuItem.path === active
+          }"
         >
-          <div class="w-[48px] h-[48px]">
-            <div class="w-[3px] mx-auto h-full bg-primary-pressed"></div>
+          <div class="flex flex-row gap-2 items-center">
+            <div
+              class="w-[48px] h-[48px] p-3 box-border rounded-[12px]"
+              [ngClass]="{
+                'bg-primary-pressed': menuItem.path === active,
+                'bg-white': menuItem.path !== active
+              }"
+            >
+              <img
+                [src]="
+                  menuItem.path === active ? menuItem.srcActive : menuItem.src
+                "
+                alt="dashboard icon"
+              />
+            </div>
+            <span
+              class="text-p-lg tracking-[0.5px]"
+              [ngClass]="{
+                'text-neutral-10 ': menuItem.path === active,
+                'text-neutral-70': menuItem.path !== active
+              }"
+            >
+              {{ menuItem.title }}
+            </span>
           </div>
-          <a href="">{{ subMenu.title }}</a>
+          <div class="">
+            <img
+              *ngIf="menuItem.subMenu"
+              [src]="
+                menuItem.path === active || menuItem.isSubMenuActive
+                  ? 'assets/images/icons/ic-arrow-up-white.svg'
+                  : 'assets/images/icons/ic-arrow-down.svg'
+              "
+              alt="arrow"
+            />
+          </div>
         </div>
+        <ng-container *ngIf="menuItem.isSubMenuActive">
+          <a
+            *ngFor="let subMenu of menuItem.subMenu"
+            class="flex flex-row items-center justify-between pr-2"
+            [routerLink]="subMenu.path + menuItem.path"
+          >
+            <div class="flex flex-row items-center gap-2">
+              <div class="w-[48px] h-[48px]">
+                <div class="w-[3px] mx-auto h-full bg-primary-pressed"></div>
+              </div>
+              <p>{{ subMenu.title }}</p>
+            </div>
+            <img
+              [src]="
+                menuItem.path + subMenu.path === active
+                  ? 'assets/images/icons/ic-arrow-right-1-active.svg'
+                  : 'assets/images/icons/ic-arrow-right-1.svg'
+              "
+              class="w-[24px] h-[24px]"
+              alt="ic right"
+            />
+          </a>
+        </ng-container>
       </li>
     </ul>
   </div>
