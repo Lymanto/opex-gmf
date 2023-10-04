@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
 export class TableCreateRequestComponent {
 
 
-  headers = ["No", "Document Name", "Doc. Type", "Size", "Upload by", "Deparment by", "Upload Date","Action"];
+  headers = ["No", "Document Name", "Doc. Type", "Size", "Upload by", "Deparment by", "Upload Date", "Action"];
 
 }

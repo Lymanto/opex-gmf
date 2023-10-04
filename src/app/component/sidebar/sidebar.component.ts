@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 type SidebarData = {
   path: string;
@@ -21,12 +21,7 @@ export const sidebarData: SidebarData[] = [
     src: 'assets/images/icons/ic-dashboard.svg',
     srcActive: 'assets/images/icons/ic-dashboard-active.svg',
   },
-  {
-    path: '/request',
-    title: 'Request',
-    src: 'assets/images/icons/ic-request.svg',
-    srcActive: 'assets/images/icons/ic-request-active.svg',
-  },
+
   {
     path: '/need-approval',
     title: 'Need Approval',
@@ -113,12 +108,12 @@ export const sidebarData: SidebarData[] = [
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   @Input() active: string = '';
   @Input() needApproval: string = '0';
 
   sidebarData: SidebarData[] = sidebarData;
-  constructor() {}
+  constructor() { }
   ngOnInit() {
     sidebarData[2]['needApproval'] = this.needApproval;
   }

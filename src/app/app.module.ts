@@ -14,8 +14,9 @@ import { NgChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectBoxComponent } from './component/Form/select-box/select-box.component';
 import { DashboardComponent } from './pages/dashboard/dashboard/dashboard.component';
-import { RequestComponent } from './pages/request/request.component';
 import { NewRequestComponent } from './pages/dashboard/new-request/new-request.component';
+import { LayoutComponent } from './component/layout/layout.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,9 @@ import { NewRequestComponent } from './pages/dashboard/new-request/new-request.c
     ButtonComponent,
     StatusPercentageComponent,
     DashboardComponent,
-    RequestComponent,
     NewRequestComponent,
+    LayoutComponent,
+    LoginComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -41,4 +43,4 @@ import { NewRequestComponent } from './pages/dashboard/new-request/new-request.c
     SelectBoxComponent,
   ],
 })
-export class AppModule {}
+export class AppModule { }
