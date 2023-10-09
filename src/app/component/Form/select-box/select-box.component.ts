@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { NgFor, AsyncPipe, NgIf } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 export interface statusList {
   id: number;
@@ -74,6 +74,7 @@ export const submissionList: submissionList[] = [
     MatAutocompleteModule,
     ReactiveFormsModule,
     NgFor,
+    NgIf,
     AsyncPipe,
   ],
 })
@@ -81,6 +82,7 @@ export class SelectBoxComponent implements OnInit {
   @Input() label: string = '';
   @Input() id: string = '';
   @Input() type: string = '';
+  @Input() required: boolean = false;
   statusList = statusList;
   submissionList = submissionList;
   control = new FormControl('');

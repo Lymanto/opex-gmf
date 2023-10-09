@@ -1,3 +1,60 @@
 <app-layout needApproval="100" currentUrl="/dashboard">
-    <p>request works</p>
+  <div
+    class="p-4 border border-primary-border rounded-3xl bg-neutral-10 flex flex-col gap-4"
+  >
+    <div class="flex justify-between items-center">
+      <app-button
+        icon="assets/images/icons/ic-arrow-left.svg"
+        type="primary-not-active"
+        label="Back"
+      ></app-button>
+      <p class="text-p-lg font-medium">Create Request Realization</p>
+      <app-button
+        icon="assets/images/icons/ic-reset.svg"
+        type="danger-not-active"
+        label="Reset"
+      ></app-button>
+    </div>
+    <div class="flex flex-col gap-4">
+      <div class="grid grid-cols-3 gap-4">
+        <app-input-date
+          label="Entry Date"
+          id="entryDate"
+          placeholder="Select One.."
+        ></app-input-date>
+        <app-input-text
+          id="requestNumber"
+          placeholder="Fill this.."
+          label="User (Dinas)"
+        ></app-input-text>
+        <app-select-box
+          id="typeSubmission"
+          label="Type of Submission"
+          type="typeSubmission"
+        ></app-select-box>
+      </div>
+      <div class="grid grid-cols-4 gap-4">
+        <app-input-text
+          id="nameOfRequest"
+          placeholder="Fill this.."
+          label="Name of Request"
+        ></app-input-text>
+        <app-input-text
+          id="idNumber"
+          placeholder="Fill this.."
+          label="ID Number"
+        ></app-input-text>
+        <app-select-box
+          id="responsibleOfRequest"
+          label="Responsible of Request"
+          [required]="true"
+        ></app-select-box>
+        <app-input-text
+          id="idNumber"
+          placeholder="Fill this.."
+          label="ID Number"
+        ></app-input-text>
+      </div>
+    </div>
+  </div>
 </app-layout>
