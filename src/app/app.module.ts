@@ -17,6 +17,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard/dashboard.compon
 import { NewRequestComponent } from './pages/dashboard/new-request/new-request.component';
 import { LayoutComponent } from './component/layout/layout.component';
 import { LoginComponent } from './pages/login/login.component';
+import { TextareaComponent } from './component/Form/textarea/textarea.component';
+import { ItemComponent } from './component/item/item.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { LoginComponent } from './pages/login/login.component';
     NewRequestComponent,
     LayoutComponent,
     LoginComponent,
+    TextareaComponent,
+    ItemComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

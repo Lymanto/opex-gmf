@@ -1,0 +1,29 @@
+<div class="flex flex-col gap-1">
+  <div class="flex items-center gap-0.5">
+    <label for="{{ id }}">{{ label }}</label>
+    <span class="text-tertiary-tx-red text-p-md" *ngIf="required">*</span>
+    <img src="assets/images/icons/ic-ask.svg" class="w-4 h-4" />
+  </div>
+  <ng-container *ngIf="type === 'normal'">
+    <textarea
+      name="{{ id }}"
+      id="{{ id }}"
+      class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-80 appearance-none w-full"
+      placeholder="{{ placeholder }}"
+      required="{{ required }}"
+      cols="2"
+      >{{ content }}</textarea
+    >
+  </ng-container>
+  <ng-container *ngIf="type === 'rich'">
+    <textarea
+      name="{{ id }}"
+      id="{{ id }}"
+      class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-80 appearance-none w-full"
+      placeholder="{{ placeholder }}"
+      required="{{ required }}"
+      cols="2"
+      >{{ content }}</textarea
+    >
+  </ng-container>
+</div>

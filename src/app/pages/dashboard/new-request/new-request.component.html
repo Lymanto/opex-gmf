@@ -31,6 +31,7 @@
           id="typeSubmission"
           label="Type of Submission"
           type="typeSubmission"
+          [required]="true"
         ></app-select-box>
       </div>
       <div class="grid grid-cols-4 gap-4">
@@ -56,5 +57,19 @@
         ></app-input-text>
       </div>
     </div>
+    <app-textarea
+      id="titleOfRequest"
+      label="Title of Request"
+      [required]="true"
+      type="normal"
+    ></app-textarea>
+    <app-textarea
+      id="noteOfRequest"
+      label="Note of Request"
+      [required]="true"
+      type="rich"
+    ></app-textarea>
+    <app-item></app-item>
+    <app-table createnewrequesttable=" "></app-table>
   </div>
 </app-layout>
