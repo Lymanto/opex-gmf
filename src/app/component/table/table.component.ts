@@ -23,9 +23,14 @@ export class TableComponent {
 
   headers = ["No", "No. of Request", "Entry Date", "Dinas", "Status", "Type of Submission", "Status To", "Department To", "Submission Value", "Action"];
 
+  head = ["No", "Document Name", "Doc. Type", "Size", "Upload by", "Deparment by", "Upload Date", "Action"];
+
   show: boolean = false
 
   onclick() {
     this.show = !this.show
   }
+
+  @Input() dashboardtable: string = '';
+  @Input() createnewrequesttable: string = '';
 }
