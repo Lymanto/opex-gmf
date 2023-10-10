@@ -12,4 +12,5 @@ export class TextareaComponent {
   @Input() required: boolean = false;
   @Input() content: string = '';
   @Input() type: string = '';
+  @Input() isAsk: boolean = false;
 }

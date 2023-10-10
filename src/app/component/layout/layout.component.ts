@@ -9,5 +9,4 @@ import { Component, Input } from '@angular/core';
 export class LayoutComponent {
   @Input() currentUrl: string = ''
   @Input() needApproval: string = ''
-
 }

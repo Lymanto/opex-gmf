@@ -3,7 +3,15 @@
     [ngClass]="{
       'btn-danger-not-active': type == 'danger-not-active',
       'btn-primary': type == 'primary',
-      'btn-primary-not-active': type == 'primary-not-active'
+      'btn-primary-not-active': type == 'primary-not-active',
+      'btn-create-allocation': type == 'create-allocation',
+      'btn-create-allocation-not-active':
+        type == 'create-allocation-not-active',
+      'btn-submit': type == 'submit',
+      'btn-edit-reallocation': type == 'edit-reallocation',
+      'btn-trash': type == 'trash',
+      'btn-edit': type == 'edit',
+      'btn-show': type == 'show'
     }"
   >
     <img [src]="icon" alt="icon" class="w-4 h-4" />

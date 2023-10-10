@@ -113,7 +113,7 @@ module.exports = {
         tertiary: {
           "bg-green": "#CFF2CC",
           "br-green": "#5FD355",
-          "tx-green": "#84BD00",
+          "tx-green": "#0FBD00",
           "bg-yellow": "#F9F1D8",
           "br-yellow": "#ECD07C",
           "tx-yellow": "#E2B93B",

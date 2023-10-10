@@ -1,10 +1,63 @@
 <div class="flex flex-col gap-1">
-  <label for="{{ id }}">{{ label }}</label>
-  <input
-    name="{{ id }}"
-    id="{{ id }}"
-    class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-80 appearance-none w-full"
-    type="text"
-    placeholder="{{ placeholder }}"
-  />
+  <label [for]="id" class="flex flex-row items-center gap-0.5"
+    >{{ label }}
+    <span class="text-tertiary-tx-red text-p-md" *ngIf="required">*</span>
+    <img
+      src="assets/images/icons/ic-ask.svg"
+      *ngIf="isAsk"
+      class="w-4 h-4"
+      alt="icon"
+    />
+  </label>
+  <ng-container *ngIf="type === 'normal'">
+    <input
+      [name]="id"
+      [id]="id"
+      class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-80 appearance-none w-full disabled:bg-neutral-20"
+      type="text"
+      [placeholder]="placeholder"
+      [disabled]="isDisabled"
+      [required]="required"
+    />
+  </ng-container>
+  <ng-container *ngIf="type === 'currency'">
+    <div class="relative">
+      <input
+        [name]="id"
+        [id]="id"
+        class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-80 appearance-none w-full disabled:bg-neutral-20"
+        type="text"
+        [placeholder]="placeholder"
+        [disabled]="isDisabled"
+        [required]="required"
+      />
+      <div class="absolute right-3 top-1/2 -translate-y-1/2">USD</div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="type === 'amount-submission'">
+    <div class="relative">
+      <input
+        [name]="id"
+        [id]="id"
+        class="border border-neutral-40 p-3 pr-[100px] rounded-2xl text-p-md text-neutral-80 appearance-none w-full disabled:bg-neutral-20"
+        type="text"
+        [placeholder]="placeholder"
+        [disabled]="isDisabled"
+        [required]="required"
+      />
+      <div class="absolute top-1/2 right-3 -translate-y-1/2">
+        <select
+          class="pl-2 w-[54px] border-l border-l-primary-border text-p-md text-neutral-100 appearance-none"
+        >
+          <option value="USD">USD</option>
+          <option value="IDR">IDR</option>
+        </select>
+        <img
+          src="assets/images/icons/ic-arrow-down.svg"
+          class="w-5 h-5 absolute right-0.5 top-1/2 -translate-y-1/2"
+          alt="arrow down"
+        />
+      </div>
+    </div>
+  </ng-container>
 </div>

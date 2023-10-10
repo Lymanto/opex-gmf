@@ -2,7 +2,7 @@
   <div class="flex items-center gap-0.5">
     <label for="{{ id }}">{{ label }}</label>
     <span class="text-tertiary-tx-red text-p-md" *ngIf="required">*</span>
-    <img src="assets/images/icons/ic-ask.svg" class="w-4 h-4" />
+    <img src="assets/images/icons/ic-ask.svg" class="w-4 h-4" *ngIf="isAsk" />
   </div>
   <ng-container *ngIf="type === 'normal'">
     <textarea

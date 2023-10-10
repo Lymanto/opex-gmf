@@ -1,23 +1,26 @@
 <ng-container *ngIf="dashboardtable">
   <table class="w-full">
     <tr
-      class=" text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto">
+      class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
+    >
       <th *ngFor="let column of headers" class="p-2">
-        {{column}}
+        {{ column }}
       </th>
     </tr>
-    <tr 
+    <tr
       class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
       [ngClass]="{
         'bg-primary-bg-2':show,
-      }">
+      }"
+    >
       <td class="p-4">01</td>
       <td>TD/1079/8/23</td>
       <td>30 Maret 2023</td>
       <td>TD</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-green text-tertiary-tx-green text-center w-[54px] h-[24px] rounded bg-tertiary-bg-green">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-green text-tertiary-tx-green text-center w-[54px] h-[24px] rounded bg-tertiary-bg-green"
+        >
           Closed
         </div>
       </td>
@@ -26,55 +29,74 @@
       <td></td>
       <td>20.949,75 USD</td>
       <td>
-        <button (click)="onclick()" type="button" class="" *ngFor="let menuItem of tabledata" routerLinkActive="active">
+        <button
+          (click)="onclick()"
+          type="button"
+          class=""
+          *ngFor="let menuItem of tabledata"
+          routerLinkActive="active"
+        >
           <div
-            class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px]  rounded-full bg-tertiary-white"
+            class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
             [ngClass]="{
             'bg-primary-hover':show,
             'border-primary-hover':show,
-          }">
-  
-  
-            <img [src]="show ? 'assets/images/icons/ic-arrow-up-active.svg':'assets/images/icons/ic-arrow-down.svg'"
-              alt="Arrow down" />
+          }"
+          >
+            <img
+              [src]="
+                show
+                  ? 'assets/images/icons/ic-arrow-up-active.svg'
+                  : 'assets/images/icons/ic-arrow-down.svg'
+              "
+              alt="Arrow down"
+            />
           </div>
         </button>
       </td>
     </tr>
-    <tr *ngIf="show"
-      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]">
+    <tr
+      *ngIf="show"
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
+    >
       <td colspan="9">
-        <div class="flex gap-1 items-center ">
+        <div class="flex gap-1 items-center">
           <div class="text-p-md tracking-[0.5px] font-medium">Description</div>
-          <div class="w-2 h-[1px]  bg-neutral-100"></div>
-          <div class="text-p-md tracking-[0,5px] ">Permohonan persetujuan realisasi anggaran perpanjagan lisensi Webex
-            meeting, Cloud device registration,
-            add on storage, lisensi server, lisensi VMware</div>
-  
-  
+          <div class="w-2 h-[1px] bg-neutral-100"></div>
+          <div class="text-p-md tracking-[0,5px]">
+            Permohonan persetujuan realisasi anggaran perpanjagan lisensi Webex
+            meeting, Cloud device registration, add on storage, lisensi server,
+            lisensi VMware
+          </div>
         </div>
-  
       </td>
       <td>
-  
-        <button type="button" class="" *ngFor="let menuItem of tabledata" routerLinkActive="active">
+        <button
+          type="button"
+          class=""
+          *ngFor="let menuItem of tabledata"
+          routerLinkActive="active"
+        >
           <div
-            class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
-            <img src="assets/images/icons/ic-eyes-blue.svg" alt="">
+            class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+          >
+            <img src="assets/images/icons/ic-eyes-blue.svg" alt="" />
           </div>
         </button>
       </td>
     </tr>
-  
+
     <tr
-      class="text-center border  border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]">
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
       <td class="p-4">02</td>
       <td>TD/1079/8/23</td>
       <td>30 Maret 2023</td>
       <td>TB</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-blue text-tertiary-tx-blue text-center w-[54px] h-[24px] rounded bg-tertiary-bg-blue">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-blue text-tertiary-tx-blue text-center w-[54px] h-[24px] rounded bg-tertiary-bg-blue"
+        >
           Progress
         </div>
       </td>
@@ -84,20 +106,23 @@
       <td>20.949,75 USD</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+        >
           <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
         </div>
       </td>
     </tr>
     <tr
-      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]">
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
       <td class="p-4">03</td>
       <td>TD/1079/8/23</td>
       <td></td>
       <td>TJ</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-red text-tertiary-tx-red text-center w-[54px] h-[24px] rounded bg-tertiary-bg-red">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-red text-tertiary-tx-red text-center w-[54px] h-[24px] rounded bg-tertiary-bg-red"
+        >
           Open
         </div>
       </td>
@@ -107,20 +132,23 @@
       <td>20.949,75 USD</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+        >
           <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
         </div>
       </td>
     </tr>
     <tr
-      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]">
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
       <td class="p-4">04</td>
       <td>TD/1079/8/23</td>
       <td>30 Maret 2023</td>
       <td>TE</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-tosca text-tertiary-tx-tosca text-center w-[54px] h-[24px] rounded bg-tertiary-bg-tosca">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-tosca text-tertiary-tx-tosca text-center w-[54px] h-[24px] rounded bg-tertiary-bg-tosca"
+        >
           Revise
         </div>
       </td>
@@ -130,20 +158,23 @@
       <td>20.949,75 USD</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+        >
           <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
         </div>
       </td>
     </tr>
     <tr
-      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]">
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
       <td class="p-4">05</td>
       <td>TD/1079/8/23</td>
       <td>30 Maret 2023</td>
       <td>TD</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-yellow text-tertiary-tx-yellow text-center w-[54px] h-[24px] rounded bg-tertiary-bg-yellow">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-yellow text-tertiary-tx-yellow text-center w-[54px] h-[24px] rounded bg-tertiary-bg-yellow"
+        >
           Reject
         </div>
       </td>
@@ -153,20 +184,23 @@
       <td>20.949,75 USD</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+        >
           <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
         </div>
       </td>
     </tr>
     <tr
-      class="text-center border  border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]">
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
       <td class="p-4">06</td>
       <td>TD/1079/8/23</td>
       <td>30 Maret 2023</td>
       <td>TC</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-yellow text-tertiary-tx-yellow text-center w-[54px] h-[24px] rounded bg-tertiary-bg-yellow">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-yellow text-tertiary-tx-yellow text-center w-[54px] h-[24px] rounded bg-tertiary-bg-yellow"
+        >
           Reject
         </div>
       </td>
@@ -176,20 +210,23 @@
       <td>20.949,75 USD</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+        >
           <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
         </div>
       </td>
     </tr>
     <tr
-      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]">
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
       <td class="p-4">07</td>
       <td>TD/1079/8/23</td>
       <td>30 Maret 2023</td>
       <td>TZ</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-yellow text-tertiary-tx-yellow text-center w-[54px] h-[24px] rounded bg-tertiary-bg-yellow">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-yellow text-tertiary-tx-yellow text-center w-[54px] h-[24px] rounded bg-tertiary-bg-yellow"
+        >
           Reject
         </div>
       </td>
@@ -199,20 +236,23 @@
       <td>20.949,75 USD</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+        >
           <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
         </div>
       </td>
     </tr>
     <tr
-      class="text-center border  border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]">
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
       <td class="p-4">08</td>
       <td>TD/1079/8/23</td>
       <td>30 Maret 2023</td>
       <td>TU</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-yellow text-tertiary-tx-yellow text-center w-[54px] h-[24px] rounded bg-tertiary-bg-yellow">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-yellow text-tertiary-tx-yellow text-center w-[54px] h-[24px] rounded bg-tertiary-bg-yellow"
+        >
           Reject
         </div>
       </td>
@@ -222,20 +262,23 @@
       <td>20.949,75 USD</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+        >
           <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
         </div>
       </td>
     </tr>
     <tr
-      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]">
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
       <td class="p-4">09</td>
       <td>TD/1079/8/23</td>
       <td>30 Maret 2023</td>
       <td>TQ</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-yellow text-tertiary-tx-yellow text-center w-[54px] h-[24px] rounded bg-tertiary-bg-yellow">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-yellow text-tertiary-tx-yellow text-center w-[54px] h-[24px] rounded bg-tertiary-bg-yellow"
+        >
           Reject
         </div>
       </td>
@@ -245,20 +288,23 @@
       <td>20.949,75 USD</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+        >
           <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
         </div>
       </td>
     </tr>
     <tr
-      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]">
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
       <td class="p-4">10</td>
       <td>TD/1079/8/23</td>
       <td>30 Maret 2023</td>
       <td>TL</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-yellow text-tertiary-tx-yellow text-center w-[54px] h-[24px] rounded bg-tertiary-bg-yellow">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-yellow text-tertiary-tx-yellow text-center w-[54px] h-[24px] rounded bg-tertiary-bg-yellow"
+        >
           Reject
         </div>
       </td>
@@ -268,7 +314,8 @@
       <td>20.949,75 USD</td>
       <td>
         <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white">
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+        >
           <img src="assets/images/icons/ic-arrow-down.svg" alt="Arrow down" />
         </div>
       </td>
@@ -283,28 +330,40 @@
       <div class="flex gap-1">
         <div class="text-p-md tracking-[0.5px] text-neutral-60">Page</div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center">
-          1</div>
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+        >
+          1
+        </div>
         <div class="text-p-md tracking-[0.5px] text-neutral-60">of 200</div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 bg-neutral-20 border-neutral-40 text-neutral-60 text-center rounded w-[22px] h-[22px] flex justify-center items-center">
-          <img src="" alt="">
+          class="text-p-md tracking-[0.5px] border-solid border-2 bg-neutral-20 border-neutral-40 text-neutral-60 text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+        >
+          <img src="" alt="" />
         </div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-hover bg-primary-hover text-white text-center rounded w-[22px] h-[22px] flex justify-center items-center">
-          1</div>
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-hover bg-primary-hover text-white text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+        >
+          1
+        </div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center">
-          2</div>
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+        >
+          2
+        </div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center">
-          3</div>
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+        >
+          3
+        </div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center">
-          ...</div>
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+        >
+          ...
+        </div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center">
-          <img src="assets/images/icons/ic-arrow-right.svg" alt="">
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+        >
+          <img src="assets/images/icons/ic-arrow-right.svg" alt="" />
         </div>
       </div>
     </div>
@@ -314,14 +373,16 @@
 <ng-container *ngIf="createnewrequesttable">
   <table class="w-full">
     <tr
-      class=" text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto">
+      class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
+    >
       <th *ngFor="let column of head" class="p-2">
-        {{column}}
+        {{ column }}
       </th>
     </tr>
-  
+
     <tr
-      class="text-center border  border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]">
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
       <td class="p-4">01</td>
       <td>Hutang Piutang</td>
       <td>Other</td>
@@ -332,15 +393,15 @@
       <td>
         <div class="flex justify-between items-center">
           <div class="flex gap-3 mx-auto">
-            <div class="text-p-md tracking-[0.5px] border-solid border-2 border-tertiary-bg-red text-tertiary-tx-red text-center rounded w-[22px] h-[22px] flex justify-center items-center">
-              <img src="assets/images/icons/ic-arrow-right.svg" alt="">
-            </div>
-            <div class="text-p-md tracking-[0.5px] border-solid border-2 border-tertiary-bg-green text-tertiary-tx-green text-center rounded w-[22px] h-[22px] flex justify-center items-center">
-              <img src="assets/images/icons/ic-arrow-right.svg" alt="">
-            </div>
-            <div class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center">
-              <img src="assets/images/icons/ic-arrow-right.svg" alt="">
-            </div>
+            <app-button icon="assets/images/icons/ic-trash.svg" type="trash" />
+            <app-button
+              icon="assets/images/icons/ic-green-pencil-square.svg"
+              type="edit"
+            />
+            <app-button
+              icon="assets/images/icons/ic-eye-blue.svg"
+              type="show"
+            />
           </div>
         </div>
       </td>

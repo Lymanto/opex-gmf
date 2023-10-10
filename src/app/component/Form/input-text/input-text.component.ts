@@ -6,7 +6,14 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./input-text.component.css'],
 })
 export class InputTextComponent {
-  @Input() label = '';
-  @Input() id = '';
-  @Input() placeholder = '';
+  @Input() label :string= '';
+  @Input() id:string = '';
+  @Input() placeholder :string= '';
+  @Input() required :boolean= false;
+  @Input() isAsk :boolean =false;
+  @Input() isDisabled :boolean =false;
+  @Input() value: string = '';
+  @Input() type: string = '';
+
+
 }
