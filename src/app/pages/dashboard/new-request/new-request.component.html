@@ -95,6 +95,8 @@
         label="Upload File"
         icon="assets/images/icons/ic-archive.svg"
         type="primary"
+        data-modal-target="uploadFile"
+        data-modal-toggle="uploadFile"
       />
     </div>
     <app-table createnewrequesttable=" "></app-table>
@@ -107,30 +109,34 @@
         />
         <app-button
           icon="assets/images/icons/ic-arrow-path-rounded-square.svg"
-          type="create-allocation"
-          label="Create Alokasi"
+          type="danger"
+          label="Create Realokasi"
+          data-modal-target="overlimitBudget"
+          data-modal-toggle="overlimitBudget"
         />
         <app-button
           icon="assets/images/icons/ic-check-circle.svg"
-          type="submit"
+          type="success"
           label="Submit"
         />
         <app-button
           icon="assets/images/icons/ic-arrow-path-rounded-square.svg"
-          type="create-allocation-not-active"
-          label="Create Alokasi"
+          type="secondary"
+          label="Create Realokasi"
         />
         <app-button
           icon="assets/images/icons/ic-pencil-square.svg"
-          type="edit-reallocation"
+          type="info"
           label="Edit Realokasi"
         />
         <app-button
           icon="assets/images/icons/ic-check-circle.svg"
-          type="create-allocation-not-active"
+          type="secondary"
           label="Submit"
         />
       </div>
     </div>
   </div>
+  <app-modal type="uploadFile" />
+  <app-modal type="overlimitBudget" />
 </app-layout>

@@ -1,14 +1,13 @@
-import { Component, EventEmitter, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.css'],
+  selector: 'app-modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.css'],
 })
-export class ButtonComponent {
+export class ModalComponent {
   @Input() label: string = '';
   @Input() id: string = '';
-  @Input() isFull: boolean = false;
 
   @Input() hasIcon: boolean = true;
   @Input() isHref: boolean = false;

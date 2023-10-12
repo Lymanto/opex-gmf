@@ -1,0 +1,151 @@
+<ng-container *ngIf="type === 'uploadFile'">
+  <div
+    id="uploadFile"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+  >
+    <div class="relative w-full max-w-md max-h-full">
+      <div
+        class="relative bg-neutral-10 border border-primary-border rounded-lg shadow dark:bg-gray-700"
+      >
+        <div class="text-center mt-6"><h6>Upload File</h6></div>
+        <div class="flex items-center justify-center w-full">
+          <label
+            for="dropzone-file"
+            class="flex flex-col items-center justify-center mx-6 mt-6 w-[400px] h-[160px] border border-primary-border rounded-2xl cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+          >
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <div class="mb-3">
+                <img src="assets/images/icons/ic-form-upload.svg" alt="" />
+              </div>
+              <p class="mb-1 text-p-md text-primary-hover font-medium">
+                Upload a file or drag and drop
+              </p>
+              <p class="text-p-sm text-gray-500 dark:text-gray-400">
+                Only PDF files can be uploaded & Maks file 1 MB
+              </p>
+            </div>
+            <input id="dropzone-file" type="file" class="hidden" />
+          </label>
+        </div>
+        <div
+          class="flex flex-col items-start justify-start border border-primary-border bg-primary-bg-2 rounded-xl mt-2 mx-6 p-2 gap-2 box-border"
+        >
+          <div class="flex justify-between items-center gap-1">
+            <span>
+              <img src="assets/images/icons/ic-paper-clip.svg" alt="" />
+            </span>
+            <span class="text-primary-hover text-p-sm">-</span>
+          </div>
+          <div class="flex flex-row gap-1 items-center w-full">
+            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+              <div
+                class="bg-blue-600 h-2.5 rounded-full"
+                style="width: 45%"
+              ></div>
+            </div>
+            <span
+              class="text-caption font-medium text-neutral-100 dark:text-white"
+            >
+              45%
+            </span>
+          </div>
+        </div>
+        <div class="mx-6 mt-3">
+          <app-input-text
+            type="normal"
+            id="documentName"
+            placeholder="Fill this.."
+            label="Document Name"
+            [required]="true"
+          ></app-input-text>
+        </div>
+        <div class="mx-6 mt-2">
+          <app-select-box
+            id="docType"
+            label="Doc. Type"
+            [required]="true"
+          ></app-select-box>
+        </div>
+        <div class="mx-6 mt-2">
+          <app-input-text
+            type="normal"
+            id="size"
+            label="Size"
+            [isDisabled]="true"
+          />
+        </div>
+        <div class="p-6 text-center mt-10">
+          <div class="flex items-center justify-center gap-3">
+            <app-button
+              type="primary-not-active"
+              label="Cancel"
+              data-modal-hide="uploadFile"
+              [hasIcon]="false"
+            />
+
+            <app-button
+              type="primary"
+              label="Upload Now"
+              data-modal-hide="uploadFile"
+              [hasIcon]="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="type === 'overlimitBudget'">
+  <div
+    id="overlimitBudget"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+  >
+    <div class="relative w-full max-w-md max-h-full">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <button
+          type="button"
+          class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          data-modal-hide="overlimitBudget"
+        ></button>
+        <div class="p-6 text-center">
+          <img
+            src="assets/images/danger.png"
+            class="max-w-[302px] w-full mx-auto"
+          />
+          <h3 class="text-subheading mt-2 font-medium text-neutral-100">
+            Your request overlimit budget
+          </h3>
+          <p class="text-p-md text-neutral-60 mb-2">
+            This message will be showup if your request budget overlimit, please
+            consider to make reallocation budget firstly. Please choose one of
+            the following
+          </p>
+          <app-select-box />
+          <div class="mt-10 w-full flex flex-col gap-3">
+            <app-button
+              data-modal-hide="overlimitBudget"
+              label="Okay"
+              [hasIcon]="false"
+              type="primary"
+              [isFull]="true"
+            >
+              Yes, I'm sure
+            </app-button>
+            <app-button
+              data-modal-hide="overlimitBudget"
+              label="Cancel"
+              [hasIcon]="false"
+              type="primary-not-active"
+              [isFull]="true"
+            >
+              No, cancel
+            </app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

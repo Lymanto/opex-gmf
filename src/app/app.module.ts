@@ -19,6 +19,8 @@ import { LayoutComponent } from './component/layout/layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TextareaComponent } from './component/Form/textarea/textarea.component';
 import { ItemComponent } from './component/item/item.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ModalComponent } from './component/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -36,15 +38,17 @@ import { ItemComponent } from './component/item/item.component';
     LoginComponent,
     TextareaComponent,
     ItemComponent,
+    ModalComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     NgChartsModule,
     BrowserAnimationsModule,
     SelectBoxComponent,
   ],
 })
-export class AppModule { }
+export class AppModule {}

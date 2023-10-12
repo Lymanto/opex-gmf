@@ -12,17 +12,22 @@
       label="Add"
       icon="assets/images/icons/ic-plus-circle-blue.svg"
       type="primary-not-active"
+      (click)="addItems()"
     >
     </app-button>
   </div>
-  <div class="flex flex-col gap-4">
+  <form
+    class="flex flex-col gap-4"
+    [formGroup]="itemsForm"
+    *ngFor="let item of getItems.controls; let i = index"
+  >
     <div
       class="flex flex-col gap-4 p-4 box-border border border-primary-border rounded-3xl bg-primary-bg-2"
     >
       <div class="flex justify-between items-center">
         <div class="flex flex-col justify-center items-center">
           <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">Item</p>
-          <p class="text-p-lg font-semibold text-neutral-100">1</p>
+          <p class="text-p-lg font-semibold text-neutral-100">{{ i + 1 }}</p>
         </div>
         <app-button
           label="Hide Item"
@@ -48,6 +53,7 @@
           label="G/L Number"
           [isAsk]="true"
           [isDisabled]="true"
+          formControlName="availableControl"
         />
       </div>
       <div class="grid grid-cols-4 gap-4">
@@ -90,5 +96,5 @@
         [required]="true"
       />
     </div>
-  </div>
+  </form>
 </div>
