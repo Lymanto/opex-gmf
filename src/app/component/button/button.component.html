@@ -31,7 +31,7 @@
     }"
     [routerLink]="href"
   >
-    <img [src]="icon" alt="icon" class="w-4 h-4" />
+    <img [src]="icon" alt="icon" class="w-4 h-4" *ngIf="hasIcon" />
     {{ label }}
   </a>
 </ng-container>

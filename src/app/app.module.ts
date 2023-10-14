@@ -21,6 +21,18 @@ import { TextareaComponent } from './component/Form/textarea/textarea.component'
 import { ItemComponent } from './component/item/item.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from './component/modal/modal.component';
+import { CreateReallocationBudgetComponent } from './pages/dashboard/create-reallocation-budget/create-reallocation-budget.component';
+import { NeedApprovalComponent } from './pages/need-approval/need-approval/need-approval.component';
+import { GeneralComponent } from './pages/reallocation-budget/general/general.component';
+import { RealokasiCorporateComponent } from './pages/reallocation-budget/realokasi-corporate/realokasi-corporate.component';
+import { SummaryComponent } from './pages/report/summary/summary.component';
+import { ViewBudgetComponent } from './pages/report/view-budget/view-budget.component';
+import { PersonnelSummaryComponent } from './pages/report/personnel-summary/personnel-summary.component';
+import { GuidanceApplicationComponent } from './pages/guidance-application/guidance-application.component';
+import { FeedbackApplicationComponent } from './pages/feedback-application/feedback-application.component';
+import { KursUsdComponent } from './pages/master-data/kurs-usd/kurs-usd.component';
+import { SummaryComponent as SummaryMasterData } from './pages/master-data/summary/summary.component';
+import { ViewBudgetComponent as ViewBudgetMasterData } from './pages/master-data/view-budget/view-budget.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +51,18 @@ import { ModalComponent } from './component/modal/modal.component';
     TextareaComponent,
     ItemComponent,
     ModalComponent,
+    CreateReallocationBudgetComponent,
+    NeedApprovalComponent,
+    GeneralComponent,
+    RealokasiCorporateComponent,
+    SummaryComponent,
+    ViewBudgetComponent,
+    PersonnelSummaryComponent,
+    GuidanceApplicationComponent,
+    FeedbackApplicationComponent,
+    KursUsdComponent,
+    SummaryMasterData,
+    ViewBudgetMasterData,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -126,13 +126,14 @@
           <app-select-box />
           <div class="mt-10 w-full flex flex-col gap-3">
             <app-button
-              data-modal-hide="overlimitBudget"
+              [isHref]="true"
+              href="/dashboard/create-reallocation-budget"
               label="Okay"
               [hasIcon]="false"
               type="primary"
               [isFull]="true"
+              data-modal-hide="overlimitBudget"
             >
-              Yes, I'm sure
             </app-button>
             <app-button
               data-modal-hide="overlimitBudget"
@@ -141,7 +142,6 @@
               type="primary-not-active"
               [isFull]="true"
             >
-              No, cancel
             </app-button>
           </div>
         </div>
