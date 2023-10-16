@@ -23,18 +23,30 @@
           label="Entry Date"
           id="entryDate"
           placeholder="Select One.."
+          [isReadOnly]="true"
         ></app-input-date>
         <app-input-text
           type="normal"
           id="requestNumber"
           placeholder="Fill this.."
           label="User (Dinas)"
+          [isReadOnly]="true"
         ></app-input-text>
         <app-select-box
           id="typeSubmission"
           label="Type of Submission"
           type="typeSubmission"
           [required]="true"
+          [data]="[
+            'Uang Muka',
+            'Pengadaaan',
+            'Quality',
+            'Facility',
+            'ICT',
+            'Entertainment',
+            'Reimbursement'
+          ]"
+          displayWith="Entertainment"
         ></app-select-box>
       </div>
       <div class="grid grid-cols-4 gap-4">
@@ -43,23 +55,28 @@
           id="nameOfRequest"
           placeholder="Fill this.."
           label="Name of Request"
+          [isReadOnly]="true"
         ></app-input-text>
         <app-input-text
           type="normal"
           id="idNumber"
           placeholder="Fill this.."
           label="ID Number"
+          [isReadOnly]="true"
         ></app-input-text>
         <app-select-box
           id="responsibleOfRequest"
           label="Responsible of Request"
           [required]="true"
+          [data]="['Lymanto', 'Vito', 'Aida', 'Marcel']"
+          displayWith="Lymanto"
         ></app-select-box>
         <app-input-text
           type="normal"
           id="idNumber"
           placeholder="Fill this.."
           label="ID Number"
+          [isReadOnly]="true"
         ></app-input-text>
       </div>
     </div>
@@ -100,41 +117,39 @@
       />
     </div>
     <app-table createnewrequesttable=" "></app-table>
-    <div class="flex flex-col justify-between items-center">
-      <div class="flex gap-2 mt-5">
-        <app-button
-          icon="assets/images/icons/ic-save.svg"
-          type="primary"
-          label="Save"
-        />
-        <app-button
-          icon="assets/images/icons/ic-arrow-path-rounded-square.svg"
-          type="danger"
-          label="Create Realokasi"
-          data-modal-target="overlimitBudget"
-          data-modal-toggle="overlimitBudget"
-        />
-        <app-button
-          icon="assets/images/icons/ic-check-circle.svg"
-          type="success"
-          label="Submit"
-        />
-        <app-button
-          icon="assets/images/icons/ic-arrow-path-rounded-square.svg"
-          type="secondary"
-          label="Create Realokasi"
-        />
-        <app-button
-          icon="assets/images/icons/ic-pencil-square.svg"
-          type="info"
-          label="Edit Realokasi"
-        />
-        <app-button
-          icon="assets/images/icons/ic-check-circle.svg"
-          type="secondary"
-          label="Submit"
-        />
-      </div>
+    <div class="flex gap-2 mt-5 w-full items-center justify-center">
+      <app-button
+        icon="assets/images/icons/ic-save.svg"
+        type="primary"
+        label="Save"
+      />
+      <app-button
+        icon="assets/images/icons/ic-arrow-path-rounded-square.svg"
+        type="danger"
+        label="Create Realokasi"
+        data-modal-target="overlimitBudget"
+        data-modal-toggle="overlimitBudget"
+      />
+      <app-button
+        icon="assets/images/icons/ic-check-circle.svg"
+        type="success"
+        label="Submit"
+      />
+      <app-button
+        icon="assets/images/icons/ic-arrow-path-rounded-square.svg"
+        type="secondary"
+        label="Create Realokasi"
+      />
+      <app-button
+        icon="assets/images/icons/ic-pencil-square.svg"
+        type="info"
+        label="Edit Realokasi"
+      />
+      <app-button
+        icon="assets/images/icons/ic-check-circle.svg"
+        type="secondary"
+        label="Submit"
+      />
     </div>
   </div>
   <app-modal type="uploadFile" />

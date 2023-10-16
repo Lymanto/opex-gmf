@@ -13,6 +13,7 @@ export class InputTextComponent {
   @Input() required: boolean = false;
   @Input() isAsk: boolean = false;
   @Input() isDisabled: boolean = false;
+  @Input() isReadOnly: boolean = false;
   @Input() value: string = '';
   @Input() type: string = '';
 }

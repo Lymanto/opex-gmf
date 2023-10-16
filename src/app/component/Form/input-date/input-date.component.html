@@ -12,11 +12,13 @@
     <input
       name="{{ id }}"
       id="{{ id }}"
-      class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-80 !appearance-none w-full"
+      class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-80 !appearance-none w-full disabled:bg-neutral-20 read-only:bg-neutral-20"
       [type]="focus ? 'date' : 'text'"
       (focus)="focus = true"
       (focusout)="focus = false"
       placeholder="{{ placeholder }}"
+      [disabled]="isDisabled"
+      [readonly]="isReadOnly"
     />
 
     <img

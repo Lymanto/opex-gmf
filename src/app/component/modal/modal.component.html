@@ -6,7 +6,7 @@
   >
     <div class="relative w-full max-w-md max-h-full">
       <div
-        class="relative bg-neutral-10 border border-primary-border rounded-lg shadow dark:bg-gray-700"
+        class="relative bg-neutral-10 border border-primary-border rounded-3xl shadow dark:bg-gray-700"
       >
         <div class="text-center mt-6"><h6>Upload File</h6></div>
         <div class="flex items-center justify-center w-full">
@@ -75,16 +75,18 @@
             [isDisabled]="true"
           />
         </div>
-        <div class="p-6 text-center mt-10">
-          <div class="flex items-center justify-center gap-3">
+        <div class="px-6 pb-6 text-center mt-10">
+          <div class="grid grid-cols-2 items-center justify-center gap-3">
             <app-button
               type="primary-not-active"
               label="Cancel"
               data-modal-hide="uploadFile"
               [hasIcon]="false"
+              [isFull]="true"
             />
 
             <app-button
+              [isFull]="true"
               type="primary"
               label="Upload Now"
               data-modal-hide="uploadFile"
@@ -143,6 +145,111 @@
               [isFull]="true"
             >
             </app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="type === 'kursAdd'">
+  <div
+    id="kursAdd"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+  >
+    <div class="relative w-full max-w-md max-h-full">
+      <div
+        class="relative bg-neutral-10 border border-primary-border rounded-lg shadow dark:bg-gray-700"
+      >
+        <div class="text-center mt-6"><h6>Add New</h6></div>
+        <div class="mt-6 mx-6">
+          <app-select-box
+            id="years"
+            label="Years"
+            [required]="true"
+          ></app-select-box>
+        </div>
+        <div class="mt-2 mx-6">
+          <app-input-text
+            type="normal"
+            id="addKurs"
+            placeholder=" Please Fill this"
+            label="Value (IDR)"
+            [required]="true"
+          >
+          </app-input-text>
+        </div>
+        <div class="px-6 pb-6 text-center mt-10">
+          <div class="grid grid-cols-2 items-center justify-center gap-3">
+            <app-button
+              type="primary-not-active"
+              label="Cancel"
+              [hasIcon]="false"
+              [isFull]="true"
+              data-modal-hide="kursAdd"
+            />
+
+            <app-button
+              [isFull]="true"
+              type="primary"
+              label="Save"
+              [hasIcon]="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="type === 'kursEdit'">
+  <div
+    id="kursEdit"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+  >
+    <div class="relative w-full max-w-md max-h-full">
+      <div
+        class="relative bg-neutral-10 border border-primary-border rounded-lg shadow dark:bg-gray-700"
+      >
+        <div class="text-center mt-6"><h6>Edit Value</h6></div>
+        <div class="mt-6 mx-6">
+          <app-input-text
+            type="normal"
+            id="editKurs"
+            value="2023"
+            label="Years"
+            [isReadOnly]="true"
+          >
+          </app-input-text>
+        </div>
+        <div class="mt-2 mx-6">
+          <app-input-text
+            type="normal"
+            id="addKurs"
+            value="15.320,89"
+            label="Value (IDR)"
+            [required]="true"
+          >
+          </app-input-text>
+        </div>
+        <div class="px-6 pb-6 text-center mt-10">
+          <div class="grid grid-cols-2 items-center justify-center gap-3">
+            <app-button
+              type="primary-not-active"
+              label="Cancel"
+              [hasIcon]="false"
+              [isFull]="true"
+              data-modal-hide="kursEdit"
+            />
+
+            <app-button
+              [isFull]="true"
+              type="primary"
+              label="Update"
+              [hasIcon]="false"
+            />
           </div>
         </div>
       </div>

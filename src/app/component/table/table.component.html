@@ -330,15 +330,15 @@
       <div class="flex gap-1">
         <div class="text-p-md tracking-[0.5px] text-neutral-60">Page</div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
         >
           1
         </div>
         <div class="text-p-md tracking-[0.5px] text-neutral-60">of 200</div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 bg-neutral-20 border-neutral-40 text-neutral-60 text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+          class="text-p-md tracking-[0.5px] border-solid border-2 bg-neutral-20 border-neutral-40 text-neutral-60 text-center rounded-lg- w-[22px] h-[22px] flex justify-center items-center"
         >
-          <img src="" alt="" />
+          <img src="assets/images/icons/ic-arrow-left-not-active.svg" alt="" />
         </div>
         <div
           class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-hover bg-primary-hover text-white text-center rounded w-[22px] h-[22px] flex justify-center items-center"
@@ -346,22 +346,22 @@
           1
         </div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
         >
           2
         </div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
         >
           3
         </div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
         >
           ...
         </div>
         <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
         >
           <img src="assets/images/icons/ic-arrow-right.svg" alt="" />
         </div>
@@ -398,7 +398,7 @@
               type="action-danger"
             />
             <app-button
-              icon="assets/images/icons/ic-green-pencil-square.svg"
+              icon="assets/images/icons/ic-pencil-square-green.svg"
               type="action-success"
             />
             <app-button
@@ -408,6 +408,152 @@
           </div>
         </div>
       </td>
+    </tr>
+  </table>
+</ng-container>
+
+<ng-container *ngIf="kursusdtable">
+  <table class="w-full">
+    <tr
+      class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
+    >
+      <th *ngFor="let column of kursheaders" class="p-2">
+        {{ column }}
+      </th>
+    </tr>
+
+    <tr
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
+      <td class="p-4">01</td>
+      <td>2023</td>
+      <td>15.300</td>
+      <td>
+        <div class="flex justify-center">
+          <div class="flex mx-auto">
+            <app-button
+              icon="assets/images/icons/ic-pencil-square-blue.svg"
+              type="action-primary"
+              data-modal-target="kursEdit"
+              data-modal-toggle="kursEdit"
+            ></app-button>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
+      <td class="p-4">02</td>
+      <td>2022</td>
+      <td>15.300</td>
+      <td>
+        <div class="flex justify-center">
+          <div class="flex mx-auto">
+            <app-button
+              icon="assets/images/icons/ic-pencil-square-blue.svg"
+              type="action-primary"
+            ></app-button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div class="flex justify-between items-center">
+    <div class="flex gap-1">
+      <div class="text-p-md tracking-[0.5px] text-neutral-60">Row per page</div>
+      <div class="text-p-md tracking-[0.5px] text-neutral-100">10</div>
+    </div>
+    <div class="justify-end items-center mt-2">
+      <div class="flex gap-1">
+        <div class="text-p-md tracking-[0.5px] text-neutral-60">Page</div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          1
+        </div>
+        <div class="text-p-md tracking-[0.5px] text-neutral-60">of 200</div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 bg-neutral-20 border-neutral-40 text-neutral-60 text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          <img src="assets/images/icons/ic-arrow-left-not-active.svg" alt="" />
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-hover bg-primary-hover text-white text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+        >
+          1
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          2
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          3
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          ...
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          <img src="assets/images/icons/ic-arrow-right.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="masterdatasummarytable">
+  <table class="w-full">
+    <tr
+      class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
+    >
+      <th *ngFor="let column of masterdatasummaryheaders" class="p-2">
+        {{ column }}
+      </th>
+    </tr>
+
+    <tr
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+    >
+      <td class="p-4">
+        <button
+          (click)="onclick()"
+          type="button"
+          class=""
+          *ngFor="let menuItem of tabledata"
+          routerLinkActive="active"
+        >
+          <div
+            class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+            [ngClass]="{
+          'bg-primary-hover':show,
+          'border-primary-hover':show,
+        }"
+          >
+            <img
+              [src]="
+                show
+                  ? 'assets/images/icons/ic-arrow-up-active.svg'
+                  : 'assets/images/icons/ic-arrow-down.svg'
+              "
+              alt="Arrow down"
+            />
+          </div>
+        </button>
+      </td>
+      <td>Company Accommodation</td>
+      <td>579.32</td>
+      <td>579.32</td>
+      <td class="text-p-md font-semibold text-primary-hover">50%</td>
+      <td>773.24</td>
+      <td>773.24</td>
+      <td class="text-p-md font-semibold text-primary-hover">90%</td>
     </tr>
   </table>
 </ng-container>

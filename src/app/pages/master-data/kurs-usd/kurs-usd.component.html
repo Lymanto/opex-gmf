@@ -1,3 +1,21 @@
 <app-layout currentUrl="/master-data" currentUrlSubMenu="/kurs-usd">
-  <p>kurs-usd works!</p>
+  <div
+    class="p-4 border border-primary-border rounded-3xl bg-neutral-10 flex flex-col gap-4"
+  >
+    <div class="flex flex-row justify-between items-center">
+      <h2 class="text-subheading font-medium text-neutral-100">List of Data</h2>
+      <div class="flex flex-row gap-3">
+        <app-button
+          label="Add New"
+          icon="assets/images/icons/ic-plus-circle-white.svg"
+          type="primary"
+          data-modal-target="kursAdd"
+          data-modal-toggle="kursAdd"
+        ></app-button>
+      </div>
+    </div>
+    <app-table kursusdtable=" "></app-table>
+    <app-modal type="kursAdd" />
+    <app-modal type="kursEdit" />
+  </div>
 </app-layout>

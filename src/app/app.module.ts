@@ -33,6 +33,7 @@ import { FeedbackApplicationComponent } from './pages/feedback-application/feedb
 import { KursUsdComponent } from './pages/master-data/kurs-usd/kurs-usd.component';
 import { SummaryComponent as SummaryMasterData } from './pages/master-data/summary/summary.component';
 import { ViewBudgetComponent as ViewBudgetMasterData } from './pages/master-data/view-budget/view-budget.component';
+import { ItemReallocationComponent } from './component/item-reallocation/item-reallocation.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ViewBudgetComponent as ViewBudgetMasterData } from './pages/master-data
     KursUsdComponent,
     SummaryMasterData,
     ViewBudgetMasterData,
+    ItemReallocationComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

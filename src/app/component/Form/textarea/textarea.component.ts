@@ -13,4 +13,6 @@ export class TextareaComponent {
   @Input() content: string = '';
   @Input() type: string = '';
   @Input() isAsk: boolean = false;
+  @Input() isReadOnly: boolean = false;
+  @Input() isDisabled: boolean = false;
 }

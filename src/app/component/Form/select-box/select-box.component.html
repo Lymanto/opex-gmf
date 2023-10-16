@@ -8,17 +8,16 @@
       name="{{ id }}"
       id="{{ id }}"
       required="{{ required ? 'required' : '' }}"
-      class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-80 appearance-none w-full"
+      class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-100 placeholder:text-neutral-80 appearance-none w-full"
       placeholder="Select One"
       [formControl]="control"
       [matAutocomplete]="auto"
+      [readonly]="isReadOnly"
+      [value]="value"
     />
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option
-        *ngFor="let street of filteredStreets | async"
-        [value]="street"
-      >
-        {{ street }}
+      <mat-option *ngFor="let item of filteredDatas | async" [value]="item">
+        {{ item }}
       </mat-option>
     </mat-autocomplete>
 

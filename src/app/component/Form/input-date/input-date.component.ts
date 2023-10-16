@@ -6,11 +6,13 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./input-date.component.css'],
 })
 export class InputDateComponent {
-  @Input() label:string = '';
-  @Input() id:string = '';
-  @Input() placeholder:string = '';
-  @Input() required:boolean = false;
-  @Input() isAsk:boolean = false;
+  @Input() label: string = '';
+  @Input() id: string = '';
+  @Input() placeholder: string = '';
+  @Input() required: boolean = false;
+  @Input() isAsk: boolean = false;
+  @Input() isDisabled: boolean = false;
+  @Input() isReadOnly: boolean = false;
 
   focus = false;
 }
