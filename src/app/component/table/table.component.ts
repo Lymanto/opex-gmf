@@ -57,6 +57,7 @@ export class TableComponent {
     this.show = !this.show;
   }
 
+  @Input() type!: string;
   @Input() dashboardtable: string = '';
   @Input() createnewrequesttable: string = '';
   @Input() kursusdtable: string = '';

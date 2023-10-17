@@ -1,4 +1,4 @@
-<ng-container *ngIf="dashboardtable">
+<ng-container *ngIf="type === 'dashboardTable'">
   <table class="w-full">
     <tr
       class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
@@ -370,7 +370,7 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="createnewrequesttable">
+<ng-container *ngIf="type === 'createNewRequestTable'">
   <table class="w-full">
     <tr
       class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
@@ -412,7 +412,7 @@
   </table>
 </ng-container>
 
-<ng-container *ngIf="kursusdtable">
+<ng-container *ngIf="type === 'kursTable'">
   <table class="w-full">
     <tr
       class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
@@ -508,7 +508,7 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="masterdatasummarytable">
+<ng-container *ngIf="type === 'masterDataSummaryTable'">
   <table class="w-full">
     <tr
       class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
