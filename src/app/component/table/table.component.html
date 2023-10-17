@@ -80,7 +80,7 @@
           <div
             class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
           >
-            <img src="assets/images/icons/ic-eyes-blue.svg" alt="" />
+            <img src="assets/images/icons/ic-eye-blue.svg" alt="" />
           </div>
         </button>
       </td>
@@ -520,6 +520,9 @@
 
     <tr
       class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+      [ngClass]="{
+        'bg-primary-bg-2':show,
+      }"
     >
       <td class="p-4">
         <button
@@ -547,6 +550,7 @@
           </div>
         </button>
       </td>
+
       <td>Company Accommodation</td>
       <td>579.32</td>
       <td>579.32</td>
@@ -555,5 +559,527 @@
       <td>773.24</td>
       <td class="text-p-md font-semibold text-primary-hover">90%</td>
     </tr>
+    <tr
+      *ngIf="show"
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
+    >
+      <td></td>
+      <td class="p-4">Travel</td>
+      <td>115.864</td>
+      <td>115.864</td>
+      <td class="text-p-md font-semibold text-primary-hover">50%</td>
+      <td>773.24</td>
+      <td>773.24</td>
+      <td class="text-p-md font-semibold text-primary-hover">90%</td>
+    </tr>
+    <tr
+      *ngIf="show"
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
+    >
+      <td></td>
+      <td class="p-4">Transport</td>
+      <td>115.864</td>
+      <td>115.864</td>
+      <td class="text-p-md font-semibold text-primary-hover">50%</td>
+      <td>773.24</td>
+      <td>773.24</td>
+      <td class="text-p-md font-semibold text-primary-hover">90%</td>
+    </tr>
+    <tr
+      *ngIf="show"
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
+    >
+      <td></td>
+      <td class="p-4">Hotel</td>
+      <td>115.864</td>
+      <td>115.864</td>
+      <td class="text-p-md font-semibold text-primary-hover">50%</td>
+      <td>773.24</td>
+      <td>773.24</td>
+      <td class="text-p-md font-semibold text-primary-hover">90%</td>
+    </tr>
+    <tr
+      *ngIf="show"
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
+    >
+      <td></td>
+      <td class="p-4">Daily</td>
+      <td>115.864</td>
+      <td>115.864</td>
+      <td class="text-p-md font-semibold text-primary-hover">50%</td>
+      <td>773.24</td>
+      <td>773.24</td>
+      <td class="text-p-md font-semibold text-primary-hover">90%</td>
+    </tr>
+    <tr
+      *ngIf="show"
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
+    >
+      <td></td>
+      <td class="p-4">Other Accomodation</td>
+      <td>115.864</td>
+      <td>115.864</td>
+      <td class="text-p-md font-semibold text-primary-hover">50%</td>
+      <td>773.24</td>
+      <td>773.24</td>
+      <td class="text-p-md font-semibold text-primary-hover">90%</td>
+    </tr>
   </table>
+  <div class="flex justify-between items-center">
+    <div class="flex gap-1">
+      <div class="text-p-md tracking-[0.5px] text-neutral-60">Row per page</div>
+      <div class="text-p-md tracking-[0.5px] text-neutral-100">10</div>
+    </div>
+    <div class="justify-end items-center mt-2">
+      <div class="flex gap-1">
+        <div class="text-p-md tracking-[0.5px] text-neutral-60">Page</div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          1
+        </div>
+        <div class="text-p-md tracking-[0.5px] text-neutral-60">of 200</div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 bg-neutral-20 border-neutral-40 text-neutral-60 text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          <img src="assets/images/icons/ic-arrow-left-not-active.svg" alt="" />
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-hover bg-primary-hover text-white text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+        >
+          1
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          2
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          3
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          ...
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          <img src="assets/images/icons/ic-arrow-right.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="type === 'reallocationbudgetgeneraltable'">
+  <table class="w-full">
+    <tr
+      class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
+    >
+      <th *ngFor="let column of reallocationbudgetgeneralheaders" class="p-2">
+        {{ column }}
+      </th>
+    </tr>
+    <tr
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+      [ngClass]="{
+      'bg-primary-bg-2':show,
+    }"
+    >
+      <td class="p-4">01</td>
+      <td>TAM/RLA.TD/08.029/2023</td>
+      <td>Internal Dinas</td>
+      <td></td>
+      <td>05 Juni 2023</td>
+      <td>
+        <div
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-blue text-tertiary-tx-blue text-center w-[54px] h-[24px] rounded bg-tertiary-bg-blue"
+        >
+          Progress
+        </div>
+      </td>
+      <td>Andy Emir</td>
+      <td>JKTTAM</td>
+      <td>
+        <button
+          (click)="onclick()"
+          type="button"
+          class=""
+          *ngFor="let menuItem of tabledata"
+          routerLinkActive="active"
+        >
+          <div
+            class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+            [ngClass]="{
+    'bg-primary-hover':show,
+    'border-primary-hover':show,
+  }"
+          >
+            <img
+              [src]="
+                show
+                  ? 'assets/images/icons/ic-arrow-up-active.svg'
+                  : 'assets/images/icons/ic-arrow-down.svg'
+              "
+              alt="Arrow down"
+            />
+          </div>
+        </button>
+      </td>
+    </tr>
+    <tr
+      *ngIf="show"
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
+    >
+      <td colspan="8">
+        <div class="flex gap-1 items-center">
+          <div class="text-p-md tracking-[0.5px] font-medium">Description</div>
+          <div class="w-2 h-[1px] bg-neutral-100"></div>
+          <div class="text-p-md tracking-[0,5px]">
+            Permohonan persetujuan realisasi anggaran perpanjagan lisensi Webex
+            meeting, Cloud device registration, add on storage, lisensi server,
+            lisensi VMware
+          </div>
+        </div>
+      </td>
+      <td>
+        <button
+          type="button"
+          class=""
+          *ngFor="let menuItem of tabledata"
+          routerLinkActive="active"
+        >
+          <div
+            class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+          >
+            <img src="assets/images/icons/ic-eye-blue.svg" alt="" />
+          </div>
+        </button>
+      </td>
+    </tr>
+  </table>
+  <div class="flex justify-between items-center">
+    <div class="flex gap-1">
+      <div class="text-p-md tracking-[0.5px] text-neutral-60">Row per page</div>
+      <div class="text-p-md tracking-[0.5px] text-neutral-100">10</div>
+    </div>
+    <div class="justify-end items-center mt-2">
+      <div class="flex gap-1">
+        <div class="text-p-md tracking-[0.5px] text-neutral-60">Page</div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          1
+        </div>
+        <div class="text-p-md tracking-[0.5px] text-neutral-60">of 200</div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 bg-neutral-20 border-neutral-40 text-neutral-60 text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          <img src="assets/images/icons/ic-arrow-left-not-active.svg" alt="" />
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-hover bg-primary-hover text-white text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+        >
+          1
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          2
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          3
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          ...
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          <img src="assets/images/icons/ic-arrow-right.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="type === 'reallocationcorporatetable'">
+  <table class="w-full">
+    <tr
+      class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
+    >
+      <th *ngFor="let column of reallocationbudgetgeneralheaders" class="p-2">
+        {{ column }}
+      </th>
+    </tr>
+    <tr
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+      [ngClass]="{
+    'bg-primary-bg-2':show,
+  }"
+    >
+      <td class="p-4">01</td>
+      <td>30 Maret 2023</td>
+      <td>TD</td>
+      <td>TAM/RLC.TD/08.029/2023</td>
+      <td>1.000,75 USD</td>
+      <td>
+        <div
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-blue text-tertiary-tx-blue text-center w-[54px] h-[24px] rounded bg-tertiary-bg-blue"
+        >
+          Progress
+        </div>
+      </td>
+      <td>Andy Emir</td>
+      <td>JKTTAM</td>
+      <td>
+        <button
+          (click)="onclick()"
+          type="button"
+          class=""
+          *ngFor="let menuItem of tabledata"
+          routerLinkActive="active"
+        >
+          <div
+            class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+            [ngClass]="{
+  'bg-primary-hover':show,
+  'border-primary-hover':show,
+}"
+          >
+            <img
+              [src]="
+                show
+                  ? 'assets/images/icons/ic-arrow-up-active.svg'
+                  : 'assets/images/icons/ic-arrow-down.svg'
+              "
+              alt="Arrow down"
+            />
+          </div>
+        </button>
+      </td>
+    </tr>
+    <tr
+      *ngIf="show"
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
+    >
+      <td colspan="8">
+        <div class="flex gap-1 items-center">
+          <div class="text-p-md tracking-[0.5px] font-medium">Description</div>
+          <div class="w-2 h-[1px] bg-neutral-100"></div>
+          <div class="text-p-md tracking-[0,5px]">
+            Permohonan persetujuan realisasi anggaran perpanjagan lisensi Webex
+            meeting, Cloud device registration, add on storage, lisensi server,
+            lisensi VMware
+          </div>
+        </div>
+      </td>
+      <td>
+        <button
+          type="button"
+          class=""
+          *ngFor="let menuItem of tabledata"
+          routerLinkActive="active"
+        >
+          <div
+            class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+          >
+            <img src="assets/images/icons/ic-eye-blue.svg" alt="" />
+          </div>
+        </button>
+      </td>
+    </tr>
+  </table>
+  <div class="flex justify-between items-center">
+    <div class="flex gap-1">
+      <div class="text-p-md tracking-[0.5px] text-neutral-60">Row per page</div>
+      <div class="text-p-md tracking-[0.5px] text-neutral-100">10</div>
+    </div>
+    <div class="justify-end items-center mt-2">
+      <div class="flex gap-1">
+        <div class="text-p-md tracking-[0.5px] text-neutral-60">Page</div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          1
+        </div>
+        <div class="text-p-md tracking-[0.5px] text-neutral-60">of 200</div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 bg-neutral-20 border-neutral-40 text-neutral-60 text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          <img src="assets/images/icons/ic-arrow-left-not-active.svg" alt="" />
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-hover bg-primary-hover text-white text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+        >
+          1
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          2
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          3
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          ...
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          <img src="assets/images/icons/ic-arrow-right.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="type === 'personalsummarytable'">
+  <table class="w-full">
+    <tr
+      class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
+    >
+      <th *ngFor="let column of personalsummaryheaders" class="p-2">
+        {{ column }}
+      </th>
+    </tr>
+    <tr
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+      [ngClass]="{
+    'bg-primary-bg-2':show,
+  }"
+    >
+      <td class="p-4">01</td>
+      <td>TD</td>
+      <td>Maret</td>
+      <td>2023</td>
+      <td>TD/1079/8/23</td>
+      <td>Pengadaan</td>
+      <td>20.949,75</td>
+      <td>
+        <div
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-blue text-tertiary-tx-blue text-center w-[54px] h-[24px] rounded bg-tertiary-bg-blue"
+        >
+          Progress
+        </div>
+      </td>
+      <td>AMANDA RIZKA PRIUTAMI</td>
+      <td>Ade Amala</td>
+      <td>
+        <button
+          (click)="onclick()"
+          type="button"
+          class=""
+          *ngFor="let menuItem of tabledata"
+          routerLinkActive="active"
+        >
+          <div
+            class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+            [ngClass]="{
+  'bg-primary-hover':show,
+  'border-primary-hover':show,
+}"
+          >
+            <img
+              [src]="
+                show
+                  ? 'assets/images/icons/ic-arrow-up-active.svg'
+                  : 'assets/images/icons/ic-arrow-down.svg'
+              "
+              alt="Arrow down"
+            />
+          </div>
+        </button>
+      </td>
+    </tr>
+    <tr
+      *ngIf="show"
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
+    >
+      <td colspan="10">
+        <div class="flex gap-1 items-center">
+          <div class="text-p-md tracking-[0.5px] font-medium">Description</div>
+          <div class="w-2 h-[1px] bg-neutral-100"></div>
+          <div class="text-p-md tracking-[0,5px]">
+            Permohonan persetujuan realisasi anggaran perpanjagan lisensi Webex
+            meeting, Cloud device registration, add on storage, lisensi server,
+            lisensi VMware
+          </div>
+        </div>
+      </td>
+      <td>
+        <button
+          type="button"
+          class=""
+          *ngFor="let menuItem of tabledata"
+          routerLinkActive="active"
+        >
+          <div
+            class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+          >
+            <img src="assets/images/icons/ic-eye-blue.svg" alt="" />
+          </div>
+        </button>
+      </td>
+    </tr>
+  </table>
+  <div class="flex justify-between items-center">
+    <div class="flex gap-1">
+      <div class="text-p-md tracking-[0.5px] text-neutral-60">Row per page</div>
+      <div class="text-p-md tracking-[0.5px] text-neutral-100">10</div>
+    </div>
+    <div class="justify-end items-center mt-2">
+      <div class="flex gap-1">
+        <div class="text-p-md tracking-[0.5px] text-neutral-60">Page</div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          1
+        </div>
+        <div class="text-p-md tracking-[0.5px] text-neutral-60">of 200</div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 bg-neutral-20 border-neutral-40 text-neutral-60 text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          <img src="assets/images/icons/ic-arrow-left-not-active.svg" alt="" />
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-hover bg-primary-hover text-white text-center rounded w-[22px] h-[22px] flex justify-center items-center"
+        >
+          1
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          2
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          3
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          ...
+        </div>
+        <div
+          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
+        >
+          <img src="assets/images/icons/ic-arrow-right.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
 </ng-container>
