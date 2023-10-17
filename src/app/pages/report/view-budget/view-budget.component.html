@@ -1,3 +1,34 @@
 <app-layout currentUrl="/report" currentUrlSubMenu="/view-budget">
-  <p>view-budget works!</p>
+  <div
+    class="p-4 border border-primary-border rounded-3xl bg-neutral-10 flex flex-col gap-4"
+  >
+    <div
+      class="flex flex-row justify-between items-center border border-b-primary-border border-t-neutral-10 border-x-neutral-10 py-4"
+    >
+      <h2 class="text-subheading font-medium text-neutral-100">List of Data</h2>
+    </div>
+    <div
+      class="grid justify-between items-center grid-cols-2 gap-3 border border-b-primary-border border-t-neutral-10 border-x-neutral-10 py-4"
+    >
+      <app-select-box id="years" label="Years"></app-select-box>
+      <app-input-text
+        type="normal"
+        id="dinas"
+        label="Dinas"
+        [isReadOnly]="true"
+        value="TD"
+      ></app-input-text>
+    </div>
+    <div
+      class="flex flex-col gap-4 p-4 box-border border border-primary-border rounded-3xl bg-primary-bg-2"
+    >
+      <div
+        class="grid justify-between items-center grid-cols-2 gap-3 border border-b-primary-border border-t-primary-bg-2 border-x-primary-bg-2 py-4"
+      >
+        <app-select-box id="group" label="Group"></app-select-box>
+        <app-select-box id="groupDetail" label="Group Detail"></app-select-box>
+      </div>
+      <div class="grid justify-between items-center grid-cols-5 gap-3"></div>
+    </div>
+  </div>
 </app-layout>
