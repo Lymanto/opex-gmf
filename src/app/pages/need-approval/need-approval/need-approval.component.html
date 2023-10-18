@@ -83,6 +83,10 @@
       </div>
     </ng-container>
 
-    <app-table type="dashboardTable"></app-table>
+    <app-table
+      type="needApproval"
+      [header]="header"
+      [body]="tableBody"
+    ></app-table>
   </div>
 </app-layout>

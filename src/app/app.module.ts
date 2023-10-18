@@ -34,6 +34,7 @@ import { KursUsdComponent } from './pages/master-data/kurs-usd/kurs-usd.componen
 import { SummaryComponent as SummaryMasterData } from './pages/master-data/summary/summary.component';
 import { ViewBudgetComponent as ViewBudgetMasterData } from './pages/master-data/view-budget/view-budget.component';
 import { ItemReallocationComponent } from './component/item-reallocation/item-reallocation.component';
+import { StatusComponent } from './component/status/status.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { ItemReallocationComponent } from './component/item-reallocation/item-re
     SummaryMasterData,
     ViewBudgetMasterData,
     ItemReallocationComponent,
+    StatusComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NeedApprovalComponent } from './need-approval.component';
+import NeedApprovalComponent from './need-approval.component';
 
 describe('NeedApprovalComponent', () => {
   let component: NeedApprovalComponent;
@@ -8,7 +8,7 @@ describe('NeedApprovalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NeedApprovalComponent]
+      declarations: [NeedApprovalComponent],
     });
     fixture = TestBed.createComponent(NeedApprovalComponent);
     component = fixture.componentInstance;

@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivationEnd } from '@angular/router';
+import { tableBodyType } from 'src/app/lib/types';
 
 export const tabledata = [
   {
@@ -13,8 +14,19 @@ export const tabledata = [
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'],
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
   tabledata = tabledata;
+  @Input() header!: string[];
+  @Input() body!: tableBodyType[];
+  statusType: string[] = ['Open', 'Progress', 'Closed', 'Revise', 'Reject'];
+  ngOnInit() {}
+  checkStatus(value: string): boolean {
+    if (this.statusType.includes(value)) {
+      return true;
+    }
+    return false;
+  }
+
   headers = [
     'No',
     'No. of Request',
@@ -91,17 +103,19 @@ export class TableComponent {
   ];
 
   show: boolean = false;
-
+  activeId: string = 'not-active';
   onclick() {
     this.show = !this.show;
   }
+  onClick(value: string) {
+    if (this.activeId == 'not-active') {
+      this.activeId = value;
+    } else if (this.activeId != value) {
+      this.activeId = value;
+    } else {
+      this.activeId = 'not-active';
+    }
+  }
 
   @Input() type!: string;
-  @Input() dashboardtable: string = '';
-  @Input() createnewrequesttable: string = '';
-  @Input() kursusdtable: string = '';
-  @Input() masterdatasummarytable: string = '';
-  @Input() reallocationbudgetgeneraltable: string = '';
-  @Input() personalsummarytable: string = '';
-  @Input() reallocationcorporatetable: string = '';
 }
