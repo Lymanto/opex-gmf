@@ -8,7 +8,6 @@ import { tableBodyType } from 'src/app/lib/types';
 })
 export class NeedApprovalComponent {
   isFilterActive: boolean = true;
-  public needApproval: string = '100';
   header: string[] = [
     'No.',
     'TA Reff',
@@ -83,7 +82,5 @@ export class NeedApprovalComponent {
     },
   ];
 
-  ngOnInit(): void {
-    this.needApproval;
-  }
+  ngOnInit(): void {}
 }

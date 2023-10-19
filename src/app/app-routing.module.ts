@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard/dashboard.component';
-import { NewRequestComponent } from './pages/dashboard/new-request/new-request.component';
+import { NewRequestComponent as DashboardNewRequestComponent } from './pages/dashboard/new-request/new-request.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CreateReallocationBudgetComponent } from './pages/dashboard/create-reallocation-budget/create-reallocation-budget.component';
 import { NeedApprovalComponent } from './pages/need-approval/need-approval/need-approval.component';
@@ -15,6 +15,7 @@ import { FeedbackApplicationComponent } from './pages/feedback-application/feedb
 import { SummaryComponent as SummaryMasterData } from './pages/master-data/summary/summary.component';
 import { ViewBudgetComponent as ViewBudgetMasterData } from './pages/master-data/view-budget/view-budget.component';
 import { KursUsdComponent } from './pages/master-data/kurs-usd/kurs-usd.component';
+import { RequestVerificationComponent } from './pages/need-approval/detail/request-verification/request-verification.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard/new-request',
-    component: NewRequestComponent,
+    component: DashboardNewRequestComponent,
   },
   {
     path: 'dashboard/create-reallocation-budget',
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'need-approval',
     component: NeedApprovalComponent,
+  },
+  {
+    path: 'need-approval/detail',
+    component: RequestVerificationComponent,
   },
   {
     path: 'reallocation-budget/general',

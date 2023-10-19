@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
 export class LayoutComponent {
   @Input() currentUrl: string = '';
   @Input() currentUrlSubMenu: string = '';
-  @Input() needApproval: string = '';
+  @Input() needApproval: string = '50';
 }

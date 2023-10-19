@@ -1,4 +1,4 @@
-<app-layout needApproval="{{ needApproval }}" currentUrl="/need-approval">
+<app-layout currentUrl="/need-approval">
   <div
     class="p-4 border border-primary-border rounded-3xl bg-neutral-10 flex flex-col gap-4"
   >
@@ -16,13 +16,6 @@
           (click)="isFilterActive = !isFilterActive"
         >
         </app-button>
-        <app-button
-          label="Create Request"
-          icon="assets/images/icons/ic-plus-circle-white.svg"
-          type="primary"
-          [isHref]="true"
-          href="/dashboard/new-request"
-        ></app-button>
       </div>
     </div>
     <ng-container *ngIf="isFilterActive">

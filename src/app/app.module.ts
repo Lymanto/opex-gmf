@@ -14,7 +14,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectBoxComponent } from './component/Form/select-box/select-box.component';
 import { DashboardComponent } from './pages/dashboard/dashboard/dashboard.component';
-import { NewRequestComponent } from './pages/dashboard/new-request/new-request.component';
+import { NewRequestComponent as DashboardNewRequestComponent } from './pages/dashboard/new-request/new-request.component';
 import { LayoutComponent } from './component/layout/layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TextareaComponent } from './component/Form/textarea/textarea.component';
@@ -35,7 +35,7 @@ import { SummaryComponent as SummaryMasterData } from './pages/master-data/summa
 import { ViewBudgetComponent as ViewBudgetMasterData } from './pages/master-data/view-budget/view-budget.component';
 import { ItemReallocationComponent } from './component/item-reallocation/item-reallocation.component';
 import { StatusComponent } from './component/status/status.component';
-
+import { RequestVerificationComponent } from './pages/need-approval/detail/request-verification/request-verification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +47,7 @@ import { StatusComponent } from './component/status/status.component';
     ButtonComponent,
     StatusPercentageComponent,
     DashboardComponent,
-    NewRequestComponent,
+    DashboardNewRequestComponent,
     LayoutComponent,
     LoginComponent,
     TextareaComponent,
@@ -67,6 +67,8 @@ import { StatusComponent } from './component/status/status.component';
     ViewBudgetMasterData,
     ItemReallocationComponent,
     StatusComponent,
+
+    RequestVerificationComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

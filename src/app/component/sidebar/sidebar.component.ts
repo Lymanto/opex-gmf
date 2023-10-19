@@ -111,11 +111,11 @@ export const sidebarData: SidebarData[] = [
 export class SidebarComponent implements OnInit {
   @Input() active: string = '';
   @Input() activeSubMenu: string = '';
-  @Input() needApproval: string = '0';
+  @Input() needApproval!: string;
 
   sidebarData: SidebarData[] = sidebarData;
   constructor() {}
   ngOnInit() {
-    sidebarData[2]['needApproval'] = this.needApproval;
+    sidebarData[1]['needApproval'] = this.needApproval;
   }
 }
