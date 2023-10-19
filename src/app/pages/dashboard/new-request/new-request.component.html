@@ -32,7 +32,7 @@
           label="User (Dinas)"
           [isReadOnly]="true"
         ></app-input-text>
-        <app-select-box
+        <!-- <app-select-box
           id="typeSubmission"
           label="Type of Submission"
           type="typeSubmission"
@@ -47,7 +47,7 @@
             'Reimbursement'
           ]"
           displayWith="Entertainment"
-        ></app-select-box>
+        ></app-select-box> -->
       </div>
       <div class="grid grid-cols-4 gap-4">
         <app-input-text
@@ -68,14 +68,16 @@
           id="responsibleOfRequest"
           label="Responsible of Request"
           [required]="true"
-          [data]="['Lymanto', 'Vito', 'Aida', 'Marcel']"
+          [data]="userData.body.data"
           displayWith="Lymanto"
+          (selectedValue)="getValue($event)"
         ></app-select-box>
         <app-input-text
           type="normal"
           id="idNumber"
           placeholder="Fill this.."
           label="ID Number"
+          [value]="idNumber == null ? idNumber : 'null'"
           [isReadOnly]="true"
         ></app-input-text>
       </div>

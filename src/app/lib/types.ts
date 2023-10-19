@@ -14,3 +14,15 @@ export interface tableBodyType {
   departmentTo: string;
   description: string;
 }
+export interface userType {
+  personalNumber: string;
+  personalName: string;
+  personalTitle: string;
+  personalUnit: string;
+  personalEmail: string;
+  personalBirthPlace: string;
+  personalBirthDate: string;
+  personalGrade: string;
+  personalImage: string | null;
+  isGmfEmployee: string | null;
+}

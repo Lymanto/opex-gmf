@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -79,6 +80,7 @@ import { RequestVerificationComponent } from './pages/need-approval/detail/reque
     NgChartsModule,
     BrowserAnimationsModule,
     SelectBoxComponent,
+    HttpClientModule,
   ],
 })
 export class AppModule {}

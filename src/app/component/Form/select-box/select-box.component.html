@@ -15,9 +15,15 @@
       [readonly]="isReadOnly"
       [value]="value"
     />
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let item of filteredDatas | async" [value]="item">
-        {{ item }}
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="getValue($event.option.value)"
+    >
+      <mat-option
+        *ngFor="let item of filteredDatas | async"
+        [value]="item.personalName"
+      >
+        {{ item.personalName }}
       </mat-option>
     </mat-autocomplete>
 
