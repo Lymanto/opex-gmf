@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { startWith, map, tap } from 'rxjs/operators';
 import { NgFor, AsyncPipe, NgIf } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { userType } from 'src/app/lib/types';
+import { selectType } from 'src/app/lib/types';
 
 @Component({
   selector: 'app-select-box',
@@ -32,7 +32,7 @@ export class SelectBoxComponent implements OnInit {
   console = console;
   control = new FormControl('');
 
-  filteredDatas: Observable<userType[]> | undefined;
+  filteredDatas: Observable<selectType[]> | undefined;
 
   ngOnInit() {
     this.filteredDatas = this.control.valueChanges.pipe(
@@ -41,10 +41,10 @@ export class SelectBoxComponent implements OnInit {
     );
   }
 
-  private _filter(value: string): userType[] {
+  private _filter(value: string): selectType[] {
     const filterValue = this._normalizeValue(value);
     return this.data.filter((items: any) =>
-      this._normalizeValue(items.personalName).includes(filterValue)
+      this._normalizeValue(items.value).includes(filterValue)
     );
   }
 

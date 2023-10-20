@@ -37,6 +37,7 @@ import { ViewBudgetComponent as ViewBudgetMasterData } from './pages/master-data
 import { ItemReallocationComponent } from './component/item-reallocation/item-reallocation.component';
 import { StatusComponent } from './component/status/status.component';
 import { RequestVerificationComponent } from './pages/need-approval/detail/request-verification/request-verification.component';
+import { ViewBudgetTableComponent } from './component/view-budget-table/view-budget-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +71,7 @@ import { RequestVerificationComponent } from './pages/need-approval/detail/reque
     StatusComponent,
 
     RequestVerificationComponent,
+      ViewBudgetTableComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

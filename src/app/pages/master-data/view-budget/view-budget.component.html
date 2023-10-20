@@ -3,10 +3,10 @@
     class="p-4 border border-primary-border rounded-3xl bg-neutral-10 flex flex-col gap-4"
   >
     <div
-      class="flex flex-row justify-between items-center border border-b-primary-border border-t-neutral-10 border-x-neutral-10 py-4"
+      class="flex flex-row justify-between items-center border-b border-b-primary-border py-4"
     >
       <h2 class="text-subheading font-medium text-neutral-100">List of Data</h2>
-      <div class="flex flex-row gap-1">
+      <div class="flex flex-row gap-2 items-center">
         <p class="text-p-md text-primary-hover text-center items-center">
           Download RKAP
         </p>
@@ -24,21 +24,82 @@
       </div>
     </div>
     <div
-      class="grid justify-between items-center grid-cols-4 gap-3 border border-b-primary-border border-t-neutral-10 border-x-neutral-10 py-4"
+      class="flex flex-row gap-3 items-center border-b border-b-primary-border pb-4"
     >
-      <app-input-date id="years" label="Years"></app-input-date>
-      <app-select-box id="dinas" label="Dinas"></app-select-box>
-      <app-input-text
-        type="normal"
-        id="pembatasanggaran"
-        label="Pembatasan Anggaran (%) (Opsional)"
-      ></app-input-text>
-      <app-button
-        id="simulate"
-        label="Simulate"
-        icon="assets/images/icons/ic-shield-check.svg"
-        type="secondary"
-      ></app-button>
+      <div
+        class="grow grid justify-between items-center grid-cols-3 gap-3 border-r border-r-primary-border pr-3"
+      >
+        <app-select-box id="years" label="Years"></app-select-box>
+        <app-select-box id="dinas" label="Dinas"></app-select-box>
+        <app-input-text
+          type="normal"
+          id="pembatasanggaran"
+          label="Pembatasan Anggaran (%) (Opsional)"
+        ></app-input-text>
+      </div>
+      <div>
+        <app-button
+          id="simulate"
+          label="Simulate"
+          icon="assets/images/icons/ic-shield-check.svg"
+          type="secondary"
+        ></app-button>
+      </div>
     </div>
+    <div
+      class="flex flex-col gap-4 p-4 box-border border border-primary-border rounded-3xl bg-primary-bg-2"
+    >
+      <div
+        class="grid justify-between items-center grid-cols-2 gap-3 border border-b-primary-border border-t-primary-bg-2 border-x-primary-bg-2 py-4"
+      >
+        <app-select-box id="group" label="Group"></app-select-box>
+        <app-select-box id="groupDetail" label="Group Detail"></app-select-box>
+      </div>
+      <div>
+        <div class="grid justify-center items-center grid-cols-5 gap-3 mt-1">
+          <div class="flex flex-col gap-1 items-center justify-center">
+            Budget MTD
+            <div
+              class="border border-primary-border bg-primary-border rounded-2xl text-p-md font-semibold text-center items-center p-3 w-full"
+            >
+              1.759.077
+            </div>
+          </div>
+          <div class="flex flex-col gap-1 items-center justify-center">
+            Actual MTD
+            <div
+              class="border border-primary-border bg-primary-border rounded-2xl text-p-md font-semibold text-center items-center p-3 w-full"
+            >
+              1.759.077
+            </div>
+          </div>
+          <div class="flex flex-col gap-1 items-center justify-center">
+            Budget YTD
+            <div
+              class="border border-primary-border bg-primary-border rounded-2xl text-p-md font-semibold text-center items-center p-3 w-full"
+            >
+              1.759.077
+            </div>
+          </div>
+          <div class="flex flex-col gap-1 items-center justify-center">
+            Actual MTD
+            <div
+              class="border border-primary-border bg-primary-border rounded-2xl text-p-md font-semibold text-center items-center p-3 w-full"
+            >
+              1.759.077
+            </div>
+          </div>
+          <div class="flex flex-col gap-1 items-center justify-center">
+            Total Remaining Budget
+            <div
+              class="border border-primary-border bg-primary-border rounded-2xl text-p-md font-semibold text-center items-center p-3 w-full"
+            >
+              1.759.077
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-view-budget-table [body]="tableBody" />
   </div>
 </app-layout>

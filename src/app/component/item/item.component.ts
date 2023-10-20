@@ -19,7 +19,7 @@ export class ItemComponent implements OnInit {
     this.itemsForm = this.fb.group({
       items: new FormArray([this.createItem]),
     });
-    console.log(this.itemsForm);
+    // console.log(this.itemsForm);
   }
   addItems(): void {
     (this.itemsForm.get('items') as FormArray).push(this.createItem);

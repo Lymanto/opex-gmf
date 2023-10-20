@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { userType } from 'src/app/lib/types';
-import { GetAllUsersService } from 'src/app/services/opex/get-all-users.service';
+import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.service';
 
 @Component({
   selector: 'app-new-request',

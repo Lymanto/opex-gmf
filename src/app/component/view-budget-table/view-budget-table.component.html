@@ -1,0 +1,86 @@
+<div
+  class="border border-primary-border bg-neutral-10 rounded-3xl p-4 w-full h-16 mt-4"
+>
+  <div class="flex justify-between items-center">
+    <div class="flex flex-col justify-start items-start">
+      <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">Description</p>
+      <p class="text-p-lg font-semibold text-neutral-100">RKAP Budget</p>
+    </div>
+    <app-button
+      icon="assets/images/icons/ic-arrow-down.svg"
+      type="primary-not-active"
+    >
+    </app-button>
+  </div>
+  <table class="w-full">
+    <tr
+      class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
+    >
+      <th>Action</th>
+      <th *ngFor="let column of headers" class="p-2">
+        {{ column }}
+      </th>
+    </tr>
+    <tbody *ngFor="let item of body">
+      <tr
+        class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+      >
+        <td>
+          <button (click)="onClick(item.id)" type="button" class="">
+            <div
+              class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+              [ngClass]="{
+              'bg-primary-hover':item.id === activeId,
+              'border-primary-hover':item.id === activeId,
+            }"
+            >
+              <img
+                [src]="
+                  item.id === activeId
+                    ? 'assets/images/icons/ic-arrow-up-active.svg'
+                    : 'assets/images/icons/ic-arrow-down.svg'
+                "
+                alt="Arrow down"
+              />
+            </div>
+          </button>
+        </td>
+        <td class="h-[56px]">{{ item.financialIndicators }}</td>
+        <td class="h-[56px]">{{ item.glNumber }}</td>
+        <td class="h-[56px]">{{ item.total }}</td>
+        <td class="h-[56px]">{{ item.jan }}</td>
+        <td class="h-[56px]">{{ item.feb }}</td>
+        <td class="h-[56px]">{{ item.mar }}</td>
+        <td class="h-[56px]">{{ item.apr }}</td>
+        <td class="h-[56px]">{{ item.jun }}</td>
+        <td class="h-[56px]">{{ item.jul }}</td>
+        <td class="h-[56px]">{{ item.agu }}</td>
+        <td class="h-[56px]">{{ item.sep }}</td>
+        <td class="h-[56px]">{{ item.okt }}</td>
+        <td class="h-[56px]">{{ item.nov }}</td>
+        <td class="h-[56px]">{{ item.des }}</td>
+      </tr>
+      <tr
+        *ngIf="item.id === activeId"
+        class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
+      >
+        <td></td>
+        <td>Travel</td>
+        <td>40011000</td>
+        <td>-</td>
+        <td>115.864</td>
+        <td>115.864</td>
+        <td>773.24</td>
+        <td>773.24</td>
+        <td>773.24</td>
+        <td>773.24</td>
+        <td>773.24</td>
+        <td>773.24</td>
+        <td>773.24</td>
+        <td>773.24</td>
+        <td>773.24</td>
+        <td>773.24</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

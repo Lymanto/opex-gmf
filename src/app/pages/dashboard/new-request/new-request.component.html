@@ -32,22 +32,44 @@
           label="User (Dinas)"
           [isReadOnly]="true"
         ></app-input-text>
-        <!-- <app-select-box
+        <app-select-box
           id="typeSubmission"
           label="Type of Submission"
           type="typeSubmission"
           [required]="true"
           [data]="[
-            'Uang Muka',
-            'Pengadaaan',
-            'Quality',
-            'Facility',
-            'ICT',
-            'Entertainment',
-            'Reimbursement'
+          {
+            id:'Uang Muka',
+            value:'Uang Muka',
+          },
+          {
+            id:'Pengadaaan',
+            value:'Pengadaaan'
+          },
+          {
+            id:'Quality',
+            value:'Quality'
+          },
+          {
+            id:'Facility',
+            value:'Facility'
+          },
+          {
+            id:'ICT',
+            value:'ICT'
+          },
+          {
+            id:'Entertainment',
+            value:'Entertainment'
+          },
+          {
+            id:'Reimbursement',
+            value:'Reimbursement'
+          }
           ]"
+          type="arrayData"
           displayWith="Entertainment"
-        ></app-select-box> -->
+        ></app-select-box>
       </div>
       <div class="grid grid-cols-4 gap-4">
         <app-input-text
@@ -64,14 +86,14 @@
           label="ID Number"
           [isReadOnly]="true"
         ></app-input-text>
-        <app-select-box
+
+        <app-input-text
+          [required]="true"
           id="responsibleOfRequest"
           label="Responsible of Request"
-          [required]="true"
-          [data]="userData.body.data"
-          displayWith="Lymanto"
-          (selectedValue)="getValue($event)"
-        ></app-select-box>
+          type="normal"
+          placeholder="Fill This.."
+        ></app-input-text>
         <app-input-text
           type="normal"
           id="idNumber"
