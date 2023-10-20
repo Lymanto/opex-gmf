@@ -28,8 +28,7 @@ export class SelectBoxComponent implements OnInit {
   @Input() required: boolean = false;
   @Input() isReadOnly: boolean = false;
   @Input() value: string = '';
-  @Output() selectedValue: EventEmitter<userType> =
-    new EventEmitter<userType>();
+  @Output() selectedValue: EventEmitter<string> = new EventEmitter<string>();
   console = console;
   control = new FormControl('');
 
@@ -52,7 +51,7 @@ export class SelectBoxComponent implements OnInit {
   private _normalizeValue(value: string): string {
     return value.toLowerCase().replace(/\s/g, '');
   }
-  getValue(val: EventEmitter<userType>): void {
-    this.selectedValue = val;
+  getValue(val: string): void {
+    this.selectedValue.emit(val);
   }
 }

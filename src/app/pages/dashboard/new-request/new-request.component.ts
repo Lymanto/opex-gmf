@@ -9,7 +9,7 @@ import { GetAllUsersService } from 'src/app/services/opex/get-all-users.service'
 })
 export class NewRequestComponent implements OnInit {
   userData!: any;
-  idNumber!: userType;
+  idNumber: string = '';
   console = console;
   constructor(private service: GetAllUsersService) {}
   ngOnInit() {
@@ -17,7 +17,8 @@ export class NewRequestComponent implements OnInit {
       this.userData = response;
     });
   }
-  getValue(val: userType): void {
+  getValue(val: string): void {
     this.idNumber = val;
+    this.console.log('val :', val);
   }
 }
