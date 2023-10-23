@@ -38,6 +38,8 @@ import { ItemReallocationComponent } from './component/item-reallocation/item-re
 import { StatusComponent } from './component/status/status.component';
 import { RequestVerificationComponent } from './pages/need-approval/detail/request-verification/request-verification.component';
 import { ViewBudgetTableComponent } from './component/view-budget-table/view-budget-table.component';
+import { ReallocationRequestComponent } from './pages/reallocation-budget/reallocation-request/reallocation-request.component';
+import { RequestRealokasiComponent } from './pages/reallocation-budget/detail/request-realokasi/request-realokasi.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +73,9 @@ import { ViewBudgetTableComponent } from './component/view-budget-table/view-bud
     StatusComponent,
 
     RequestVerificationComponent,
-      ViewBudgetTableComponent,
+    ViewBudgetTableComponent,
+    ReallocationRequestComponent,
+    RequestRealokasiComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

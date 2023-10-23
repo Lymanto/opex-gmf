@@ -6,12 +6,13 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+
 @Component({
-  selector: 'app-item',
-  templateUrl: './item.component.html',
-  styleUrls: ['./item.component.css'],
+  selector: 'app-reallocation-request',
+  templateUrl: './reallocation-request.component.html',
+  styleUrls: ['./reallocation-request.component.css'],
 })
-export class ItemComponent implements OnInit {
+export class ReallocationRequestComponent implements OnInit {
   console = console;
   itemsForm!: FormGroup;
   constructor(private fb: FormBuilder) {}
@@ -32,14 +33,17 @@ export class ItemComponent implements OnInit {
   }
   get createItem(): FormGroup {
     return this.fb.group({
-      budget: [new FormControl<string>('', Validators.required)],
-      group: [new FormControl<string>('', Validators.required)],
+      groupControl: [new FormControl<string>('', Validators.required)],
       groupDetailControl: [new FormControl<string>('', Validators.required)],
       GLDetailControl: [new FormControl<string>('', Validators.required)],
       availableControl: [new FormControl<string>('', Validators.required)],
       amountSubmissionControl: [
         new FormControl<string>('', Validators.required),
       ],
+      periodStartControl: [new FormControl<string>('', Validators.required)],
+      periodFinishControl: [new FormControl<string>('', Validators.required)],
+      descriptionPBControl: [new FormControl<string>('', Validators.required)],
+      remarkPBControl: [new FormControl<string>('', Validators.required)],
     });
   }
 }

@@ -2,6 +2,16 @@ export interface headerType {
   id: string;
   title: string;
 }
+export interface tableBodyReallocationType {
+  id: string;
+  documentName: string;
+  docType: string;
+  size: string;
+  uploadBy: string;
+  departmentBy: string;
+  uploadDate: string;
+  description: string;
+}
 export interface tableBodyRkapType {
   id: string;
   financialIndicators: string;

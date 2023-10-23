@@ -881,19 +881,14 @@
           </div>
         </div>
       </td>
-      <td>
-        <button
-          type="button"
-          class=""
-          *ngFor="let menuItem of tabledata"
-          routerLinkActive="active"
-        >
+      <td routerLinkActive="active">
+        <a routerLink="/reallocation-budget/detail">
           <div
             class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
           >
             <img src="assets/images/icons/ic-eye-blue.svg" alt="" />
           </div>
-        </button>
+        </a>
       </td>
     </tr>
   </table>

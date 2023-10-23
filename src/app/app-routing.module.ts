@@ -16,6 +16,8 @@ import { SummaryComponent as SummaryMasterData } from './pages/master-data/summa
 import { ViewBudgetComponent as ViewBudgetMasterData } from './pages/master-data/view-budget/view-budget.component';
 import { KursUsdComponent } from './pages/master-data/kurs-usd/kurs-usd.component';
 import { RequestVerificationComponent } from './pages/need-approval/detail/request-verification/request-verification.component';
+import { ReallocationRequestComponent } from './pages/reallocation-budget/reallocation-request/reallocation-request.component';
+import { RequestRealokasiComponent } from './pages/reallocation-budget/detail/request-realokasi/request-realokasi.component';
 
 const routes: Routes = [
   {
@@ -39,12 +41,20 @@ const routes: Routes = [
     component: RequestVerificationComponent,
   },
   {
+    path: 'reallocation-budget/detail',
+    component: RequestRealokasiComponent,
+  },
+  {
     path: 'reallocation-budget/general',
     component: GeneralComponent,
   },
   {
     path: 'reallocation-budget/realokasi-corporate',
     component: RealokasiCorporateComponent,
+  },
+  {
+    path: 'reallocation-budget/reallocation-request',
+    component: ReallocationRequestComponent,
   },
   {
     path: 'report/summary',
