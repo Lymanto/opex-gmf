@@ -101,6 +101,16 @@ export class TableComponent implements OnInit {
     'Responsible of Request',
     'Action',
   ];
+  remarkHeaders = [
+    'No',
+    'Action',
+    'Date of Remark',
+    'Status',
+    'Status From',
+    'Department From',
+    'Status To',
+    'Department To',
+  ];
 
   show: boolean = false;
   activeId: string = 'not-active';

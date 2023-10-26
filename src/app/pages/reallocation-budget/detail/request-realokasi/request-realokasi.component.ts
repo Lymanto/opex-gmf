@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './request-realokasi.component.html',
   styleUrls: ['./request-realokasi.component.css']
 })
-export class RequestRealokasiComponent {
+export class RequestRealokasiComponent   {
+  isFilterActive: boolean = true;
 
 }
