@@ -428,19 +428,18 @@
               class="flex-grow flex flex-col gap-3 border-r border-r-primary-border pr-4"
             >
               <div class="grid grid-cols-4 gap-3">
-                <app-select-box id="years" label="Years"></app-select-box>
-                <app-select-box id="dinas" label="Dinas"></app-select-box>
-                <app-input-text
-                  type="normal"
-                  id="requestNumber"
-                  placeholder="Fill this.."
-                  label="No. of Request"
-                ></app-input-text>
-                <app-input-date
-                  id="entryDateFrom"
-                  placeholder="Select One.."
-                  label="Entry Date (From)"
-                ></app-input-date>
+                <app-input-date id="dateOfRemarkFrom" label="Date of Remark (From)"></app-input-date>
+                <app-input-date id="dateOfRemarkTo" label="Date of Remark (To)"></app-input-date>
+                <app-select-box   
+                  id="status"
+                  placeholder="Please Select one..."
+                  label="Status"
+                ></app-select-box>
+                <app-select-box
+                  id="statusTo"
+                  placeholder="Please Select one..."
+                  label="Status To"
+                ></app-select-box>
               </div>
               </div>
               <app-button
