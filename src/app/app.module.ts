@@ -36,10 +36,15 @@ import { SummaryComponent as SummaryMasterData } from './pages/master-data/summa
 import { ViewBudgetComponent as ViewBudgetMasterData } from './pages/master-data/view-budget/view-budget.component';
 import { ItemReallocationComponent } from './component/item-reallocation/item-reallocation.component';
 import { StatusComponent } from './component/status/status.component';
-import { RequestVerificationComponent } from './pages/need-approval/detail/request-verification/request-verification.component';
+import { RequestVerificationComponent } from './component/need-approval-detail/request-verification/request-verification.component';
 import { ViewBudgetTableComponent } from './component/view-budget-table/view-budget-table.component';
 import { ReallocationRequestComponent } from './pages/reallocation-budget/reallocation-request/reallocation-request.component';
 import { RequestRealokasiComponent } from './pages/reallocation-budget/detail/request-realokasi/request-realokasi.component';
+import { DetailComponent } from './pages/need-approval/detail/detail.component';
+import { ReallocatonBudgetComponent } from './component/need-approval-detail/reallocaton-budget/reallocaton-budget.component';
+import { RemarkComponent } from './component/need-approval-detail/remark/remark.component';
+import { TrackingApprovalComponent } from './component/need-approval-detail/tracking-approval/tracking-approval.component';
+import { CardComponent } from './component/card/card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +81,11 @@ import { RequestRealokasiComponent } from './pages/reallocation-budget/detail/re
     ViewBudgetTableComponent,
     ReallocationRequestComponent,
     RequestRealokasiComponent,
+    DetailComponent,
+    ReallocatonBudgetComponent,
+    RemarkComponent,
+    TrackingApprovalComponent,
+    CardComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

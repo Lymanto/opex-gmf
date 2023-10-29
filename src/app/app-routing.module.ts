@@ -15,9 +15,10 @@ import { FeedbackApplicationComponent } from './pages/feedback-application/feedb
 import { SummaryComponent as SummaryMasterData } from './pages/master-data/summary/summary.component';
 import { ViewBudgetComponent as ViewBudgetMasterData } from './pages/master-data/view-budget/view-budget.component';
 import { KursUsdComponent } from './pages/master-data/kurs-usd/kurs-usd.component';
-import { RequestVerificationComponent } from './pages/need-approval/detail/request-verification/request-verification.component';
+import { RequestVerificationComponent } from './component/need-approval-detail/request-verification/request-verification.component';
 import { ReallocationRequestComponent } from './pages/reallocation-budget/reallocation-request/reallocation-request.component';
 import { RequestRealokasiComponent } from './pages/reallocation-budget/detail/request-realokasi/request-realokasi.component';
+import { DetailComponent } from './pages/need-approval/detail/detail.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: 'need-approval/detail',
-    component: RequestVerificationComponent,
+    component: DetailComponent,
   },
   {
     path: 'reallocation-budget/detail',
