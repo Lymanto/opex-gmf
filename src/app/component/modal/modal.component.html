@@ -256,3 +256,182 @@
     </div>
   </div>
 </ng-container>
+
+<ng-container *ngIf="type === 'needApprovalRevise'">
+  <div
+    id="needApprovalRevise"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+  >
+    <div class="relative w-full max-w-md max-h-full">
+      <div
+        class="relative bg-neutral-10 border border-primary-border rounded-lg shadow dark:bg-gray-700"
+      >
+        <div class="text-center mt-6"><h6>Revise</h6></div>
+        <div class="mt-6 mx-6">
+          <div
+            class="flex flex-row justify-between items-center p-4 border-2 mb-4 border-neutral-50 rounded-2xl"
+          >
+            <div>
+              <div class="text-p-lg font-medium text-primary-main">User</div>
+              <p class="text-p-sm text-neutral-80">
+                Select this if only User area to revise
+              </p>
+            </div>
+            <app-button
+              [hasIcon]="false"
+              type="primary-not-active"
+              label="Select"
+              id="select"
+              icon=""
+            ></app-button>
+          </div>
+          <div
+            class="flex flex-row justify-between items-center p-4 border-2 mb-4 border-neutral-50 rounded-2xl"
+          >
+            <div>
+              <div class="text-p-lg font-medium text-primary-main">User</div>
+              <p class="text-p-sm text-neutral-80">
+                Select this if only User area to revise
+              </p>
+            </div>
+            <app-button
+              [hasIcon]="false"
+              type="primary-not-active"
+              label="Select"
+              id="select"
+              icon=""
+            ></app-button>
+          </div>
+          <div
+            class="flex flex-row justify-between items-center p-4 mb-3 border-2 border-neutral-50 rounded-2xl"
+          >
+            <div>
+              <div class="text-p-lg font-medium text-primary-main">User</div>
+              <p class="text-p-sm text-neutral-80">
+                Select this if only User area to revise
+              </p>
+            </div>
+            <app-button
+              [hasIcon]="false"
+              type="primary-not-active"
+              label="Select"
+              id="select"
+              icon=""
+            ></app-button>
+          </div>
+          <app-textarea
+            type="normal"
+            id="remark"
+            label="Remark"
+            [required]="true"
+            placeholder="Please Fill this"
+          ></app-textarea>
+        </div>
+        <div class="px-6 pb-6 text-center mt-10">
+          <div class="grid grid-cols-2 items-center justify-center gap-3">
+            <app-button
+              type="primary-not-active"
+              label="Cancel"
+              [hasIcon]="false"
+              [isFull]="true"
+              data-modal-hide="needApprovalRevise"
+            />
+
+            <app-button
+              [isFull]="true"
+              type="primary"
+              label="Confirm"
+              [hasIcon]="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="type === 'needApprovalNeedHps'">
+  <div
+    id="needApprovalNeedHps"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+  >
+    <div class="relative w-full max-w-md max-h-full">
+      <div
+        class="relative bg-neutral-10 border border-primary-border rounded-lg shadow dark:bg-gray-700"
+      >
+        <div class="text-center mt-6"><h6>Need HPS</h6></div>
+        <div class="mt-6 mx-6">
+          <app-textarea
+            type="normal"
+            id="remark"
+            label="Remark"
+            [required]="true"
+            placeholder="Please Fill this"
+          ></app-textarea>
+        </div>
+        <div class="px-6 pb-6 text-center mt-10">
+          <div class="grid grid-cols-2 items-center justify-center gap-3">
+            <app-button
+              type="primary-not-active"
+              label="Cancel"
+              [hasIcon]="false"
+              [isFull]="true"
+              data-modal-hide="needApprovalNeedHps"
+            />
+
+            <app-button
+              [isFull]="true"
+              type="primary"
+              label="Confirm"
+              [hasIcon]="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="type === 'needApprovalApprove'">
+  <div
+    id="needApprovalApprove"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+  >
+    <div class="relative w-full max-w-md max-h-full">
+      <div
+        class="relative bg-neutral-10 border border-primary-border rounded-lg shadow dark:bg-gray-700"
+      >
+        <div class="text-center mt-6"><h6>Input Password</h6></div>
+        <div class="mt-6 mx-6">
+          <app-input-text
+            type="password"
+            id="password"
+            label="Password"
+            [required]="true"
+            placeholder="Please Fill this"
+          ></app-input-text>
+        </div>
+        <div class="px-6 pb-6 text-center mt-10">
+          <div class="grid grid-cols-2 items-center justify-center gap-3">
+            <app-button
+              type="primary-not-active"
+              label="Cancel"
+              [hasIcon]="false"
+              [isFull]="true"
+              data-modal-hide="needApprovalApprove"
+            />
+
+            <app-button
+              [isFull]="true"
+              type="primary"
+              label="Confirm"
+              [hasIcon]="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

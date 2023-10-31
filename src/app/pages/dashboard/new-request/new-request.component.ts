@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { userType } from 'src/app/lib/types';
+import { selectType } from 'src/app/lib/types';
 import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.service';
 
 @Component({
@@ -8,17 +8,27 @@ import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.ser
   styleUrls: ['./new-request.component.css'],
 })
 export class NewRequestComponent implements OnInit {
-  userData!: any;
+  userData: selectType[] = [];
   idNumber: string = '';
   console = console;
   constructor(private service: GetAllUsersService) {}
   ngOnInit() {
-    this.service.getAllUsers().subscribe((response) => {
-      this.userData = response;
+    this.service.getAllUsers().subscribe((response: any) => {
+      this.refactorUser(response.body?.data);
     });
   }
-  getValue(val: string): void {
-    this.idNumber = val;
+  refactorUser(data: any): selectType[] {
+    data.forEach((element: any) => {
+      this.userData.push({
+        id: element.personalNumber,
+        value: element.personalName,
+      });
+    });
+    return this.userData;
+  }
+
+  getValue(val: any): void {
+    this.idNumber = val.id;
     this.console.log('val :', val);
   }
 }

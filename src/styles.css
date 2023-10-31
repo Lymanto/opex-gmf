@@ -2,6 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+[type='password']{
+  border-width:0;
+}
 
 body {
   @apply bg-primary-bg-2;

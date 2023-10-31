@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-textarea',
@@ -15,4 +16,5 @@ export class TextareaComponent {
   @Input() isAsk: boolean = false;
   @Input() isReadOnly: boolean = false;
   @Input() isDisabled: boolean = false;
+  public Editor = ClassicEditor;
 }

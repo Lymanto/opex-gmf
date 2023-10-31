@@ -12,6 +12,8 @@ export class StatusComponent implements OnInit {
     | 'Closed'
     | 'Revise'
     | 'Reject'
+    | 'Approve'
+    | 'Waiting Approval'
     | string
     | undefined;
   statusClass!: string;
@@ -22,7 +24,12 @@ export class StatusComponent implements OnInit {
     switch (this.status) {
       case 'Open': {
         this.statusClass =
-          ' border-tertiary-br-red text-tertiary-tx-red bg-tertiary-bg-red ';
+          ' border-tertiary-br-gold text-tertiary-tx-gold bg-tertiary-bg-gold ';
+        break;
+      }
+      case 'Approve': {
+        this.statusClass =
+          ' border-tertiary-br-green text-tertiary-tx-green bg-tertiary-bg-green ';
         break;
       }
       case 'Progress': {
@@ -40,9 +47,15 @@ export class StatusComponent implements OnInit {
           ' border-tertiary-br-tosca text-tertiary-tx-tosca bg-tertiary-bg-tosca ';
         break;
       }
+      case 'Waiting Approval': {
+        this.statusClass =
+          ' border-tertiary-br-blue text-tertiary-tx-blue bg-tertiary-bg-blue ';
+        break;
+      }
       case 'Reject': {
         this.statusClass =
-          ' border-tertiary-br-gold text-tertiary-tx-gold bg-tertiary-bg-gold ';
+          ' border-tertiary-br-red text-tertiary-tx-red bg-tertiary-bg-red ';
+
         break;
       }
     }

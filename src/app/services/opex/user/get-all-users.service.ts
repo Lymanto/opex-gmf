@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class GetAllUsersService {
-  private url = `${environment.baseUrl}/v1/employee?page=1&perPage=10&orderColumn=personalName&orderBy=asc`;
+  private url = `${environment.baseUrl}/v1/employee?page=1&perPage=100&orderColumn=personalName&orderBy=asc`;
   constructor(private httpClient: HttpClient) {}
   getAllUsers() {
     return this.httpClient.get(this.url, {

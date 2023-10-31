@@ -16,25 +16,51 @@
     >
       <img src="assets/images/icons/ic-notification.svg" alt="" />
     </div>
-    <div
-      class="p-2 bg-slate-50 border border-primary-border rounded-2xl flex flex-row gap-2 items-center cursor-pointer"
-    >
-      <div class="relative w-[34px] h-[34px] rounded-full">
+    <div class="relative">
+      <div
+        class="p-2 bg-slate-50 border border-primary-border rounded-2xl flex flex-row gap-2 items-center cursor-pointer"
+        (click)="active = !active"
+      >
+        <div class="relative w-[34px] h-[34px] rounded-full">
+          <img
+            src="assets/images/dummy.png"
+            class="absolute object-cover"
+            alt="profile"
+          />
+        </div>
+        <div class="flex flex-col items-end">
+          <p class="text-p-md font-semibold text-neutral-100">Ade Amala</p>
+          <p class="text-p-sm font-medium text-neutral-70 leading-3">TDI - 2</p>
+        </div>
         <img
-          src="assets/images/dummy.png"
-          class="absolute object-cover"
-          alt="profile"
+          src="assets/images/icons/ic-arrow-down.svg"
+          alt="arrow down"
+          class="w-[20px] h-[20px]"
         />
       </div>
-      <div class="flex flex-col items-end">
-        <p class="text-p-md font-semibold text-neutral-100">Ade Amala</p>
-        <p class="text-p-sm font-medium text-neutral-70 leading-3">TDI - 2</p>
+      <div
+        [ngClass]="{
+          hidden: !active,
+          'absolute': active,
+        }"
+        class="bg-neutral-10 p-3 flex flex-col gap-3 w-full rounded-xl border border-primary-border"
+      >
+        <div
+          class="text-p-md text-neutral-100 hover:text-primary-hover cursor-pointer"
+        >
+          OPEX
+        </div>
+        <div
+          class="text-p-md text-neutral-100 hover:text-primary-hover cursor-pointer"
+        >
+          CAPEX
+        </div>
+        <div
+          class="text-p-md text-neutral-100 hover:text-primary-hover cursor-pointer"
+        >
+          Sign Out
+        </div>
       </div>
-      <img
-        src="assets/images/icons/ic-arrow-down.svg"
-        alt="arrow down"
-        class="w-[20px] h-[20px]"
-      />
     </div>
   </div>
 </header>

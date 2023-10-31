@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./detail.component.css'],
 })
 export class DetailComponent {
-  tabState: string = 'trackingApproval';
+  tabState: string = 'requestVerification';
 }

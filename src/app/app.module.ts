@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +46,9 @@ import { ReallocatonBudgetComponent } from './component/need-approval-detail/rea
 import { RemarkComponent } from './component/need-approval-detail/remark/remark.component';
 import { TrackingApprovalComponent } from './component/need-approval-detail/tracking-approval/tracking-approval.component';
 import { CardComponent } from './component/card/card.component';
+import { DetailRequestComponent } from './component/reallocation-budget/detail-request/detail-request.component';
+import { RemarkComponent as RemarkReallocationComponent } from './component/reallocation-budget/remark/remark.component';
+import { TrackingApprovalComponent as TrackingApprovalReallocationComponent } from './component/reallocation-budget/tracking-approval/tracking-approval.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +80,6 @@ import { CardComponent } from './component/card/card.component';
     ViewBudgetMasterData,
     ItemReallocationComponent,
     StatusComponent,
-
     RequestVerificationComponent,
     ViewBudgetTableComponent,
     ReallocationRequestComponent,
@@ -86,6 +89,9 @@ import { CardComponent } from './component/card/card.component';
     RemarkComponent,
     TrackingApprovalComponent,
     CardComponent,
+    DetailRequestComponent,
+    RemarkReallocationComponent,
+    TrackingApprovalReallocationComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -97,6 +103,7 @@ import { CardComponent } from './component/card/card.component';
     BrowserAnimationsModule,
     SelectBoxComponent,
     HttpClientModule,
+    CKEditorModule,
   ],
 })
 export class AppModule {}

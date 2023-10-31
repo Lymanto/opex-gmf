@@ -18,11 +18,9 @@
     <mat-autocomplete
       #auto="matAutocomplete"
       (optionSelected)="getValue($event.option.value)"
+      [displayWith]="displayFn"
     >
-      <mat-option
-        *ngFor="let item of filteredDatas | async"
-        [value]="item.value"
-      >
+      <mat-option *ngFor="let item of filteredDatas | async" [value]="item">
         {{ item.value }}
       </mat-option>
     </mat-autocomplete>

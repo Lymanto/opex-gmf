@@ -87,13 +87,23 @@
           [isReadOnly]="true"
         ></app-input-text>
 
-        <app-input-text
+        <!-- <app-input-text
           [required]="true"
           id="responsibleOfRequest"
           label="Responsible of Request"
           type="normal"
+          [isReadOnly]="true"
           placeholder="Fill This.."
-        ></app-input-text>
+        ></app-input-text> -->
+        <app-select-box
+          [required]="true"
+          id="responsibleOfRequest"
+          label="Responsible of Request"
+          type="normal"
+          [data]="userData"
+          placeholder="Fill This.."
+          (selectedValue)="getValue($event)"
+        ></app-select-box>
         <app-input-text
           type="normal"
           id="idNumber"

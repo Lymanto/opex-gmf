@@ -387,5 +387,37 @@
       type="info"
       label="Edit"
     />
+    <app-button
+      icon="assets/images/icons/ic-pencil-square.svg"
+      type="info"
+      label="Revise"
+      data-modal-target="needApprovalRevise"
+      data-modal-toggle="needApprovalRevise"
+    />
+    <app-button
+      icon="assets/images/icons/ic-pencil-square.svg"
+      type="danger"
+      label="Reject"
+      data-modal-target="needApprovalReject"
+      data-modal-toggle="needApprovalReject"
+    />
+    <app-button
+      icon="assets/images/icons/ic-pencil-square.svg"
+      type="danger"
+      label="Need HPS"
+      data-modal-target="needApprovalNeedHps"
+      data-modal-toggle="needApprovalNeedHps"
+    />
+    <app-button
+      icon="assets/images/icons/ic-check-circle.svg"
+      type="success"
+      label="Approve"
+      data-modal-target="needApprovalApprove"
+      data-modal-toggle="needApprovalApprove"
+    />
   </div>
+  <app-modal type="needApprovalRevise" />
+  <app-modal type="needApprovalReject" />
+  <app-modal type="needApprovalNeedHps" />
+  <app-modal type="needApprovalApprove" />
 </section>

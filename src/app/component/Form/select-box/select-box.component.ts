@@ -51,7 +51,10 @@ export class SelectBoxComponent implements OnInit {
   private _normalizeValue(value: string): string {
     return value.toLowerCase().replace(/\s/g, '');
   }
-  getValue(val: string): void {
+  getValue(val: any): void {
     this.selectedValue.emit(val);
+  }
+  displayFn(item: any): string {
+    return item ? item.value : item;
   }
 }

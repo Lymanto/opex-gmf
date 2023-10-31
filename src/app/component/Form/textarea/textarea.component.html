@@ -17,16 +17,6 @@
     >
   </ng-container>
   <ng-container *ngIf="type === 'rich'">
-    <textarea
-      name="{{ id }}"
-      id="{{ id }}"
-      class="border border-neutral-40 p-3 rounded-2xl text-p-md placeholder:text-neutral-80 appearance-none w-full text-neutral-100 read-only:bg-neutral-20 disabled:bg-neutral-20"
-      placeholder="{{ placeholder }}"
-      required="{{ required }}"
-      cols="2"
-      [readonly]="isReadOnly"
-      [disabled]="isDisabled"
-      >{{ content }}</textarea
-    >
+    <ckeditor [editor]="Editor"></ckeditor>
   </ng-container>
 </div>
