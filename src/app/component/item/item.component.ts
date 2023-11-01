@@ -14,6 +14,7 @@ import {
 export class ItemComponent implements OnInit {
   console = console;
   itemsForm!: FormGroup;
+  isDisplay:boolean = true
   constructor(private fb: FormBuilder) {}
   ngOnInit() {
     this.itemsForm = this.fb.group({

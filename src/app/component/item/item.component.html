@@ -25,6 +25,7 @@
     [formGroup]="itemsForm"
     *ngFor="let item of getItems.controls; let i = index"
   >
+  <ng-container *ngIf="isDisplay">
     <div
       class="flex flex-col gap-4 p-4 box-border border border-primary-border rounded-3xl bg-primary-bg-2"
     >
@@ -35,11 +36,22 @@
         </div>
         <app-button
           label="Hide Item"
-          type="primary"
-          icon="assets/images/icons/ic-eye-white-slash.svg"
-        />
+          [icon]="
+          isDisplay
+            ? 'assets/images/icons/ic-eye-white-slash.svg'
+            : 'assets/images/icons/ic-eye-blue.svg'
+        "
+        [label]="isDisplay ? 'Hide Item' : 'Show Item'"
+        [type]="
+        isDisplay
+        ? 'primary'
+        : 'primary-not-active'
+        "
+        (click)="isDisplay = !isDisplay"
+      >
+        </app-button>
       </div>
-      <hr class="w-full h-px bg-primary-border border-0" />
+        <hr class="w-full h-px bg-primary-border border-0" />
       <div class="grid grid-cols-3 gap-4">
         <app-select-box
           id="group"
@@ -99,5 +111,50 @@
         [required]="true"
       />
     </div>
+  </ng-container>
+
+      <ng-container *ngIf="!isDisplay">
+        <div class="flex flex-col gap-4 p-4 box-border border border-primary-border rounded-3xl bg-primary-bg-2">
+          <div class="flex items-center text-center">
+            <div class="flex flex-col justify-center items-center pr-3">
+              <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">Item</p>
+              <p class="text-p-lg font-semibold text-neutral-100">{{ i + 1 }}</p>
+            </div>
+            
+              <div class="border-l border-primary-border p-3">
+                <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3 ">Group</p>
+                <p class="text-p-lg font-semibold text-neutral-100">Rental Expense</p>
+              </div>
+              <div class="border-l border-primary-border p-3">
+                <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3 ">Group Detail</p>
+                <p class="text-p-lg font-semibold text-neutral-100">Building-Rental</p>
+              </div>
+              <div class="border-l border-primary-border p-3">
+                <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3 ">G/L Number</p>
+                <p class="text-p-lg font-semibold text-neutral-100">400000001</p>
+              </div>
+              <div class="border-l border-primary-border p-3">
+                <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3 ">Amount Submission</p>
+                <p class="text-p-lg font-semibold text-neutral-100">758.62 USD</p>
+              </div>
+              <app-button
+              label="Hide Item"
+              [icon]="
+              isDisplay
+                ? 'assets/images/icons/ic-eye-white-slash.svg'
+                : 'assets/images/icons/ic-eye-blue.svg'
+            "
+            [label]="isDisplay ? 'Hide Item' : 'Show Item'"
+            [type]="
+            isDisplay
+            ? 'primary'
+            : 'primary-not-active'
+            "
+            (click)="isDisplay = !isDisplay"
+          >
+            </app-button>
+            </div>
+          </div>
+      </ng-container>
   </form>
 </div>
