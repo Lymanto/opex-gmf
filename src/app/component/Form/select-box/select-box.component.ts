@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { startWith, map, tap } from 'rxjs/operators';
+import { startWith, map, subscribeOn } from 'rxjs/operators';
 import { NgFor, AsyncPipe, NgIf } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { selectType } from 'src/app/lib/types';
@@ -37,7 +37,10 @@ export class SelectBoxComponent implements OnInit {
   ngOnInit() {
     this.filteredDatas = this.control.valueChanges.pipe(
       startWith(''),
-      map((value) => this._filter(value || ''))
+      map((value: any) => {
+        const name = typeof value === 'string' ? value : value?.value;
+        return name ? this._filter(name as string) : this.data.slice();
+      })
     );
   }
 
@@ -55,6 +58,6 @@ export class SelectBoxComponent implements OnInit {
     this.selectedValue.emit(val);
   }
   displayFn(item: any): string {
-    return item ? item.value : item;
+    return item ? item.value : '';
   }
 }

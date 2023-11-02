@@ -152,56 +152,7 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="type === 'kursAdd'">
-  <div
-    id="kursAdd"
-    tabindex="-1"
-    class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
-  >
-    <div class="relative w-full max-w-md max-h-full">
-      <div
-        class="relative bg-neutral-10 border border-primary-border rounded-lg shadow dark:bg-gray-700"
-      >
-        <div class="text-center mt-6"><h6>Add New</h6></div>
-        <div class="mt-6 mx-6">
-          <app-select-box
-            id="years"
-            label="Years"
-            [required]="true"
-          ></app-select-box>
-        </div>
-        <div class="mt-2 mx-6">
-          <app-input-text
-            type="normal"
-            id="addKurs"
-            placeholder=" Please Fill this"
-            label="Value (IDR)"
-            [required]="true"
-          >
-          </app-input-text>
-        </div>
-        <div class="px-6 pb-6 text-center mt-10">
-          <div class="grid grid-cols-2 items-center justify-center gap-3">
-            <app-button
-              type="primary-not-active"
-              label="Cancel"
-              [hasIcon]="false"
-              [isFull]="true"
-              data-modal-hide="kursAdd"
-            />
-
-            <app-button
-              [isFull]="true"
-              type="primary"
-              label="Save"
-              [hasIcon]="false"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-container>
+<ng-container *ngIf="type === 'kursAdd'"> </ng-container>
 
 <ng-container *ngIf="type === 'kursEdit'">
   <div
@@ -393,6 +344,50 @@
     </div>
   </div>
 </ng-container>
+
+<ng-container *ngIf="type === 'needApprovalReject'">
+  <div
+    id="needApprovalReject"
+    tabindex="-1"
+    class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+  >
+    <div class="relative w-full max-w-md max-h-full">
+      <div
+        class="relative bg-neutral-10 border border-primary-border rounded-lg shadow dark:bg-gray-700"
+      >
+        <div class="text-center mt-6"><h6>Reject</h6></div>
+        <div class="mt-6 mx-6">
+          <app-textarea
+            type="normal"
+            id="remark"
+            label="Remark"
+            [required]="true"
+            placeholder="Please Fill this"
+          ></app-textarea>
+        </div>
+        <div class="px-6 pb-6 text-center mt-10">
+          <div class="grid grid-cols-2 items-center justify-center gap-3">
+            <app-button
+              type="primary-not-active"
+              label="Cancel"
+              [hasIcon]="false"
+              [isFull]="true"
+              data-modal-hide="needApprovalReject"
+            />
+
+            <app-button
+              [isFull]="true"
+              type="primary"
+              label="Confirm"
+              [hasIcon]="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
 <ng-container *ngIf="type === 'needApprovalApprove'">
   <div
     id="needApprovalApprove"

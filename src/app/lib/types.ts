@@ -59,3 +59,9 @@ export interface selectType {
   id: string;
   value: string;
 }
+
+export interface kursType {
+  years: number;
+  value: number;
+  createdBy: string;
+}

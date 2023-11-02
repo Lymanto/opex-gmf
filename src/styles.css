@@ -16,3 +16,6 @@ img {
   object-fit: cover;
 }
 
+.ck-editor__editable_inline {
+  height: 300px;
+}

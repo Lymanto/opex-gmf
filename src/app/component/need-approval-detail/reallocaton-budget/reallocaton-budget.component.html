@@ -78,5 +78,39 @@
       type="success"
       label="Submit"
     />
+    <app-button
+      icon="assets/images/icons/ic-pencil-square.svg"
+      type="info"
+      label="Revise"
+      data-modal-target="needApprovalRevise"
+      data-modal-toggle="needApprovalRevise"
+    />
+    <app-button
+      icon="assets/images/icons/ic-pencil-square.svg"
+      type="danger"
+      label="Reject"
+      data-modal-target="needApprovalReject"
+      data-modal-toggle="needApprovalReject"
+    />
+    <app-button
+      icon="assets/images/icons/ic-check-circle.svg"
+      type="success"
+      label="Approve"
+      data-modal-target="needApprovalApprove"
+      data-modal-toggle="needApprovalApprove"
+    />
+    <app-button
+      icon="assets/images/icons/ic-pencil-square.svg"
+      type="secondary"
+      label="Edit Realokasi"
+    />
+    <app-button
+      icon="assets/images/icons/ic-pencil-square.svg"
+      type="info"
+      label="Edit Realokasi"
+    />
   </div>
+  <app-modal type="needApprovalRevise" />
+  <app-modal type="needApprovalReject" />
+  <app-modal type="needApprovalApprove" />
 </section>

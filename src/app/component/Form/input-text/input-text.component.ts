@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -16,4 +16,8 @@ export class InputTextComponent {
   @Input() isReadOnly: boolean = false;
   @Input() value: string = '';
   @Input() type: string = '';
+  @Output() currentValue: EventEmitter<string> = new EventEmitter<string>();
+  getValue(event: any): void {
+    this.currentValue.emit(event.target.value);
+  }
 }

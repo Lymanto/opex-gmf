@@ -412,102 +412,6 @@
   </table>
 </ng-container>
 
-<ng-container *ngIf="type === 'kursTable'">
-  <table class="w-full">
-    <tr
-      class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
-    >
-      <th *ngFor="let column of kursheaders" class="p-2">
-        {{ column }}
-      </th>
-    </tr>
-
-    <tr
-      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
-    >
-      <td class="p-4">01</td>
-      <td>2023</td>
-      <td>15.300</td>
-      <td>
-        <div class="flex justify-center">
-          <div class="flex mx-auto">
-            <app-button
-              icon="assets/images/icons/ic-pencil-square-blue.svg"
-              type="action-primary"
-              data-modal-target="kursEdit"
-              data-modal-toggle="kursEdit"
-            ></app-button>
-          </div>
-        </div>
-      </td>
-    </tr>
-    <tr
-      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
-    >
-      <td class="p-4">02</td>
-      <td>2022</td>
-      <td>15.300</td>
-      <td>
-        <div class="flex justify-center">
-          <div class="flex mx-auto">
-            <app-button
-              icon="assets/images/icons/ic-pencil-square-blue.svg"
-              type="action-primary"
-            ></app-button>
-          </div>
-        </div>
-      </td>
-    </tr>
-  </table>
-  <div class="flex justify-between items-center">
-    <div class="flex gap-1">
-      <div class="text-p-md tracking-[0.5px] text-neutral-60">Row per page</div>
-      <div class="text-p-md tracking-[0.5px] text-neutral-100">10</div>
-    </div>
-    <div class="justify-end items-center mt-2">
-      <div class="flex gap-1">
-        <div class="text-p-md tracking-[0.5px] text-neutral-60">Page</div>
-        <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
-        >
-          1
-        </div>
-        <div class="text-p-md tracking-[0.5px] text-neutral-60">of 200</div>
-        <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 bg-neutral-20 border-neutral-40 text-neutral-60 text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
-        >
-          <img src="assets/images/icons/ic-arrow-left-not-active.svg" alt="" />
-        </div>
-        <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-hover bg-primary-hover text-white text-center rounded w-[22px] h-[22px] flex justify-center items-center"
-        >
-          1
-        </div>
-        <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
-        >
-          2
-        </div>
-        <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
-        >
-          3
-        </div>
-        <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
-        >
-          ...
-        </div>
-        <div
-          class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
-        >
-          <img src="assets/images/icons/ic-arrow-right.svg" alt="" />
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-container>
-
 <ng-container *ngIf="type === 'masterDataSummaryTable'">
   <table class="w-full">
     <tr
@@ -1209,74 +1113,73 @@
 
 <ng-container *ngIf="type === 'remarkTable'">
   <table class="w-full">
-    <tr class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto">
+    <tr
+      class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] table-auto"
+    >
       <th *ngFor="let column of remarkHeaders" class="p-2">
         {{ column }}
       </th>
     </tr>
     <tr
-    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
-    [ngClass]="{
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+      [ngClass]="{
       'bg-primary-bg-2':show,
     }"
-  >
-    <td class="p-4">01</td>
-    <td>
-      <button
-        (click)="onclick()"
-        type="button"
-        class=""
-        *ngFor="let menuItem of tabledata"
-        routerLinkActive="active"
-      >
-        <div
-          class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
-          [ngClass]="{
+    >
+      <td class="p-4">01</td>
+      <td>
+        <button
+          (click)="onclick()"
+          type="button"
+          class=""
+          *ngFor="let menuItem of tabledata"
+          routerLinkActive="active"
+        >
+          <div
+            class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+            [ngClass]="{
           'bg-primary-hover':show,
           'border-primary-hover':show,
         }"
+          >
+            <img
+              [src]="
+                show
+                  ? 'assets/images/icons/ic-arrow-up-active.svg'
+                  : 'assets/images/icons/ic-arrow-down.svg'
+              "
+              alt="Arrow down"
+            />
+          </div>
+        </button>
+      </td>
+      <td>30 Maret 2023</td>
+      <td>
+        <div
+          class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-tosca text-tertiary-tx-tosca text-center w-[54px] h-[24px] rounded bg-tertiary-bg-tosca"
         >
-          <img
-            [src]="
-              show
-                ? 'assets/images/icons/ic-arrow-up-active.svg'
-                : 'assets/images/icons/ic-arrow-down.svg'
-            "
-            alt="Arrow down"
-          />
+          Revise
         </div>
-      </button>
-    </td>
-    <td>30 Maret 2023</td>
-    <td>
-      <div
-        class="text-p-sm mx-auto tracking-[0.5px] border-solid border border-tertiary-br-tosca text-tertiary-tx-tosca text-center w-[54px] h-[24px] rounded bg-tertiary-bg-tosca"
-      >
-        Revise
-      </div>
-    </td>
-    <td >
-      Ade Amala
-    </td>
-    <td>JKTTDI-2</td>
-    <td>Ade Amala</td>
-    <td>JKTTDI-2</td>
-  </tr>
-  <tr
-    *ngIf="show"
-    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
-  >
-    <td colspan="9">
-      <div class="flex gap-1 items-center">
-        <div class="text-p-md tracking-[0.5px] font-medium">Remark</div>
-        <div class="w-2 h-[1px] bg-neutral-100"></div>
-        <div class="text-p-md tracking-[0,5px]">
-          Tolong diperhatikan lagi untuk G/L Number yang dipilih
+      </td>
+      <td>Ade Amala</td>
+      <td>JKTTDI-2</td>
+      <td>Ade Amala</td>
+      <td>JKTTDI-2</td>
+    </tr>
+    <tr
+      *ngIf="show"
+      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
+    >
+      <td colspan="9">
+        <div class="flex gap-1 items-center">
+          <div class="text-p-md tracking-[0.5px] font-medium">Remark</div>
+          <div class="w-2 h-[1px] bg-neutral-100"></div>
+          <div class="text-p-md tracking-[0,5px]">
+            Tolong diperhatikan lagi untuk G/L Number yang dipilih
+          </div>
         </div>
-      </div>
-    </td>
-  </tr>
-
+      </td>
+    </tr>
   </table>
   <div class="flex justify-between items-center">
     <div class="flex gap-1">
