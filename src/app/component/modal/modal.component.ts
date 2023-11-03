@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Flowbite } from 'src/app/lib/flowbite';
-import { kursType, selectType } from 'src/app/lib/types';
-import { KursUsdService } from 'src/app/services/opex/master-data/kurs-usd.service';
+import { format } from 'date-fns';
+import { selectType } from 'src/app/lib/types';
 
 @Component({
   selector: 'app-modal',
@@ -17,4 +17,31 @@ export class ModalComponent {
   @Input() href: string = '';
   @Input() icon: string = '';
   @Input() type: string = '';
+  yearsSelected!: number;
+  console = console;
+  currentYear: string = format(new Date(), 'yyyy');
+  yearsData: selectType[] = [
+    {
+      id: (parseInt(this.currentYear) + 1).toString(),
+      value: (parseInt(this.currentYear) + 1).toString(),
+    },
+    {
+      id: this.currentYear,
+      value: this.currentYear,
+    },
+  ];
+  generateYears(): void {
+    for (let i = 1; i <= 10; i++) {
+      this.yearsData.push({
+        id: (parseInt(this.currentYear) - i).toString(),
+        value: (parseInt(this.currentYear) - i).toString(),
+      });
+    }
+  }
+  getValueSelectBox(val: any): void {
+    this.yearsSelected = parseInt(val.id);
+  }
+  ngOnInit() {
+    this.generateYears();
+  }
 }

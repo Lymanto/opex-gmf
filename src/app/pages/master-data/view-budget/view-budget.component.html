@@ -14,6 +14,8 @@
           label="Upload RKAP"
           icon="assets/images/icons/ic-cloud-arrow-up-blue.svg"
           type="primary-not-active"
+          data-modal-target="uploadRKAP"
+          data-modal-toggle="uploadRKAP"
         ></app-button>
         <app-button
           label="Save Simulate"
@@ -102,4 +104,5 @@
     </div>
     <app-view-budget-table [body]="tableBody" />
   </div>
+  <app-modal type="uploadRKAP" />
 </app-layout>
