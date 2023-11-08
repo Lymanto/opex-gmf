@@ -49,22 +49,31 @@
         </div>
         <hr class="w-full h-px bg-primary-border border-0" />
         <div class="grid grid-cols-3 gap-4">
-          <app-select-box
-            id="group"
-            [required]="true"
-            label="Group"
-          ></app-select-box>
-          <app-select-box
-            id="groupDetail"
-            [required]="true"
-            label="Group Detail"
-          ></app-select-box>
+          <select
+            class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-100 placeholder:text-neutral-80 appearance-none w-full"
+          >
+            <option *ngFor="let item of allGroupData" [value]="item.groupGl">
+              {{ item.groupGl }}
+            </option>
+          </select>
+          <select
+            class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-100 placeholder:text-neutral-80 appearance-none w-full"
+            (selectedValue)="getValue($event)"
+          >
+            <option
+              *ngFor="let item of allGroupData"
+              [value]="item.groupDetail"
+            >
+              {{ item.groupDetail }}
+            </option>
+          </select>
           <app-input-text
-            type="normal"
-            id="GLNumber"
             label="G/L Number"
             [isAsk]="true"
-            [isDisabled]="true"
+            type="normal"
+            [isReadOnly]="true"
+            id="glAccount"
+            [value]="glAccount"
           />
         </div>
         <div class="grid grid-cols-4 gap-4">

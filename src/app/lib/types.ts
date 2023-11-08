@@ -55,6 +55,21 @@ export interface userType {
   isGmfEmployee: string | null;
 }
 
+export interface glAccountType {
+  idGlAccount: number;
+  uniqueId: string;
+  glAccount: string;
+  description: string;
+  groupDetail: string;
+  groupGl: string;
+  sap: boolean;
+  active: boolean;
+  createdAt: Date;
+  createdBy: string;
+  updatedAt: Date;
+  updatedBy: string | null;
+}
+
 export interface selectType {
   id: string;
   value: string;
