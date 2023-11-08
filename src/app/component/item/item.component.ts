@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -6,8 +7,16 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { EMPTY, Subject, catchError, mergeMap, takeUntil, tap } from 'rxjs';
-import { glAccountType } from 'src/app/lib/types';
+import {
+  EMPTY,
+  Subject,
+  catchError,
+  debounceTime,
+  mergeMap,
+  takeUntil,
+  tap,
+} from 'rxjs';
+import { glAccountType, selectType } from 'src/app/lib/types';
 import { NewRequestService } from 'src/app/services/opex/dashboard/new-request.service';
 
 @Component({
@@ -23,6 +32,11 @@ export class ItemComponent implements OnInit {
   NewRequestService: any;
   selectedItem: any;
   allGroupData: glAccountType[] = [];
+  formGroup: any;
+  groupGl: any;
+  selectGroupData: selectType[] = [];
+  selectGroupDetail: selectType[] = [];
+
   constructor(private fb: FormBuilder, private service: NewRequestService) {}
 
   private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -33,10 +47,10 @@ export class ItemComponent implements OnInit {
     });
     console.log('test');
 
-    this.fetchGroupData();
+    this.fetchGlAccount();
   }
 
-  fetchGroupData(): void {
+  fetchGlAccount(): void {
     this.service
       .getAllGroup()
       .pipe(
@@ -48,7 +62,9 @@ export class ItemComponent implements OnInit {
           if (result && result.data) {
             // Ensure result.data is a single array of glAccountType objects
             this.allGroupData = result.data.flatMap((item) => item); // Convert array of arrays to a single array
-            console.log(this.allGroupData);
+
+            this.refactorSelectGroupData(this.allGroupData);
+            this.refactorSelectGroupDetail(this.allGroupData);
           }
         }),
         takeUntil(this._onDestroy$)
@@ -56,9 +72,38 @@ export class ItemComponent implements OnInit {
       .subscribe();
   }
 
+  refactorSelectGroupData(data: glAccountType[]): void {
+    data.forEach((element: glAccountType) => {
+      this.selectGroupData.push({
+        id: element.glAccount,
+        value: element.groupGl,
+      });
+    });
+  }
+  refactorSelectGroupDetail(data: glAccountType[]): void {
+    data.forEach((element: glAccountType) => {
+      this.selectGroupDetail.push({
+        id: element.glAccount,
+        value: element.groupDetail,
+      });
+    });
+  }
+
   addItems(): void {
     (this.itemsForm.get('items') as FormArray).push(this.createItem);
   }
+
+  removeItem(index: number): void {
+    const itemsArray = this.itemsForm.get('items') as FormArray;
+    if (itemsArray.length > 1) {
+      itemsArray.removeAt(index);
+    }
+  }
+
+  showDeleteButton(index: number): boolean {
+    return index > 0;
+  }
+
   get formControllers() {
     return this.itemsForm.controls;
   }
@@ -77,18 +122,11 @@ export class ItemComponent implements OnInit {
       ],
     });
   }
-  // Fungsi yang dipanggil saat terjadi perubahan di select box
-  onSelectChange(event: Event) {
-    const target = event.target as HTMLSelectElement;
-    const selectedValue = parseInt(target.value, 10);
 
-    this.selectedItem = this.allGroupData.find(
-      (item) => item.idGlAccount === selectedValue
-    );
-  }
+  getGlGroup(val: any): void {}
 
   getValue(val: any): void {
-    this.glAccount = val.glAccount;
+    this.groupGl = val.groupGl;
     this.console.log('val :', val);
   }
 }

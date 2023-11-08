@@ -35,6 +35,13 @@
             <p class="text-p-lg font-semibold text-neutral-100">{{ i + 1 }}</p>
           </div>
           <app-button
+            *ngIf="showDeleteButton(i)"
+            label="Delete"
+            icon="assets/images/icons/ic-trash-red.svg"
+            type="danger-not-active"
+            (click)="removeItem(i)"
+          ></app-button>
+          <app-button
             label="Hide Item"
             [icon]="
               isDisplay
@@ -49,24 +56,22 @@
         </div>
         <hr class="w-full h-px bg-primary-border border-0" />
         <div class="grid grid-cols-3 gap-4">
-          <select
-            class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-100 placeholder:text-neutral-80 appearance-none w-full"
+          <app-select-box
+            type="normal"
+            id="group"
+            label="Group"
+            [required]="true"
+            [data]="selectGroupData"
           >
-            <option *ngFor="let item of allGroupData" [value]="item.groupGl">
-              {{ item.groupGl }}
-            </option>
-          </select>
-          <select
-            class="border border-neutral-40 p-3 rounded-2xl text-p-md text-neutral-100 placeholder:text-neutral-80 appearance-none w-full"
-            (selectedValue)="getValue($event)"
+          </app-select-box>
+          <app-select-box
+            type="normal"
+            id="groupDetail"
+            label="Group Detail"
+            [required]="true"
+            [data]="selectGroupDetail"
           >
-            <option
-              *ngFor="let item of allGroupData"
-              [value]="item.groupDetail"
-            >
-              {{ item.groupDetail }}
-            </option>
-          </select>
+          </app-select-box>
           <app-input-text
             label="G/L Number"
             [isAsk]="true"
@@ -154,6 +159,13 @@
             </p>
             <p class="text-p-lg font-semibold text-neutral-100">758.62 USD</p>
           </div>
+          <app-button
+            *ngIf="showDeleteButton(i)"
+            label="Delete"
+            icon="assets/images/icons/ic-trash-red.svg"
+            type="danger-not-active"
+            (click)="removeItem(i)"
+          ></app-button>
         </div>
         <app-button
           label="Hide Item"

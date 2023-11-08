@@ -6,14 +6,14 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-input-text',
   templateUrl: './input-text.component.html',
   styleUrls: ['./input-text.component.css'],
 })
-export class InputTextComponent implements OnChanges {
+export class InputTextComponent {
   @Input() label: string = '';
   @Input() id: string = '';
   @Input() placeholder: string = '';
@@ -24,16 +24,4 @@ export class InputTextComponent implements OnChanges {
   @Input() value: string = '';
   @Input() type: string = '';
   @Output() currentValue: EventEmitter<string> = new EventEmitter<string>();
-  getValue(event: any): void {
-    this.currentValue.emit(event.target.value);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (
-      changes['value'] &&
-      changes['value']?.previousValue != changes['value']?.currentValue
-    ) {
-      console.log('table content change => ', this.value);
-    }
-  }
 }

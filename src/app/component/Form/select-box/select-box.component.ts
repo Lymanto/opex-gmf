@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { startWith, map, subscribeOn } from 'rxjs/operators';
 import { NgFor, AsyncPipe, NgIf } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { selectType } from 'src/app/lib/types';
+import { glAccountType, selectType } from 'src/app/lib/types';
 
 @Component({
   selector: 'app-select-box',
@@ -30,7 +30,8 @@ export class SelectBoxComponent implements OnInit {
   @Input() value: string = '';
   @Output() selectedValue: EventEmitter<string> = new EventEmitter<string>();
   console = console;
-  control = new FormControl('');
+  @Input() control = new FormControl();
+  @Input() options: { value: glAccountType; viewValue: string }[] = [];
 
   filteredDatas: Observable<selectType[]> | undefined;
 
