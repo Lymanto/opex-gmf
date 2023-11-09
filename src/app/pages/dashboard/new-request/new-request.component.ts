@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
+import { format } from 'date-fns';
 import { selectType } from 'src/app/lib/types';
 import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.service';
 
@@ -9,6 +10,7 @@ import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.ser
 })
 export class NewRequestComponent implements OnInit {
   userData: selectType[] = [];
+  currentDate: string = format(new Date(), 'dd MMM yyyy');
   idNumber: string = '';
   console = console;
   constructor(private service: GetAllUsersService) {}

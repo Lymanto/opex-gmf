@@ -1,21 +1,12 @@
-import { NgIf } from '@angular/common';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  FormGroup,
-  FormBuilder,
   FormArray,
+  FormBuilder,
   FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
-import {
-  EMPTY,
-  Subject,
-  catchError,
-  debounceTime,
-  mergeMap,
-  takeUntil,
-  tap,
-} from 'rxjs';
+import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
 import { glAccountType, selectType } from 'src/app/lib/types';
 import { NewRequestService } from 'src/app/services/opex/dashboard/new-request.service';
 
@@ -31,9 +22,9 @@ export class ItemComponent implements OnInit {
   glAccount: string = '';
   NewRequestService: any;
   selectedItem: any;
-  allGroupData: glAccountType[] = [];
   formGroup: any;
   groupGl: any;
+  glNumber!: number;
   selectGroupData: selectType[] = [];
   selectGroupDetail: selectType[] = [];
 
@@ -61,10 +52,23 @@ export class ItemComponent implements OnInit {
         tap((result) => {
           if (result && result.data) {
             // Ensure result.data is a single array of glAccountType objects
-            this.allGroupData = result.data.flatMap((item) => item); // Convert array of arrays to a single array
+            const allData = result.data.flatMap((item) => item); // Convert array of arrays to a single array
+            const filteredData: glAccountType[] = allData.reduce(
+              (accumulator: any, current: any) => {
+                if (
+                  !accumulator.find(
+                    (item: any) => item.groupGl === current.groupGl
+                  )
+                ) {
+                  accumulator.push(current);
+                }
+                return accumulator;
+              },
+              []
+            );
 
-            this.refactorSelectGroupData(this.allGroupData);
-            this.refactorSelectGroupDetail(this.allGroupData);
+            this.refactorSelectGroupData(filteredData);
+            this.refactorSelectGroupDetail(filteredData);
           }
         }),
         takeUntil(this._onDestroy$)
@@ -126,7 +130,7 @@ export class ItemComponent implements OnInit {
   getGlGroup(val: any): void {}
 
   getValue(val: any): void {
-    this.groupGl = val.groupGl;
+    this.glNumber = val.id;
     this.console.log('val :', val);
   }
 }

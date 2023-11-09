@@ -19,18 +19,20 @@
     </div>
     <div class="flex flex-col gap-4">
       <div class="grid grid-cols-3 gap-4">
-        <app-input-date
+        <app-input-text
           label="Entry Date"
+          type="normal"
           id="entryDate"
-          placeholder="Select One.."
+          [value]="currentDate"
           [isReadOnly]="true"
-        ></app-input-date>
+        ></app-input-text>
         <app-input-text
           type="normal"
           id="requestNumber"
           placeholder="Fill this.."
           label="User (Dinas)"
           [isReadOnly]="true"
+          value="TA"
         ></app-input-text>
         <app-select-box
           id="typeSubmission"
@@ -78,6 +80,7 @@
           placeholder="Fill this.."
           label="Name of Request"
           [isReadOnly]="true"
+          value="ADE MA'RUFAN AMALA"
         ></app-input-text>
         <app-input-text
           type="normal"
@@ -85,6 +88,7 @@
           placeholder="Fill this.."
           label="ID Number"
           [isReadOnly]="true"
+          value="582127"
         ></app-input-text>
 
         <!-- <app-input-text
