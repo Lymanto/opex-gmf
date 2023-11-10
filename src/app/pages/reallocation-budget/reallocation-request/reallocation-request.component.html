@@ -24,7 +24,7 @@
           label="Entry Date"
           id="entryDate"
           [isReadOnly]="true"
-          value="23 Oktober 2023"
+          [value]="currentDate"
         ></app-input-text>
         <app-input-text
           type="normal"
@@ -116,11 +116,13 @@
                   id="group"
                   label="Group"
                   [required]="true"
+                  [data]="selectGroupData"
                 ></app-select-box>
                 <app-select-box
                   id="groupDetail"
                   label="Group Detail"
                   [required]="true"
+                  [data]="selectGroupDetail"
                 ></app-select-box>
               </div>
               <div class="grid grid-cols-3 p-4 gap-4">
@@ -187,7 +189,11 @@
             <p class="text-p-sm text-neutral-80">Reallocation Recipient</p>
           </div>
           <div>
-            <app-select-box id="group" type="normal"></app-select-box>
+            <app-select-box
+              id="group"
+              type="normal"
+              [data]="selectGroupData"
+            ></app-select-box>
           </div>
         </div>
         <hr class="w-full h-px bg-primary-border border-0" />
@@ -198,6 +204,7 @@
           id="groupDetail"
           label="Group Detail"
           [required]="true"
+          [data]="selectGroupDetail"
         />
 
         <app-input-text

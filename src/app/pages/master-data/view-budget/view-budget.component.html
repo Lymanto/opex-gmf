@@ -54,8 +54,16 @@
       <div
         class="grid justify-between items-center grid-cols-2 gap-3 border border-b-primary-border border-t-primary-bg-2 border-x-primary-bg-2 py-4"
       >
-        <app-select-box id="group" label="Group"></app-select-box>
-        <app-select-box id="groupDetail" label="Group Detail"></app-select-box>
+        <app-select-box
+          id="group"
+          label="Group"
+          [data]="selectGroupData"
+        ></app-select-box>
+        <app-select-box
+          id="groupDetail"
+          label="Group Detail"
+          [data]="selectGroupDetail"
+        ></app-select-box>
       </div>
       <div>
         <div class="grid justify-center items-center grid-cols-5 gap-3 mt-1">
