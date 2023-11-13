@@ -78,10 +78,10 @@ export interface selectType {
 export interface kursType {
   idKurs?: number;
   uniqueId?: string;
-  years: number;
+  years?: number;
   value: number;
   createdAt?: string;
-  createdBy: string;
+  createdBy?: string;
   updatedAt?: string;
   updatedBy?: string;
 }

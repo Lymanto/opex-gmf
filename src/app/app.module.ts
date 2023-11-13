@@ -21,7 +21,7 @@ import { LayoutComponent } from './component/layout/layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TextareaComponent } from './component/Form/textarea/textarea.component';
 import { ItemComponent } from './component/item/item.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from './component/modal/modal.component';
 import { CreateReallocationBudgetComponent } from './pages/dashboard/create-reallocation-budget/create-reallocation-budget.component';
 import { NeedApprovalComponent } from './pages/need-approval/need-approval/need-approval.component';
@@ -104,6 +104,7 @@ import { TrackingApprovalComponent as TrackingApprovalReallocationComponent } fr
     SelectBoxComponent,
     HttpClientModule,
     CKEditorModule,
+    FormsModule,
   ],
 })
 export class AppModule {}

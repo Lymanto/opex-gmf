@@ -16,6 +16,9 @@ export class KursUsdService {
   postKurs(kurs: kursType) {
     return this.httpClient.post<kursType>(this.url, kurs);
   }
+  editKurs(kurs: kursType) {
+    return this.httpClient.put<kursType>(`${this.url}/${kurs.idKurs}`, kurs);
+  }
 
   getAllKurs(): Observable<HttpResult<kursType[]>> {
     return this.httpClient.get<HttpResult<kursType[]>>(this.url);

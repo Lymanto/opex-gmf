@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { format } from 'date-fns';
-import {
-  EMPTY,
-  Observable,
-  Subject,
-  catchError,
-  of,
-  takeUntil,
-  tap,
-} from 'rxjs';
+import { Modal } from 'flowbite';
+import { EMPTY, Subject, catchError, of, takeUntil, tap } from 'rxjs';
+import { Flowbite } from 'src/app/lib/flowbite';
 import { kursType, selectType } from 'src/app/lib/types';
 import { KursUsdService } from 'src/app/services/opex/master-data/kurs-usd.service';
 
@@ -17,13 +11,15 @@ import { KursUsdService } from 'src/app/services/opex/master-data/kurs-usd.servi
   templateUrl: './kurs-usd.component.html',
   styleUrls: ['./kurs-usd.component.css'],
 })
+@Flowbite()
 export class KursUsdComponent implements OnInit {
   yearsSelected!: number;
   inputValue!: number;
-  tableData!: kursType[];
+  tableData: kursType[] = [];
   currentYear: string = format(new Date(), 'yyyy');
   console = console;
   errorMessage: any;
+  selectedKurs!: any;
 
   yearsData: selectType[] = [
     {
@@ -60,17 +56,51 @@ export class KursUsdComponent implements OnInit {
         createdBy,
       })
       .pipe(
-        catchError((error: any): Observable<kursType> => {
+        catchError((error: any) => {
           this.errorMessage = error.message;
           this.console.error('There was an error!', error);
+
           return of();
-        }),
-        takeUntil(this._onDestroy$)
+        })
       )
       .subscribe(
         (data: kursType) => {
-          this.console.log('data', data);
           this.getKurs();
+        },
+        (error: any) => {
+          this.console.error('Error', error);
+        }
+      );
+  }
+  kursEditPut(
+    value: number,
+    updatedBy: string,
+    idKurs: number | undefined
+  ): void {
+    this.kurs
+      .editKurs({
+        idKurs,
+        value,
+        updatedBy,
+      })
+      .pipe(
+        catchError((error: any) => {
+          this.errorMessage = error.message;
+          this.console.error('There was an error!', error);
+
+          return of();
+        })
+      )
+      .subscribe(
+        (data: kursType) => {
+          this.getKurs();
+          const elKurs: HTMLElement = document.querySelector(
+            '#kursEdit'
+          ) as HTMLElement;
+          const modal = new Modal(elKurs);
+          modal.hide();
+          document.querySelector('body > div[modal-backdrop]')?.remove();
+          this.selectedKurs = {};
         },
         (error: any) => {
           this.console.error('Error', error);
@@ -94,6 +124,23 @@ export class KursUsdComponent implements OnInit {
         takeUntil(this._onDestroy$)
       )
       .subscribe();
+  }
+  kursEditOpen(item: kursType) {
+    const elKurs: HTMLElement = document.querySelector(
+      '#kursEdit'
+    ) as HTMLElement;
+    const modal = new Modal(elKurs);
+    this.selectedKurs = item;
+    modal.show();
+  }
+  kursEditClose() {
+    const elKurs: HTMLElement = document.querySelector(
+      '#kursEdit'
+    ) as HTMLElement;
+    const modal = new Modal(elKurs);
+    modal.hide();
+    document.querySelector('body > div[modal-backdrop]')?.remove();
+    this.selectedKurs = {};
   }
 
   ngOnInit() {
