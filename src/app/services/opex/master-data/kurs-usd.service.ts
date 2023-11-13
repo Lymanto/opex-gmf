@@ -25,6 +25,8 @@ export class KursUsdService {
   }
   getLastKurs(): Observable<HttpResult<kursType>> {
     const year: number = new Date().getFullYear();
-    return this.httpClient.get<HttpResult<kursType>>(`${this.url}/${year}`);
+    return this.httpClient.get<HttpResult<kursType>>(
+      `${this.url}/years/${year}`
+    );
   }
 }

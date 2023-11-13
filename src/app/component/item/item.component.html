@@ -67,7 +67,7 @@
               label="Group"
               [required]="true"
               [data]="selectGroupData"
-              (selectedValue)="getValue($event)"
+              (selectedValue)="getValueGL($event, i)"
             >
             </app-select-box>
             <app-select-box
@@ -76,7 +76,7 @@
               label="Group Detail"
               [required]="true"
               [data]="selectGroupDetail"
-              (selectedValue)="getValue($event)"
+              (selectedValue)="getValueGL($event, i)"
             >
             </app-select-box>
             <app-input-text
@@ -85,6 +85,7 @@
               type="normalControl"
               [isReadOnly]="true"
               formControlName="GLNumberControl"
+              [value]="item.get('GLNumberControl')?.value"
               id="glAccount"
             />
           </div>
@@ -102,7 +103,7 @@
               label="Amount Submission"
               [currentKurs]="currentKurs"
               formControlName="amountSubmissionControl"
-              [available]="available"
+              [available]="item.get('availableControl')?.value"
             />
             <app-input-date
               label="Period Start"

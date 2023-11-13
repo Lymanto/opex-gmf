@@ -46,7 +46,6 @@ export class InputTextComponent implements ControlValueAccessor {
   isRemaining: boolean = false;
   onChangePair(): void {
     this.currentPair = this.pair.nativeElement.value;
-    this.console.log(this.currentPair);
   }
 
   getValue(event: any): void {
@@ -59,6 +58,7 @@ export class InputTextComponent implements ControlValueAccessor {
       this.amountSubmission =
         this.available - event.target.value / this.currentKurs;
     }
+
     if (this.amountSubmission < 0) {
       this.isError = true;
       this.errorMessage = 'Your request overlimit budget';
@@ -70,7 +70,7 @@ export class InputTextComponent implements ControlValueAccessor {
     }
   }
 
-  get text(): string {
+  get text(): string | number {
     return this._inputText;
   }
 

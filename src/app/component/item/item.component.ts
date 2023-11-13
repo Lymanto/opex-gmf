@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -20,12 +20,6 @@ export class ItemComponent implements OnInit {
   console = console;
   itemsForm!: FormGroup;
   isDisplay: boolean = true;
-  glAccount: string = '';
-  NewRequestService: any;
-  selectedItem: any;
-  formGroup: any;
-  groupGl: any;
-  glNumber!: number;
 
   currentKurs!: number;
 
@@ -81,11 +75,8 @@ export class ItemComponent implements OnInit {
     });
   }
 
-  getGlGroup(val: any): void {}
-
-  getValue(val: any): void {
-    this.glNumber = val.id;
-    this.console.log('val :', val);
+  getValueGL(val: any, index: number): void {
+    this.getItems.controls[index].get('GLNumberControl')?.setValue(val.id);
   }
   getCurrentKurs() {
     return this.kurs
