@@ -116,3 +116,7 @@ export interface kursType {
   updatedAt?: string;
   updatedBy?: string;
 }
+
+export interface CreateRequestRealizationType {
+  entryDate: Date;
+}
