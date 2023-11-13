@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivationEnd } from '@angular/router';
-import { tableBodyType } from 'src/app/lib/types';
+import { newRequestType, tableBodyType } from 'src/app/lib/types';
 
 export const tabledata = [
   {
@@ -16,6 +16,7 @@ export const tabledata = [
 })
 export class TableComponent implements OnInit {
   tabledata = tabledata;
+  @Input() requestBody: newRequestType[] = [];
   @Input() header!: string[];
   @Input() body!: tableBodyType[];
   statusType: string[] = ['Open', 'Progress', 'Closed', 'Revise', 'Reject'];
@@ -48,7 +49,6 @@ export class TableComponent implements OnInit {
     'Upload by',
     'Department by',
     'Upload Date',
-    'Action',
   ];
 
   kursheaders = ['No.', 'Years', 'Value (IDR)', 'Action'];

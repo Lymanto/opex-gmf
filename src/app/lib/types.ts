@@ -42,6 +42,18 @@ export interface tableBodyType {
   departmentTo: string;
   description: string;
 }
+
+export interface newRequestType {
+  id: string;
+  documentName: string;
+  documentType: string;
+  size: string;
+  uploadBy: string;
+  departmentBy: string;
+  uploadDate: string;
+  file: FormData;
+}
+
 export interface userType {
   personalNumber: string;
   personalName: string;
@@ -53,6 +65,25 @@ export interface userType {
   personalGrade: string;
   personalImage: string | null;
   isGmfEmployee: string | null;
+}
+
+export interface modalDocumentType {
+  docName: string;
+  docCategory: string;
+  size: string;
+  file: File;
+}
+
+export interface documentCategoryType {
+  idDocCategory: number;
+  uniqueId: string;
+  module: string;
+  docCategory: string;
+  description: string;
+  createdAt: string;
+  createdBy: string;
+  updatedAt: string;
+  updatedBy: string | null;
 }
 
 export interface glAccountType {
@@ -71,7 +102,7 @@ export interface glAccountType {
 }
 
 export interface selectType {
-  id: string;
+  id: string | number;
   value: string;
 }
 

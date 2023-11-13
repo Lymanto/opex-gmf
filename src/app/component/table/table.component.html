@@ -378,37 +378,39 @@
       <th *ngFor="let column of head" class="p-2">
         {{ column }}
       </th>
+      <th>Action</th>
     </tr>
-
-    <tr
-      class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
-    >
-      <td class="p-4">01</td>
-      <td>Hutang Piutang</td>
-      <td>Other</td>
-      <td>0.8 MB</td>
-      <td>Rifky Sefti</td>
-      <td>JKTTAB</td>
-      <td>30 Maret 2023</td>
-      <td>
-        <div class="flex justify-between items-center">
-          <div class="flex gap-3 mx-auto">
-            <app-button
-              icon="assets/images/icons/ic-trash.svg"
-              type="action-danger"
-            />
-            <app-button
-              icon="assets/images/icons/ic-pencil-square-green.svg"
-              type="action-success"
-            />
-            <app-button
-              icon="assets/images/icons/ic-eye-blue.svg"
-              type="action-primary"
-            />
+    <tbody *ngFor="let item of requestBody; let i = index">
+      <tr
+        class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+      >
+        <td class="p-4">{{ i + 1 }}</td>
+        <td>{{ item.documentName }}</td>
+        <td>{{ item.documentType }}</td>
+        <td>{{ item.size }}</td>
+        <td>{{ item.uploadBy }}</td>
+        <td>{{ item.departmentBy }}</td>
+        <td>{{ item.uploadDate }}</td>
+        <td>
+          <div class="flex justify-between items-center">
+            <div class="flex gap-3 mx-auto">
+              <app-button
+                icon="assets/images/icons/ic-trash.svg"
+                type="action-danger"
+              />
+              <app-button
+                icon="assets/images/icons/ic-pencil-square-green.svg"
+                type="action-success"
+              />
+              <app-button
+                icon="assets/images/icons/ic-eye-blue.svg"
+                type="action-primary"
+              />
+            </div>
           </div>
-        </div>
-      </td>
-    </tr>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </ng-container>
 

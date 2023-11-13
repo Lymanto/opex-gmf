@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { format } from 'date-fns';
@@ -5,6 +6,11 @@ import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
 import { glAccountType, selectType } from 'src/app/lib/types';
 import { NewRequestService } from 'src/app/services/opex/dashboard/new-request.service';
 import { KursUsdService } from 'src/app/services/opex/master-data/kurs-usd.service';
+=======
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { format } from 'date-fns';
+import { newRequestType, selectType } from 'src/app/lib/types';
+>>>>>>> 2749e82 (Update Modal Upload File)
 import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.service';
 
 @Component({
@@ -14,6 +20,7 @@ import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.ser
 })
 export class NewRequestComponent implements OnInit {
   userData: selectType[] = [];
+  @Input() requestBody: newRequestType[] = [];
   currentDate: string = format(new Date(), 'dd MMM yyyy');
   idNumber: string = '';
   console = console;
@@ -57,6 +64,7 @@ export class NewRequestComponent implements OnInit {
     this.idNumber = val.id;
     this.console.log('val :', val);
   }
+<<<<<<< HEAD
 
   addItems(): void {
     (this.itemsForm.get('items') as FormArray).push(this.createItem);
@@ -165,5 +173,10 @@ export class NewRequestComponent implements OnInit {
   }
   save(): void {
     this.console.log(this.itemsForm.value);
+=======
+  uploadFileToTable(newRequest: newRequestType): void {
+    // Handle the emitted event from the modal component
+    this.requestBody.push(newRequest); // Add the new request to the table data
+>>>>>>> 2749e82 (Update Modal Upload File)
   }
 }

@@ -371,7 +371,10 @@
         data-modal-toggle="uploadFile"
       />
     </div>
-    <app-table type="createNewRequestTable"></app-table>
+    <app-table
+      type="createNewRequestTable"
+      [requestBody]="requestBody"
+    ></app-table>
     <div class="flex gap-2 mt-5 w-full items-center justify-center">
       <app-button
         icon="assets/images/icons/ic-save.svg"
@@ -408,6 +411,9 @@
       />
     </div>
   </div>
-  <app-modal type="uploadFile" />
+  <app-modal
+    type="uploadFile"
+    (uploadFileToTable)="uploadFileToTable($event)"
+  />
   <app-modal type="overlimitBudget" />
 </app-layout>

@@ -19,13 +19,23 @@
                 <img src="assets/images/icons/ic-form-upload.svg" alt="" />
               </div>
               <p class="mb-1 text-p-md text-primary-hover font-medium">
-                Upload a file or drag and drop
+                {{
+                  uploadedFile
+                    ? "Uploaded file: " + uploadedFile.name
+                    : "Upload a file or drag and drop"
+                }}
               </p>
               <p class="text-p-sm text-gray-500 dark:text-gray-400">
                 Only PDF files can be uploaded & Maks file 1 MB
               </p>
             </div>
-            <input id="dropzone-file" type="file" class="hidden" />
+            <input
+              id="dropzone-file"
+              type="file"
+              class="hidden"
+              accept=".pdf"
+              (change)="uploadFile($event)"
+            />
           </label>
         </div>
         <div
@@ -65,6 +75,8 @@
             id="docType"
             label="Doc. Type"
             [required]="true"
+            [data]="selectDocumentCategoryData"
+            (selectedValue)="getValue($event)"
           ></app-select-box>
         </div>
         <div class="mx-6 mt-2">
@@ -73,6 +85,7 @@
             id="size"
             label="Size"
             [isDisabled]="true"
+            [value]="getFileSize()"
           />
         </div>
         <div class="px-6 pb-6 text-center mt-10">
@@ -89,7 +102,7 @@
               [isFull]="true"
               type="primary"
               label="Upload Now"
-              data-modal-hide="uploadFile"
+              (click)="uploadToTable()"
               [hasIcon]="false"
             />
           </div>
