@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { format } from 'date-fns';
 import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
 import { Flowbite } from 'src/app/lib/flowbite';
@@ -15,10 +22,9 @@ import { DocumentCategoryService } from 'src/app/services/opex/document-category
   styleUrls: ['./modal.component.css'],
 })
 @Flowbite()
-export class ModalComponent {
+export class ModalComponent implements OnInit, OnDestroy {
   @Input() label: string = '';
   @Input() id: string = '';
-  @Input() hasIcon: boolean = true;
   @Input() isHref: boolean = false;
   @Input() href: string = '';
   @Input() icon: string = '';
@@ -48,7 +54,7 @@ export class ModalComponent {
     this.yearsSelected = parseInt(val.id);
   }
 
-  constructor(private service: DocumentCategoryService) {}
+  constructor() {}
 
   private readonly _onDestroy$: Subject<void> = new Subject<void>();
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { format } from 'date-fns';
 import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
