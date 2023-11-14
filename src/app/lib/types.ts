@@ -51,7 +51,7 @@ export interface newRequestType {
   uploadBy: string;
   departmentBy: string;
   uploadDate: string;
-  file: FormData;
+  file: File;
 }
 
 export interface userType {

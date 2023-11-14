@@ -2,8 +2,14 @@ import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { format } from 'date-fns';
 import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
-import { glAccountType, newRequestType, selectType } from 'src/app/lib/types';
+import {
+  documentCategoryType,
+  glAccountType,
+  newRequestType,
+  selectType,
+} from 'src/app/lib/types';
 import { NewRequestService } from 'src/app/services/opex/dashboard/new-request.service';
+import { DocumentCategoryService } from 'src/app/services/opex/document-category/document-category.service';
 import { KursUsdService } from 'src/app/services/opex/master-data/kurs-usd.service';
 import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.service';
 
@@ -25,13 +31,25 @@ export class NewRequestComponent implements OnInit {
   currentKurs!: number;
 
   selectGroupData: selectType[] = [];
-  selectGroupDetail: selectType[] = [];
   available: number = 1500; //usd
+  dataGL!: glAccountType[];
+
+  newRequestData: newRequestType = <newRequestType>{};
+  selectDocumentCategoryData: selectType[] = [];
+  idDocCategory!: string;
+  modalDocumentType!: string;
+  docName: string = '';
+  fileSize: string = ''; // Initialize with the actual file size
+  uploadedFile: File | null = null;
+  isUploadSuccess: boolean = false;
+  isUploadError: boolean = false;
+  uploadError: string = '';
   constructor(
     private users: GetAllUsersService,
     private fb: FormBuilder,
     private newRequest: NewRequestService,
-    private kurs: KursUsdService
+    private kurs: KursUsdService,
+    private docCategory: DocumentCategoryService
   ) {}
   private readonly _onDestroy$: Subject<void> = new Subject<void>();
   ngOnInit() {
@@ -43,6 +61,11 @@ export class NewRequestComponent implements OnInit {
     });
     this.getCurrentKurs();
     this.fetchGlAccount();
+    this.fetchDocumentCategory();
+  }
+  ngOnDestroy(): void {
+    this._onDestroy$.next();
+    this._onDestroy$.complete();
   }
   refactorUser(data: any): selectType[] {
     data.forEach((element: any) => {
@@ -83,6 +106,8 @@ export class NewRequestComponent implements OnInit {
   get createItem(): FormGroup {
     return this.fb.group({
       GLNumberControl: new FormControl<string>(''),
+      groupControl: new FormControl<string>(''),
+      groupDetailControl: new FormControl<string>(''),
       availableControl: new FormControl<number>(this.available),
       amountSubmissionControl: new FormControl<string>(''),
       periodStartControl: new FormControl<Date>(new Date()),
@@ -92,7 +117,17 @@ export class NewRequestComponent implements OnInit {
     });
   }
 
-  getValueGL(val: any, index: number): void {
+  getValueGLItem(val: any, index: number): void {
+    this.dataGL.filter((item) => {
+      if (item.glAccount === val.id) {
+        this.getItems.controls[index]
+          .get('groupControl')
+          ?.setValue(item.groupGl);
+        this.getItems.controls[index]
+          .get('groupDetailControl')
+          ?.setValue(item.groupDetail);
+      }
+    });
     this.getItems.controls[index].get('GLNumberControl')?.setValue(val.id);
   }
   getCurrentKurs() {
@@ -125,22 +160,8 @@ export class NewRequestComponent implements OnInit {
           if (result && result.data) {
             // Ensure result.data is a single array of glAccountType objects
             const allData = result.data.flatMap((item) => item); // Convert array of arrays to a single array
-            const filteredData: glAccountType[] = allData.reduce(
-              (accumulator: any, current: any) => {
-                if (
-                  !accumulator.find(
-                    (item: any) => item.groupGl === current.groupGl
-                  )
-                ) {
-                  accumulator.push(current);
-                }
-                return accumulator;
-              },
-              []
-            );
-
-            this.refactorSelectGroupData(filteredData);
-            this.refactorSelectGroupDetail(filteredData);
+            this.dataGL = allData;
+            this.refactorSelectGroupData(allData);
           }
         }),
         takeUntil(this._onDestroy$)
@@ -152,23 +173,116 @@ export class NewRequestComponent implements OnInit {
     data.forEach((element: glAccountType) => {
       this.selectGroupData.push({
         id: element.glAccount,
-        value: element.groupGl,
+        value: element.description,
       });
     });
   }
-  refactorSelectGroupDetail(data: glAccountType[]): void {
-    data.forEach((element: glAccountType) => {
-      this.selectGroupDetail.push({
-        id: element.glAccount,
-        value: element.groupDetail,
-      });
-    });
-  }
+
   save(): void {
     this.console.log(this.itemsForm.value);
   }
-  uploadFileToTable(newRequest: newRequestType): void {
-    // Handle the emitted event from the modal component
-    this.requestBody.push(newRequest); // Add the new request to the table data
+
+  fetchDocumentCategory(): void {
+    this.docCategory
+      .getAllGroup()
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred:', err);
+          return EMPTY;
+        }),
+        tap((result) => {
+          if (result && result.data) {
+            // Ensure result.data is a single array of glAccountType objects
+            const allData = result.data.flatMap((item) => item); // Convert array of arrays to a single array
+            this.refactorSelectDocumentCategoryData(allData);
+          }
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
+  }
+  refactorSelectDocumentCategoryData(data: documentCategoryType[]): void {
+    data.forEach((element: documentCategoryType) => {
+      this.selectDocumentCategoryData.push({
+        id: element.idDocCategory,
+        value: element.docCategory,
+      });
+    });
+  }
+  uploadToTable() {
+    if (this.uploadedFile) {
+      const bytes = this.uploadedFile.size;
+      const maxSize = 1048576; // 1 MB limit
+      if (bytes > maxSize) {
+      } else {
+        if (this.idDocCategory === '' || this.docName === '') {
+          this.isUploadError = true;
+          this.isUploadSuccess = false;
+          this.uploadError = 'Please fill all the fields';
+
+          return;
+        }
+        this.selectDocumentCategoryData.filter((item) => {
+          if (item.id === this.idDocCategory) {
+            this.modalDocumentType = item.value;
+          }
+        });
+        this.newRequestData.documentName = this.docName;
+        this.newRequestData.documentType = this.modalDocumentType;
+        this.newRequestData.file = this.uploadedFile;
+        this.newRequestData.size = this.fileSize;
+        this.requestBody.push(this.newRequestData);
+        this.clearUp();
+      }
+    } else {
+      this.isUploadError = true;
+      this.isUploadSuccess = false;
+      this.uploadError = 'Please fill all the fields';
+    }
+  }
+  clearUp(): void {
+    this.isUploadSuccess = false;
+    this.isUploadError = false;
+    this.newRequestData = <newRequestType>{};
+    this.idDocCategory = '';
+    this.modalDocumentType = '';
+    this.docName = '';
+    this.uploadedFile = null;
+    this.fileSize = '';
+  }
+  uploadFile(event: any): void {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files.length > 0) {
+      this.uploadedFile = fileInput.files[0];
+    }
+    if (this.uploadedFile) {
+      const bytes = this.uploadedFile.size;
+      const maxSize = 1048576; // 1 MB limit
+      if (bytes > maxSize) {
+        this.fileSize = 'File size exceeds the maximum limit of 1 MB';
+        this.isUploadError = true;
+        this.uploadError =
+          'Upload error, file size exceeds the maximum limit of 1 MB';
+        this.isUploadSuccess = false;
+      } else {
+        this.fileSize = this.generateSize(bytes);
+        this.isUploadError = false;
+        this.isUploadSuccess = true;
+      }
+    } else {
+      console.warn('No file selected.');
+    }
+  }
+  generateSize(bytes: number): string {
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(1024));
+    return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i];
+  }
+
+  getValueDocType(val: any): void {
+    this.idDocCategory = val.id;
+  }
+  getValueDocName(val: string): void {
+    this.docName = val;
   }
 }
