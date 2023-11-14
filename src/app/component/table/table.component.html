@@ -380,37 +380,7 @@
       </th>
       <th>Action</th>
     </tr>
-    <tbody *ngFor="let item of requestBody; let i = index">
-      <tr
-        class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
-      >
-        <td class="p-4">{{ i + 1 }}</td>
-        <td>{{ item.documentName }}</td>
-        <td>{{ item.documentType }}</td>
-        <td>{{ item.size }}</td>
-        <td>{{ item.uploadBy }}</td>
-        <td>{{ item.departmentBy }}</td>
-        <td>{{ item.uploadDate }}</td>
-        <td>
-          <div class="flex justify-between items-center">
-            <div class="flex gap-3 mx-auto">
-              <app-button
-                icon="assets/images/icons/ic-trash.svg"
-                type="action-danger"
-              />
-              <app-button
-                icon="assets/images/icons/ic-pencil-square-green.svg"
-                type="action-success"
-              />
-              <app-button
-                icon="assets/images/icons/ic-eye-blue.svg"
-                type="action-primary"
-              />
-            </div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
+    <ng-content></ng-content>
   </table>
 </ng-container>
 
