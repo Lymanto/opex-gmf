@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-3">
+<div class="flex flex-col gap-3 min-w-full overflow-x-auto">
   <div
     class="border border-primary-border bg-neutral-10 rounded-3xl p-4 w-full mt-4"
   >
@@ -8,81 +8,115 @@
         <p class="text-p-lg font-semibold text-neutral-100">RKAP Budget</p>
       </div>
       <app-button
-        icon="assets/images/icons/ic-arrow-down.svg"
-        type="primary-not-active"
+        [icon]="
+          isDisplayRkap
+            ? 'assets/images/icons/ic-arrow-down.svg'
+            : 'assets/images/icons/ic-arrow-up-active.svg'
+        "
+        [type]="isDisplayRkap ? 'primary-not-active' : 'primary'"
+        (click)="isDisplayRkap = !isDisplayRkap"
       >
+        >
       </app-button>
     </div>
   </div>
-  <table class="w-full">
-    <tr
-      class="overflow-auto text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px]"
-    >
-      <th>Action</th>
-      <th *ngFor="let column of headers" class="p-2" class="min-w-[120px]">
-        {{ column }}
-      </th>
-    </tr>
-    <tbody *ngFor="let item of body">
-      <tr
-        class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
-      >
-        <td>
-          <button (click)="onClick(item.id)" type="button" class="">
-            <div
-              class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
-              [ngClass]="{
-              'bg-primary-hover':item.id === activeId,
-              'border-primary-hover':item.id === activeId,
-            }"
+  <ng-container *ngIf="!isDisplayRkap">
+    <div class="flex justify-between">
+      <div>
+        <table class="w-full">
+          <tr
+            class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] whitespace-nowrap sticky top-0"
+          >
+            <th class="px-4">Action</th>
+            <th *ngFor="let column of headers" class="px-4">
+              {{ column }}
+            </th>
+          </tr>
+          <tbody *ngFor="let item of body">
+            <tr
+              class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px] whitespace-nowrap"
             >
-              <img
-                [src]="
-                  item.id === activeId
-                    ? 'assets/images/icons/ic-arrow-up-active.svg'
-                    : 'assets/images/icons/ic-arrow-down.svg'
-                "
-                alt="Arrow down"
-              />
-            </div>
-          </button>
-        </td>
-        <td class="h-[56px]">{{ item.financialIndicators }}</td>
-        <td class="h-[56px]">{{ item.glNumber }}</td>
-        <td class="h-[56px]">{{ item.total }}</td>
-        <td class="h-[56px]">{{ item.jan }}</td>
-        <td class="h-[56px]">{{ item.feb }}</td>
-        <td class="h-[56px]">{{ item.mar }}</td>
-        <td class="h-[56px]">{{ item.apr }}</td>
-        <td class="h-[56px]">{{ item.jun }}</td>
-        <td class="h-[56px]">{{ item.jul }}</td>
-        <td class="h-[56px]">{{ item.agu }}</td>
-        <td class="h-[56px]">{{ item.sep }}</td>
-        <td class="h-[56px]">{{ item.okt }}</td>
-        <td class="h-[56px]">{{ item.nov }}</td>
-        <td class="h-[56px]">{{ item.des }}</td>
-      </tr>
-      <tr
-        *ngIf="item.id === activeId"
-        class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
-      >
-        <td></td>
-        <td>Travel</td>
-        <td>40011000</td>
-        <td>111111</td>
-        <td>115.864</td>
-        <td>115.864</td>
-        <td>773.24</td>
-        <td>773.24</td>
-        <td>773.24</td>
-        <td>773.24</td>
-        <td>773.24</td>
-        <td>773.24</td>
-        <td>773.24</td>
-        <td>773.24</td>
-        <td>773.24</td>
-        <td>773.24</td>
-      </tr>
-    </tbody>
-  </table>
+              <td>
+                <button (click)="onClick(item.id)" type="button" class="">
+                  <div
+                    class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+                    [ngClass]="{
+                        'bg-primary-hover':item.id === activeId,
+                        'border-primary-hover':item.id === activeId,
+                      }"
+                  >
+                    <img
+                      [src]="
+                        item.id === activeId
+                          ? 'assets/images/icons/ic-arrow-up-active.svg'
+                          : 'assets/images/icons/ic-arrow-down.svg'
+                      "
+                      alt="Arrow down"
+                    />
+                  </div>
+                </button>
+              </td>
+              <td class="h-[56px] px-4">{{ item.financialIndicators }}</td>
+              <td class="h-[56px] px-4">{{ item.glNumber }}</td>
+              <td class="h-[56px] px-4">{{ item.total }}</td>
+            </tr>
+            <tr
+              *ngIf="item.id === activeId"
+              class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px] whitespace-nowrap"
+            >
+              <td></td>
+              <td>Travel</td>
+              <td>40011000</td>
+              <td>111111</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <tr
+            class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] whitespace-nowrap sticky top-0"
+          >
+            <th *ngFor="let column of head" class="px-4">
+              {{ column }}
+            </th>
+          </tr>
+          <tbody *ngFor="let item of body">
+            <tr
+              class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px] whitespace-nowrap"
+            >
+              <td class="h-[56px] px-4">{{ item.jan }}</td>
+              <td class="h-[56px] px-4">{{ item.feb }}</td>
+              <td class="h-[56px] px-4">{{ item.mar }}</td>
+              <td class="h-[56px] px-4">{{ item.apr }}</td>
+              <td class="h-[56px] px-4">{{ item.jun }}</td>
+              <td class="h-[56px] px-4">{{ item.jul }}</td>
+              <td class="h-[56px] px-4">{{ item.agu }}</td>
+              <td class="h-[56px] px-4">{{ item.sep }}</td>
+              <td class="h-[56px] px-4">{{ item.okt }}</td>
+              <td class="h-[56px] px-4">{{ item.nov }}</td>
+              <td class="h-[56px] px-4">{{ item.des }}</td>
+            </tr>
+            <tr
+              *ngIf="item.id === activeId"
+              class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px] whitespace-nowrap"
+            >
+              <td>115.864</td>
+              <td>115.864</td>
+              <td>773.24</td>
+              <td>773.24</td>
+              <td>773.24</td>
+              <td>773.24</td>
+              <td>773.24</td>
+              <td>773.24</td>
+              <td>773.24</td>
+              <td>773.24</td>
+              <td>773.24</td>
+              <td>773.24</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-container>
 </div>

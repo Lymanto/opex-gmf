@@ -15,13 +15,13 @@ export const tabledata = [
   styleUrls: ['./view-budget-table.component.css'],
 })
 export class ViewBudgetTableComponent {
+  isDisplayRkap: boolean = true;
   tabledata = tabledata;
   @Input() body!: tableBodyRkapType[];
 
-  headers: string[] = [
-    'Financial Indicator',
-    'G/L Number',
-    'Total',
+  headers: string[] = ['Financial Indicator', 'G/L Number', 'Total'];
+
+  head: string[] = [
     'Jan',
     'Feb',
     'Mar',
@@ -37,6 +37,7 @@ export class ViewBudgetTableComponent {
   ];
 
   activeId: string = 'not-active';
+  renderer: any;
 
   onClick(value: string) {
     if (this.activeId == 'not-active') {
