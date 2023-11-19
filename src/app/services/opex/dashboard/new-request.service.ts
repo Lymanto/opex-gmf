@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, observable } from 'rxjs';
 import { HttpResult } from 'src/app/dto/http-result.dto';
-import { glAccountType } from 'src/app/lib/types';
+import { CreateRequestRealizationType, glAccountType } from 'src/app/lib/types';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -22,5 +22,16 @@ export class NewRequestService {
     return this.httpClient.get<HttpResult<glAccountType[]>>(this.url, {
       headers: this.headers,
     });
+  }
+  getAllRealization(): Observable<HttpResult<any[]>> {
+    return this.httpClient.get<HttpResult<any[]>>(
+      `${environment.baseUrlOpex}/realization`
+    );
+  }
+  postCreateRequestRealization(data: FormData) {
+    return this.httpClient.post<FormData>(
+      `${environment.baseUrlOpex}/realization/save`,
+      data
+    );
   }
 }

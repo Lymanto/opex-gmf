@@ -1,13 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { format } from 'date-fns';
-import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
+import { EMPTY, Subject, catchError, of, takeUntil, tap } from 'rxjs';
+import { HttpResult } from 'src/app/dto/http-result.dto';
 import {
+  CostCenterType,
+  CreateRequestRealizationType,
+  RealizationItemsType,
   documentCategoryType,
   glAccountType,
-  newRequestType,
+  newRequestUploadType,
   selectType,
 } from 'src/app/lib/types';
+import { CostCenterService } from 'src/app/services/opex/cost-center/cost-center.service';
 import { NewRequestService } from 'src/app/services/opex/dashboard/new-request.service';
 import { DocumentCategoryService } from 'src/app/services/opex/document-category/document-category.service';
 import { KursUsdService } from 'src/app/services/opex/master-data/kurs-usd.service';
@@ -20,9 +25,18 @@ import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.ser
 })
 export class NewRequestComponent implements OnInit {
   userData: selectType[] = [];
-  @Input() requestBody: newRequestType[] = [];
+  requestBody: newRequestUploadType[] = [];
+  files: File[] = [];
+  docCategories: string[] = [];
+  docNames: string[] = [];
+  createRequest: CreateRequestRealizationType = <
+    CreateRequestRealizationType
+  >{};
   currentDate: string = format(new Date(), 'dd MMM yyyy');
-  idNumber: string = '';
+  idResponsibleNumber: string = '';
+  idTypeSubmission: string = '';
+  titleRequest: string = '';
+  noteRequest: string = '';
   console = console;
 
   itemsForm!: FormGroup;
@@ -34,7 +48,8 @@ export class NewRequestComponent implements OnInit {
   available: number = 1500; //usd
   dataGL!: glAccountType[];
 
-  newRequestData: newRequestType = <newRequestType>{};
+  costCenterData: CostCenterType | null = <CostCenterType>{};
+  newRequestData: newRequestUploadType = <newRequestUploadType>{};
   selectDocumentCategoryData: selectType[] = [];
   idDocCategory!: string;
   modalDocumentType!: string;
@@ -44,7 +59,11 @@ export class NewRequestComponent implements OnInit {
   isUploadSuccess: boolean = false;
   isUploadError: boolean = false;
   uploadError: string = '';
+  specificUser: any;
+  personalUnit!: string;
+  selectedGroupData: any[] = [];
   constructor(
+    private costCenter: CostCenterService,
     private users: GetAllUsersService,
     private fb: FormBuilder,
     private newRequest: NewRequestService,
@@ -56,17 +75,63 @@ export class NewRequestComponent implements OnInit {
     this.users.getAllUsers().subscribe((response: any) => {
       this.refactorUser(response.body?.data);
     });
-    this.itemsForm = this.fb.group({
-      items: new FormArray([this.createItem]),
-    });
+    this.getSpecificUser(582127);
     this.getCurrentKurs();
     this.fetchGlAccount();
     this.fetchDocumentCategory();
+
+    this.itemsForm = this.fb.group({
+      items: new FormArray([this.createItem]),
+    });
   }
   ngOnDestroy(): void {
     this._onDestroy$.next();
     this._onDestroy$.complete();
   }
+  generateDinas(dinas: string): void {
+    this.personalUnit = dinas.slice(0, 3);
+    this.getCostCenter(this.personalUnit);
+  }
+  getSpecificUser(id: number): void {
+    this.users
+      .getSpecificUsers(id)
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred:', err);
+          return EMPTY;
+        }),
+        tap((result: any) => {
+          if (result) {
+            // Ensure result.data is a single array of glAccountType objects
+            this.specificUser = result.body;
+            this.generateDinas(this.specificUser?.personalUnit);
+          }
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
+  }
+  getCostCenter(bidang: string): void {
+    this.costCenter
+      .getCostCenterByBidang(bidang)
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred:', err);
+          return EMPTY;
+        }),
+        tap((result) => {
+          if (result) {
+            this.costCenterData = result.data[0] as unknown as CostCenterType;
+          }
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
+  }
+  getValueTypeSubmission(val: any): void {
+    this.idTypeSubmission = val.id;
+  }
+
   refactorUser(data: any): selectType[] {
     data.forEach((element: any) => {
       this.userData.push({
@@ -78,12 +143,22 @@ export class NewRequestComponent implements OnInit {
   }
 
   getValue(val: any): void {
-    this.idNumber = val.id;
-    this.console.log('val :', val);
+    this.idResponsibleNumber = val.id;
   }
 
   addItems(): void {
-    (this.itemsForm.get('items') as FormArray).push(this.createItem);
+    const currentGl =
+      this.getItems.controls[this.getItems.controls.length - 1].get(
+        'GLNumberControl'
+      )?.value;
+    if (currentGl != '') {
+      this.selectedGroupData.push(currentGl);
+      this.selectGroupData = this.selectGroupData.filter((item) => {
+        return !this.selectedGroupData.includes(item.id);
+      });
+      this.console.log(this.selectedGroupData);
+      (this.itemsForm.get('items') as FormArray).push(this.createItem);
+    }
   }
 
   removeItem(index: number): void {
@@ -91,6 +166,16 @@ export class NewRequestComponent implements OnInit {
     if (itemsArray.length > 1) {
       itemsArray.removeAt(index);
     }
+    this.console.log('delete', this.selectedGroupData);
+    const currentGl = this.selectedGroupData[index];
+    this.selectedGroupData.splice(index, 1);
+    const currentData = this.dataGL.filter((item) => {
+      return item.glAccount == currentGl;
+    });
+    this.selectGroupData.push({
+      id: currentData[0].glAccount,
+      value: currentData[0].description,
+    });
   }
 
   showDeleteButton(index: number): boolean {
@@ -110,8 +195,12 @@ export class NewRequestComponent implements OnInit {
       groupDetailControl: new FormControl<string>(''),
       availableControl: new FormControl<number>(this.available),
       amountSubmissionControl: new FormControl<string>(''),
-      periodStartControl: new FormControl<Date>(new Date()),
-      periodFinishControl: new FormControl<Date>(new Date()),
+      periodStartControl: new FormControl<string>(
+        new Date().toISOString().substr(0, 10)
+      ),
+      periodFinishControl: new FormControl<string>(
+        new Date().toISOString().substr(0, 10)
+      ),
       descriptionControl: new FormControl<string>(''),
       remarkControl: new FormControl<string>(''),
     });
@@ -177,11 +266,72 @@ export class NewRequestComponent implements OnInit {
       });
     });
   }
-
-  save(): void {
-    this.console.log(this.itemsForm.value);
+  refactorItemsData(data: any): RealizationItemsType[] {
+    const items: RealizationItemsType[] = [];
+    data.forEach((element: any) => {
+      items.push({
+        amountSubmission: element.amountSubmissionControl,
+        periodStart: new Date(element.periodStartControl),
+        periodFinish: new Date(element.periodFinishControl),
+        descPby: element.descriptionControl,
+        remarkPby: element.remarkControl,
+        glAccountId: element.GLNumberControl,
+      });
+    });
+    return items;
   }
+  save(): void {
+    this.createRequest.type = this.idTypeSubmission;
+    this.createRequest.responsibleNopeg = this
+      .idResponsibleNumber as unknown as number;
+    this.createRequest.personalNumber = this.specificUser?.personalNumber;
+    this.createRequest.costCenterId = 1;
+    this.createRequest.createdBy = this.specificUser?.personalNumber;
+    this.createRequest.realizationItems = this.refactorItemsData(
+      this.itemsForm.value.items
+    );
+    this.createRequest.titleRequest = this.titleRequest;
+    this.createRequest.noteRequest = this.noteRequest;
+    this.createRequest.uploadfile = this.files;
+    this.createRequest.docCategoryId = this.docCategories;
+    this.createRequest.docName = this.docNames;
+    const formdata = this.convertToFormData(this.createRequest);
+    formdata.forEach((value, key) => {
+      console.log(key + ' ' + value);
+    });
+    this.newRequest
+      .postCreateRequestRealization(formdata)
+      .pipe(
+        catchError((error: any) => {
+          this.console.error('There was an error!', error);
 
+          return of();
+        })
+      )
+      .subscribe(
+        (data: any) => {
+          this.console.log('Success', data);
+        },
+        (error: any) => {
+          this.console.error('Error', error);
+        }
+      );
+  }
+  convertToFormData(data: any): FormData {
+    const formData = new FormData();
+    formData.append('type', data.type);
+    formData.append('responsibleNopeg', data.responsibleNopeg);
+    formData.append('personalNumber', data.personalNumber);
+    formData.append('costCenterId', data.costCenterId);
+    formData.append('createdBy', data.createdBy);
+    formData.append('realizationItems', JSON.stringify(data.realizationItems));
+    formData.append('titleRequest', data.titleRequest);
+    formData.append('noteRequest', data.noteRequest);
+    formData.append('uploadfile', data.uploadfile);
+    formData.append('docCategoryId', data.docCategoryId);
+    formData.append('docName', data.docName);
+    return formData;
+  }
   fetchDocumentCategory(): void {
     this.docCategory
       .getAllGroup()
@@ -231,7 +381,11 @@ export class NewRequestComponent implements OnInit {
         this.newRequestData.documentType = this.modalDocumentType;
         this.newRequestData.file = this.uploadedFile;
         this.newRequestData.size = this.fileSize;
+        this.files.push(this.uploadedFile);
+        this.docNames.push(this.docName);
+        this.docCategories.push(this.idDocCategory);
         this.requestBody.push(this.newRequestData);
+
         this.clearUp();
       }
     } else {
@@ -243,7 +397,7 @@ export class NewRequestComponent implements OnInit {
   clearUp(): void {
     this.isUploadSuccess = false;
     this.isUploadError = false;
-    this.newRequestData = <newRequestType>{};
+    this.newRequestData = <newRequestUploadType>{};
     this.idDocCategory = '';
     this.modalDocumentType = '';
     this.docName = '';
@@ -284,5 +438,11 @@ export class NewRequestComponent implements OnInit {
   }
   getValueDocName(val: string): void {
     this.docName = val;
+  }
+  getTitleRequest(val: string): void {
+    this.titleRequest = val;
+  }
+  getNoteRequest(val: string): void {
+    this.noteRequest = val;
   }
 }

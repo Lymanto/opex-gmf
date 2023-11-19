@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
@@ -16,5 +17,14 @@ export class TextareaComponent {
   @Input() isAsk: boolean = false;
   @Input() isReadOnly: boolean = false;
   @Input() isDisabled: boolean = false;
+  editorData: string = '';
+  console = console;
+  @Output() value: EventEmitter<string> = new EventEmitter<string>();
   public Editor = ClassicEditor;
+  setVal(value: any) {
+    this.value.emit(value.target.value);
+  }
+  setValEditor({ editor }: ChangeEvent) {
+    this.value.emit(editor.data.get());
+  }
 }

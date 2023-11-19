@@ -7,13 +7,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class StatusComponent implements OnInit {
   @Input() status!:
-    | 'Open'
-    | 'Progress'
-    | 'Closed'
-    | 'Revise'
-    | 'Reject'
-    | 'Approve'
-    | 'Waiting Approval'
+    | 'OPEN'
+    | 'PROGRESS'
+    | 'CLOSED'
+    | 'REVISE'
+    | 'REJECT'
+    | 'APPROVE'
+    | 'WAITING_APPROVAL'
     | string
     | undefined;
   statusClass!: string;
@@ -22,37 +22,37 @@ export class StatusComponent implements OnInit {
   }
   setColor(): void {
     switch (this.status) {
-      case 'Open': {
+      case 'OPEN': {
         this.statusClass =
           ' border-tertiary-br-gold text-tertiary-tx-gold bg-tertiary-bg-gold ';
         break;
       }
-      case 'Approve': {
+      case 'APPROVE': {
         this.statusClass =
           ' border-tertiary-br-green text-tertiary-tx-green bg-tertiary-bg-green ';
         break;
       }
-      case 'Progress': {
+      case 'PROGRESS': {
         this.statusClass =
           ' border-tertiary-br-blue text-tertiary-tx-blue bg-tertiary-bg-blue ';
         break;
       }
-      case 'Closed': {
+      case 'CLOSED': {
         this.statusClass =
           ' border-tertiary-br-green text-tertiary-tx-green bg-tertiary-bg-green ';
         break;
       }
-      case 'Revise': {
+      case 'REVISE': {
         this.statusClass =
           ' border-tertiary-br-tosca text-tertiary-tx-tosca bg-tertiary-bg-tosca ';
         break;
       }
-      case 'Waiting Approval': {
+      case 'WAITING_APPROVAL': {
         this.statusClass =
           ' border-tertiary-br-blue text-tertiary-tx-blue bg-tertiary-bg-blue ';
         break;
       }
-      case 'Reject': {
+      case 'REJECT': {
         this.statusClass =
           ' border-tertiary-br-red text-tertiary-tx-red bg-tertiary-bg-red ';
 

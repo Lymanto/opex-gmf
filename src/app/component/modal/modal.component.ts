@@ -11,7 +11,7 @@ import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
 import { Flowbite } from 'src/app/lib/flowbite';
 import {
   documentCategoryType,
-  newRequestType,
+  newRequestUploadType,
   selectType,
 } from 'src/app/lib/types';
 import { DocumentCategoryService } from 'src/app/services/opex/document-category/document-category.service';

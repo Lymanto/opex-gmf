@@ -15,7 +15,7 @@ import { format } from 'date-fns';
   ],
 })
 export class InputDateComponent {
-  _inputDate: string = '';
+  _inputDate!: string;
   @Input() label: string = '';
   @Input() id: string = '';
   @Input() placeholder: string = '';
@@ -29,12 +29,12 @@ export class InputDateComponent {
     return this._inputDate;
   }
 
-  set date(value: Date) {
-    this._inputDate = value.toISOString().substr(0, 10);
+  set date(value: string) {
+    this._inputDate = value;
     this.propagateChange(this._inputDate);
   }
 
-  writeValue(value: Date) {
+  writeValue(value: string) {
     if (value !== undefined) {
       this.date = value;
     }

@@ -13,10 +13,15 @@
       required="{{ required }}"
       [readonly]="isReadOnly"
       [disabled]="isDisabled"
+      (change)="setVal($event)"
       >{{ content }}</textarea
     >
   </ng-container>
   <ng-container *ngIf="type === 'rich'">
-    <ckeditor [editor]="Editor"></ckeditor>
+    <ckeditor
+      (change)="setValEditor($event)"
+      [(ngModel)]="editorData"
+      [editor]="Editor"
+    ></ckeditor>
   </ng-container>
 </div>

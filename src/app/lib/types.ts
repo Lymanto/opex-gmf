@@ -43,17 +43,6 @@ export interface tableBodyType {
   description: string;
 }
 
-export interface newRequestType {
-  id: string;
-  documentName: string;
-  documentType: string;
-  size: string;
-  uploadBy: string;
-  departmentBy: string;
-  uploadDate: string;
-  file: File;
-}
-
 export interface userType {
   personalNumber: string;
   personalName: string;
@@ -118,5 +107,50 @@ export interface kursType {
 }
 
 export interface CreateRequestRealizationType {
-  entryDate: Date;
+  type: string;
+  responsibleNopeg: number;
+  personalNumber: number;
+  costCenterId: number;
+  createdBy: string;
+  titleRequest: string;
+  noteRequest: string;
+  realizationItems: RealizationItemsType[];
+  uploadfile: File[];
+  docCategoryId: string[];
+  docName: string[];
+}
+
+export interface RealizationItemsType {
+  amountSubmission: number;
+  periodStart: Date;
+  periodFinish: Date;
+  descPby: string;
+  remarkPby: string;
+  glAccountId: number;
+}
+export interface newRequestUploadType {
+  id: string;
+  documentName: string;
+  documentType: string;
+  size: string;
+  uploadBy: string;
+  departmentBy: string;
+  uploadDate: string;
+  file: File;
+}
+export interface CostCenterType {
+  idCostCenter: number;
+  uniqueId: string;
+  costCenter: string;
+  description: string;
+  bidang: string;
+  dinas: string;
+  directorat: string;
+  groupDinas: string;
+  profitCenter: string;
+  active: true;
+  createdAt: Date;
+  createdBy: string;
+  updatedAt: Date;
+  updatedBy: string | null;
 }
