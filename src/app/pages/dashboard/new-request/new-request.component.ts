@@ -190,6 +190,7 @@ export class NewRequestComponent implements OnInit {
   }
   get createItem(): FormGroup {
     return this.fb.group({
+      GLNumberIdControl: new FormControl<string>(''),
       GLNumberControl: new FormControl<string>(''),
       groupControl: new FormControl<string>(''),
       groupDetailControl: new FormControl<string>(''),
@@ -215,6 +216,9 @@ export class NewRequestComponent implements OnInit {
         this.getItems.controls[index]
           .get('groupDetailControl')
           ?.setValue(item.groupDetail);
+        this.getItems.controls[index]
+          .get('GLNumberIdControl')
+          ?.setValue(item.idGlAccount);
       }
     });
     this.getItems.controls[index].get('GLNumberControl')?.setValue(val.id);
@@ -266,6 +270,7 @@ export class NewRequestComponent implements OnInit {
       });
     });
   }
+
   refactorItemsData(data: any): RealizationItemsType[] {
     const items: RealizationItemsType[] = [];
     data.forEach((element: any) => {
@@ -275,7 +280,7 @@ export class NewRequestComponent implements OnInit {
         periodFinish: new Date(element.periodFinishControl),
         descPby: element.descriptionControl,
         remarkPby: element.remarkControl,
-        glAccountId: element.GLNumberControl,
+        glAccountId: element.GLNumberIdControl,
       });
     });
     return items;
@@ -403,6 +408,27 @@ export class NewRequestComponent implements OnInit {
     this.docName = '';
     this.uploadedFile = null;
     this.fileSize = '';
+  }
+  resetAll(): void {
+    this.isUploadSuccess = false;
+    this.isUploadError = false;
+    this.newRequestData = <newRequestUploadType>{};
+    this.itemsForm = this.fb.group({
+      items: new FormArray([this.createItem]),
+    });
+    this.idDocCategory = '';
+    this.titleRequest = '';
+    this.noteRequest = '';
+    this.idResponsibleNumber = '';
+    this.modalDocumentType = '';
+    this.docName = '';
+    this.uploadedFile = null;
+    this.fileSize = '';
+    this.files = [];
+    this.docNames = [];
+    this.docCategories = [];
+    this.requestBody = [];
+    this.clearUp();
   }
   uploadFile(event: any): void {
     const fileInput = event.target as HTMLInputElement;

@@ -35,6 +35,9 @@ export class StatusPercentageComponent {
       },
     },
   };
+  toLowerCase(label: string): string {
+    return label.toLowerCase();
+  }
   ngOnInit(): void {
     // this.doughnutChartLabels = [this.label];
     this.doughnutChartDatasets = [

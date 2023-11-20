@@ -17,7 +17,7 @@ export class TextareaComponent {
   @Input() isAsk: boolean = false;
   @Input() isReadOnly: boolean = false;
   @Input() isDisabled: boolean = false;
-  editorData: string = '';
+  @Input() editorData: string = '';
   console = console;
   @Output() value: EventEmitter<string> = new EventEmitter<string>();
   public Editor = ClassicEditor;

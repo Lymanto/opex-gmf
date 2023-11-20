@@ -81,29 +81,10 @@
     <div class="border border-primary-border rounded-3xl bg-primary-bg-2 p-3">
       <div class="grid grid-cols-5 gap-4">
         <app-status-percentage
-          label="Reject"
-          value="100"
-          percentage="50"
-        ></app-status-percentage>
-        <app-status-percentage
-          label="Revise"
-          value="100"
-          percentage="50"
-        ></app-status-percentage>
-        <app-status-percentage
-          label="Open"
-          value="100"
-          percentage="50"
-        ></app-status-percentage>
-        <app-status-percentage
-          label="Progress"
-          value="100"
-          percentage="50"
-        ></app-status-percentage>
-        <app-status-percentage
-          label="Closed"
-          value="100"
-          percentage="50"
+          *ngFor="let item of dataPercentage"
+          [label]="item.type"
+          [value]="item.count"
+          [percentage]="item.percentage"
         ></app-status-percentage>
       </div>
     </div>
@@ -129,21 +110,21 @@
           class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
         >
           <td class="p-4">{{ i + 1 }}</td>
-          <td>{{ item.realization.requestNumber }}</td>
-          <td>{{ item.realization.createdAt }}</td>
-          <td>TD</td>
+          <td>{{ item.requestNumber }}</td>
+          <td>{{ formatDate(item.entryDate) }}</td>
+          <td>{{ item.m_cost_center.dinas }}</td>
           <td>
-            <ng-container *ngIf="checkStatus(item.realization.status)">
-              <app-status [status]="item.realization.status" />
+            <ng-container *ngIf="checkStatus(item.status)">
+              <app-status [status]="item.status" />
             </ng-container>
           </td>
-          <td>{{ item.realization.type }}</td>
-          <td></td>
-          <td></td>
-          <td>20.949,75 USD</td>
+          <td>{{ item.typeSubmission }}</td>
+          <td>{{ item.statusTo }}</td>
+          <td>{{ item.departmentTo }}</td>
+          <td>{{ item.submissionValue }} USD</td>
           <td>
             <button
-              (click)="onShowDetail(item.realization.idRealization)"
+              (click)="onShowDetail(item.idRealization)"
               type="button"
               class=""
               routerLinkActive="active"
@@ -151,13 +132,13 @@
               <div
                 class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
                 [ngClass]="{
-                  'bg-primary-hover':item.realization.idRealization === activeId,
-                  'border-primary-hover':item.realization.idRealization === activeId,
+                  'bg-primary-hover':item.idRealization === activeId,
+                  'border-primary-hover':item.idRealization === activeId,
         }"
               >
                 <img
                   [src]="
-                    item.realization.idRealization === activeId
+                    item.idRealization === activeId
                       ? 'assets/images/icons/ic-arrow-up-active.svg'
                       : 'assets/images/icons/ic-arrow-down.svg'
                   "
@@ -168,7 +149,7 @@
           </td>
         </tr>
         <tr
-          *ngIf="item.realization.idRealization === activeId"
+          *ngIf="item.idRealization === activeId"
           class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px]"
         >
           <td colspan="9">
@@ -178,9 +159,7 @@
               </div>
               <div class="w-2 h-[1px] bg-neutral-100"></div>
               <div class="text-p-md tracking-[0,5px]">
-                Permohonan persetujuan realisasi anggaran perpanjagan lisensi
-                Webex meeting, Cloud device registration, add on storage,
-                lisensi server, lisensi VMware
+                {{ item.description }}
               </div>
             </div>
           </td>

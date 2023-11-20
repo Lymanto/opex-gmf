@@ -15,6 +15,7 @@
         icon="assets/images/icons/ic-reset.svg"
         type="danger-not-active"
         label="Reset"
+        (click)="resetAll()"
       />
     </div>
     <div class="flex flex-col gap-4">
@@ -123,7 +124,7 @@
       label="Note of Request"
       [required]="true"
       type="rich"
-      [content]="noteRequest"
+      [editorData]="noteRequest"
       (value)="getNoteRequest($event)"
       [isAsk]="true"
     ></app-textarea>

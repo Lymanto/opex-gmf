@@ -23,9 +23,17 @@ export class NewRequestService {
       headers: this.headers,
     });
   }
-  getAllRealization(): Observable<HttpResult<any[]>> {
+  getAllRealization(
+    page: number = 1,
+    perPage: number = 10
+  ): Observable<HttpResult<any[]>> {
     return this.httpClient.get<HttpResult<any[]>>(
-      `${environment.baseUrlOpex}/realization`
+      `${environment.baseUrlOpex}/dashboard?page=${page}&perPage=${perPage}`
+    );
+  }
+  getPercentage(): Observable<HttpResult<any[]>> {
+    return this.httpClient.get<HttpResult<any[]>>(
+      `${environment.baseUrlOpex}/dashboard/type`
     );
   }
   postCreateRequestRealization(data: FormData) {
