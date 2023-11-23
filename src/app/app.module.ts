@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -50,6 +50,29 @@ import { DetailRequestComponent } from './component/reallocation-budget/detail-r
 import { RemarkComponent as RemarkReallocationComponent } from './component/reallocation-budget/remark/remark.component';
 import { TrackingApprovalComponent as TrackingApprovalReallocationComponent } from './component/reallocation-budget/tracking-approval/tracking-approval.component';
 import { PaginationComponent } from './component/pagination/pagination.component';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { environment } from 'src/environments/environment';
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: environment.keycloakUrl,
+        realm: environment.realm,
+        clientId: environment.keycloakClientId,
+      },
+      loadUserProfileAtStartUp: true,
+      enableBearerInterceptor: true,
+      bearerPrefix: 'Bearer',
+      bearerExcludedUrls: ['assets/'],
+      initOptions: {
+        onLoad: 'login-required',
+        // silentCheckSsoRedirectUri:
+        //   window.location.origin + '/assets/silent-check-sso.html',
+      },
+    });
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,7 +118,14 @@ import { PaginationComponent } from './component/pagination/pagination.component
     TrackingApprovalReallocationComponent,
     PaginationComponent,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
+  ],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
@@ -107,6 +137,7 @@ import { PaginationComponent } from './component/pagination/pagination.component
     HttpClientModule,
     CKEditorModule,
     FormsModule,
+    KeycloakAngularModule,
   ],
 })
 export class AppModule {}

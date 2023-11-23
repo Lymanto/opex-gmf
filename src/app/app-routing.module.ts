@@ -22,6 +22,11 @@ import { DetailComponent } from './pages/need-approval/detail/detail.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full',
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent,
   },

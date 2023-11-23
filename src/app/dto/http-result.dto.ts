@@ -5,7 +5,13 @@ export interface HttpResult<T> {
   message: string;
   status: number;
 }
-export interface HttpResultSoe<T> {
+export interface HttpResultSoeSpesificUser<T> {
+  body: T;
+  headers: any | null;
+  message: string;
+  time: string;
+}
+export interface HttpResultSoeAllUser<T> {
   body: T[];
   headers: any | null;
   message: string;
