@@ -5,6 +5,7 @@ import { EMPTY, Subject, catchError, of, takeUntil, tap } from 'rxjs';
 import { Flowbite } from 'src/app/lib/flowbite';
 import { kursType, selectType } from 'src/app/lib/types';
 import { KursUsdService } from 'src/app/services/opex/master-data/kurs-usd.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-kurs-usd',
@@ -20,7 +21,7 @@ export class KursUsdComponent implements OnInit {
   console = console;
   errorMessage: any;
   selectedKurs!: any;
-
+  alert = alert;
   yearsData: selectType[] = [
     {
       id: (parseInt(this.currentYear) + 1).toString(),
@@ -60,12 +61,14 @@ export class KursUsdComponent implements OnInit {
           this.errorMessage = error.message;
           this.console.error('There was an error!', error);
 
+          Swal.fire('', error.error.message, 'error');
           return of();
         })
       )
       .subscribe(
         (data: kursType) => {
           this.getKurs();
+          Swal.fire('', 'Add new kurs Success', 'success');
         },
         (error: any) => {
           this.console.error('Error', error);
@@ -101,6 +104,7 @@ export class KursUsdComponent implements OnInit {
           modal.hide();
           document.querySelector('body > div[modal-backdrop]')?.remove();
           this.selectedKurs = {};
+          Swal.fire('', 'Update Success', 'success');
         },
         (error: any) => {
           this.console.error('Error', error);

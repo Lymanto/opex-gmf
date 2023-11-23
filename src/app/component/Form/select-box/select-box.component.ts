@@ -1,10 +1,21 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MatAutocompleteModule,
+  MatAutocompleteTrigger,
+  MatAutocomplete,
+} from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
-import { startWith, map, subscribeOn } from 'rxjs/operators';
-import { NgFor, AsyncPipe, NgIf } from '@angular/common';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { glAccountType, selectType } from 'src/app/lib/types';
+import { map, startWith } from 'rxjs/operators';
+import { selectType } from 'src/app/lib/types';
 
 @Component({
   selector: 'app-select-box',
@@ -24,18 +35,16 @@ export class SelectBoxComponent implements OnInit {
   @Input() label: string = '';
   @Input() id: string = '';
   @Input() data!: any;
-  @Input() displayWith!: any;
   @Input() required: boolean = false;
   @Input() isReadOnly: boolean = false;
   @Input() value: string = '';
   @Output() selectedValue: EventEmitter<string> = new EventEmitter<string>();
   console = console;
   @Input() control = new FormControl();
-  @Input() options: { value: glAccountType; viewValue: string }[] = [];
-
   filteredDatas: Observable<selectType[]> | undefined;
 
   ngOnInit() {
+    this.control.setValue(this.value);
     this.filteredDatas = this.control.valueChanges.pipe(
       startWith(''),
       map((value: any) => {
@@ -60,5 +69,15 @@ export class SelectBoxComponent implements OnInit {
   }
   displayFn(item: any): string {
     return item ? item.value : '';
+  }
+  resetAutoInput(trigger: MatAutocompleteTrigger, auto: MatAutocomplete) {
+    setTimeout((_: any) => {
+      auto.options.forEach((item) => {
+        item.deselect();
+      });
+
+      // this.control.reset();
+      // this.control.setValue(this.value);
+    }, 100);
   }
 }

@@ -49,6 +49,7 @@ import { CardComponent } from './component/card/card.component';
 import { DetailRequestComponent } from './component/reallocation-budget/detail-request/detail-request.component';
 import { RemarkComponent as RemarkReallocationComponent } from './component/reallocation-budget/remark/remark.component';
 import { TrackingApprovalComponent as TrackingApprovalReallocationComponent } from './component/reallocation-budget/tracking-approval/tracking-approval.component';
+import { PaginationComponent } from './component/pagination/pagination.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,6 +93,7 @@ import { TrackingApprovalComponent as TrackingApprovalReallocationComponent } fr
     DetailRequestComponent,
     RemarkReallocationComponent,
     TrackingApprovalReallocationComponent,
+    PaginationComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

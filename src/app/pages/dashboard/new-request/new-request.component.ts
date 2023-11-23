@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { format } from 'date-fns';
 import { EMPTY, Subject, catchError, of, takeUntil, tap } from 'rxjs';
-import { HttpResult } from 'src/app/dto/http-result.dto';
+
+import Swal from 'sweetalert2';
 import {
   CostCenterType,
   CreateRequestRealizationType,
@@ -276,8 +277,12 @@ export class NewRequestComponent implements OnInit {
     data.forEach((element: any) => {
       items.push({
         amountSubmission: element.amountSubmissionControl,
-        periodStart: new Date(element.periodStartControl),
-        periodFinish: new Date(element.periodFinishControl),
+        periodStart: new Date(
+          element.periodStartControl
+        ).toISOString() as unknown as Date,
+        periodFinish: new Date(
+          element.periodFinishControl
+        ).toISOString() as unknown as Date,
         descPby: element.descriptionControl,
         remarkPby: element.remarkControl,
         glAccountId: element.GLNumberIdControl,
@@ -285,7 +290,20 @@ export class NewRequestComponent implements OnInit {
     });
     return items;
   }
+
   save(): void {
+    if (
+      this.idResponsibleNumber === '' ||
+      this.idTypeSubmission === '' ||
+      this.titleRequest === '' ||
+      this.noteRequest === '' ||
+      this.files.length === 0 ||
+      this.docCategories.length === 0 ||
+      this.docNames.length === 0
+    ) {
+      Swal.fire('', 'Please fill all the fields', 'error');
+      return;
+    }
     this.createRequest.type = this.idTypeSubmission;
     this.createRequest.responsibleNopeg = this
       .idResponsibleNumber as unknown as number;
@@ -304,6 +322,7 @@ export class NewRequestComponent implements OnInit {
     formdata.forEach((value, key) => {
       console.log(key + ' ' + value);
     });
+    this.console.log(this.createRequest);
     this.newRequest
       .postCreateRequestRealization(formdata)
       .pipe(
@@ -315,7 +334,8 @@ export class NewRequestComponent implements OnInit {
       )
       .subscribe(
         (data: any) => {
-          this.console.log('Success', data);
+          Swal.fire('', 'Create Request Realization Success', 'success');
+          this.resetAll();
         },
         (error: any) => {
           this.console.error('Error', error);
@@ -329,12 +349,44 @@ export class NewRequestComponent implements OnInit {
     formData.append('personalNumber', data.personalNumber);
     formData.append('costCenterId', data.costCenterId);
     formData.append('createdBy', data.createdBy);
-    formData.append('realizationItems', JSON.stringify(data.realizationItems));
+    data.realizationItems.forEach((element: any, index: number) => {
+      formData.append(
+        `realizationItems[${index}][amountSubmission]`,
+        element.amountSubmission
+      );
+      formData.append(
+        `realizationItems[${index}][periodStart]`,
+        element.periodStart
+      );
+      formData.append(
+        `realizationItems[${index}][periodFinish]`,
+        element.periodFinish
+      );
+      formData.append(`realizationItems[${index}][descPby]`, element.descPby);
+      formData.append(
+        `realizationItems[${index}][remarkPby]`,
+        element.remarkPby
+      );
+      formData.append(
+        `realizationItems[${index}][glAccountId]`,
+        element.glAccountId
+      );
+    });
     formData.append('titleRequest', data.titleRequest);
     formData.append('noteRequest', data.noteRequest);
-    formData.append('uploadfile', data.uploadfile);
-    formData.append('docCategoryId', data.docCategoryId);
-    formData.append('docName', data.docName);
+
+    data.uploadfile.forEach((element: any, index: number) => {
+      formData.append(`uploadfile[${index}]`, element);
+    });
+    data.docCategoryId.forEach((element: any, index: number) => {
+      formData.append(`docCategoryId[${index}]`, element);
+    });
+    data.docName.forEach((element: any, index: number) => {
+      formData.append(`docName[${index}]`, element);
+    });
+    // formData.append('uploadfile', data.uploadfile);
+    // formData.append('docCategoryId', data.docCategoryId);
+    // formData.append('docName', data.docName);
     return formData;
   }
   fetchDocumentCategory(): void {

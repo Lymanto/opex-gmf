@@ -25,10 +25,15 @@ export class NewRequestService {
   }
   getAllRealization(
     page: number = 1,
-    perPage: number = 10
+    perPage: number = 10,
+    years?: string,
+    requestNumber?: string,
+    status?: string,
+    type?: string,
+    dinas?: string
   ): Observable<HttpResult<any[]>> {
     return this.httpClient.get<HttpResult<any[]>>(
-      `${environment.baseUrlOpex}/dashboard?page=${page}&perPage=${perPage}`
+      `${environment.baseUrlOpex}/dashboard/all?page=${page}&perPage=${perPage}&orderBy=desc${years}${requestNumber}${status}${type}${dinas}`
     );
   }
   getPercentage(): Observable<HttpResult<any[]>> {

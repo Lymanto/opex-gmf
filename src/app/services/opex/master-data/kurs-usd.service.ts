@@ -21,7 +21,7 @@ export class KursUsdService {
   }
 
   getAllKurs(): Observable<HttpResult<kursType[]>> {
-    return this.httpClient.get<HttpResult<kursType[]>>(this.url);
+    return this.httpClient.get<HttpResult<kursType[]>>(`${this.url}/all`);
   }
   getLastKurs(): Observable<HttpResult<kursType>> {
     const year: number = new Date().getFullYear();
