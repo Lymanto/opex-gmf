@@ -52,21 +52,23 @@ export class InputTextComponent implements ControlValueAccessor {
     this.currentValue.emit(event.target.value);
   }
   onChangeAmountSubmission(event: any): void {
-    if (this.currentPair === 'USD') {
-      this.amountSubmission = this.available - event.target.value;
+    if (this.currentPair !== 'USD') {
+      this.amountSubmission = event.target.value / this.currentKurs;
     } else {
-      this.amountSubmission =
-        this.available - event.target.value / this.currentKurs;
+      this.amountSubmission = event.target.value;
     }
 
-    if (this.amountSubmission < 0) {
+    if (this.amountSubmission > this.available) {
       this.isError = true;
       this.errorMessage = 'Your request overlimit budget';
       this.isRemaining = false;
     } else {
       this.isError = false;
       this.isRemaining = true;
-      this.remainingMessage = `${this.amountSubmission} USD`;
+      this.propagateChange(this.amountSubmission.toFixed(2));
+      if (this.currentPair !== 'USD') {
+        this.remainingMessage = `${this.amountSubmission.toFixed(2)} USD`;
+      }
     }
   }
 

@@ -21,6 +21,19 @@ export class KursUsdComponent implements OnInit {
   console = console;
   errorMessage: any;
   selectedKurs!: any;
+  page: number = 1;
+  perPage: number = 10;
+  meta: {
+    lastpage: number;
+    totalItemsPerPage: number;
+    totalItems: number;
+    currentPage: number;
+  } = {
+    lastpage: 0,
+    totalItemsPerPage: 0,
+    totalItems: 0,
+    currentPage: 0,
+  };
   alert = alert;
   yearsData: selectType[] = [
     {
@@ -113,16 +126,18 @@ export class KursUsdComponent implements OnInit {
   }
   getKurs() {
     return this.kurs
-      .getAllKurs()
+      .getAllKurs(this.page, this.perPage)
       .pipe(
         catchError((err) => {
           console.error('Error occurred', err);
           return EMPTY;
         }),
-        tap((result: { data: any[] }) => {
+        tap((result: { data: any[]; meta: any }) => {
           if (result && result.data) {
             // Ensure result.data is a single array of glAccountType objects
             this.tableData = result.data.flatMap((item) => item); // Convert array of arrays to a single array
+            const meta = result.meta;
+            this.meta = meta;
           }
         }),
         takeUntil(this._onDestroy$)
@@ -146,7 +161,10 @@ export class KursUsdComponent implements OnInit {
     document.querySelector('body > div[modal-backdrop]')?.remove();
     this.selectedKurs = {};
   }
-
+  onPageChange(page: number) {
+    this.page = page;
+    this.getKurs();
+  }
   ngOnInit() {
     this.generateYears();
     this.getKurs();

@@ -195,7 +195,7 @@ export class AuthGuard extends KeycloakAuthGuard implements CanActivateChild {
 
     // Allow the user to proceed if all the required roles are present.
     // console.log('requiredRoles 3', requiredRoles.includes(this.role));
-    // console.log('requiredRoles 4', this.role);
+    console.log('requiredRoles 4', this.role);
     // console.log('requiredRoles 5', requiredRoles.some((role) => this.role.includes(role)));
 
     return requiredRoles.some((role) => this.role.includes(role));

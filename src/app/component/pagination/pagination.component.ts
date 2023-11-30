@@ -26,18 +26,18 @@ export class PaginationComponent {
   // when input changes, update the pagination
   ngOnChanges() {
     this.numberOfPages = Math.ceil(this.numberOfItems / this.itemsPerPage);
-
+    this.console.log('ss', this.numberOfPages);
     this.updatePages();
 
     if (this.currentPage > this.numberOfPages) {
       this.goToPage(1);
     }
-    this.console.log('this.numberOfPages ', this.pages);
   }
 
   // fills the pages array with the actual numbers
   private updatePages(): void {
     // if there are no pages create an emtpy array
+
     if (this.numberOfPages === 0) {
       this.pages = [];
       return;
@@ -64,7 +64,13 @@ export class PaginationComponent {
     const end = start + 9;
 
     // loop through all items in the middle (except first and last page)
-    for (let i = start; i < end; ++i) {
+    for (let i = start; i < end; i++) {
+      if (i < this.currentPage) {
+        break;
+      }
+      if (i < this.numberOfPages - 1) {
+        break;
+      }
       // if the second or second to last page are "not connected", add `null` instead of the page nmber
       // null will be replaced with '...' in the template
       if (
@@ -77,9 +83,8 @@ export class PaginationComponent {
 
       this.pages.push(i);
     }
-
     // add last page
-    this.pages.push(this.numberOfPages);
+    // this.pages.push(this.numberOfPages);
   }
 
   onPageChange(): void {

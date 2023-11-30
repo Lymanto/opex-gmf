@@ -30,10 +30,12 @@ export class NewRequestService {
     requestNumber?: string,
     status?: string,
     type?: string,
-    dinas?: string
+    dinas?: string,
+    entryDateFrom?: string,
+    entryDateTo?: string
   ): Observable<HttpResult<any[]>> {
     return this.httpClient.get<HttpResult<any[]>>(
-      `${environment.baseUrlOpex}/dashboard/all?page=${page}&perPage=${perPage}&orderBy=desc${years}${requestNumber}${status}${type}${dinas}`
+      `${environment.baseUrlOpex}/dashboard/all?page=${page}&perPage=${perPage}&orderBy=desc${years}${requestNumber}${status}${type}${dinas}${entryDateFrom}${entryDateTo}`
     );
   }
   getPercentage(): Observable<HttpResult<any[]>> {
@@ -43,7 +45,7 @@ export class NewRequestService {
   }
   postCreateRequestRealization(data: FormData) {
     return this.httpClient.post<FormData>(
-      `${environment.baseUrlOpex}/realization/save`,
+      `${environment.baseUrlOpex}/realization/status/OPEN`,
       data
     );
   }

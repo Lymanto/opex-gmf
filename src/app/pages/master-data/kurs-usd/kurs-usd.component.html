@@ -49,50 +49,28 @@
         <div class="text-p-md tracking-[0.5px] text-neutral-60">
           Row per page
         </div>
-        <div class="text-p-md tracking-[0.5px] text-neutral-100">10</div>
+        <div class="text-p-md tracking-[0.5px] text-neutral-100">
+          {{ meta.totalItemsPerPage }}
+        </div>
       </div>
       <div class="justify-end items-center mt-2">
         <div class="flex gap-1">
           <div class="text-p-md tracking-[0.5px] text-neutral-60">Page</div>
+
           <div
             class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
           >
-            1
+            {{ meta.currentPage }}
           </div>
-          <div class="text-p-md tracking-[0.5px] text-neutral-60">of 200</div>
-          <div
-            class="text-p-md tracking-[0.5px] border-solid border-2 bg-neutral-20 border-neutral-40 text-neutral-60 text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
-          >
-            <img
-              src="assets/images/icons/ic-arrow-left-not-active.svg"
-              alt=""
-            />
+          <div class="text-p-md tracking-[0.5px] text-neutral-60">
+            of {{ meta.lastpage }}
           </div>
-          <div
-            class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-hover bg-primary-hover text-white text-center rounded w-[22px] h-[22px] flex justify-center items-center"
-          >
-            1
-          </div>
-          <div
-            class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
-          >
-            2
-          </div>
-          <div
-            class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
-          >
-            3
-          </div>
-          <div
-            class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
-          >
-            ...
-          </div>
-          <div
-            class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
-          >
-            <img src="assets/images/icons/ic-arrow-right.svg" alt="" />
-          </div>
+          <app-pagination
+            [numberOfItems]="meta.totalItems"
+            [itemsPerPage]="meta.totalItemsPerPage"
+            [currentPage]="meta.currentPage"
+            (pageChange)="onPageChange($event)"
+          />
         </div>
       </div>
     </div>

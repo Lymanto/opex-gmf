@@ -18,8 +18,10 @@
     type="date"
     placeholder="{{ placeholder }}"
     [disabled]="isDisabled"
+    [value]="value"
     [readonly]="isReadOnly"
     [(ngModel)]="date"
+    (change)="onChange($event)"
     (blur)="touched($event)"
   />
 

@@ -13,7 +13,17 @@ export class DashboardComponent implements OnInit {
   isFilterActive: boolean = true;
   data!: any[];
   dataPercentage!: any[];
-  meta!: any;
+  meta: {
+    lastpage: number;
+    totalItemsPerPage: number;
+    totalItems: number;
+    currentPage: number;
+  } = {
+    lastpage: 0,
+    totalItemsPerPage: 0,
+    totalItems: 0,
+    currentPage: 0,
+  };
   show: boolean = false;
   activeId: string = 'not-active';
   page: number = 1;
@@ -23,6 +33,8 @@ export class DashboardComponent implements OnInit {
   status: string = '';
   type: string = '';
   dinas: string = '';
+  entryDateFrom: string = '';
+  entryDateTo: string = '';
   statusType: string[] = ['OPEN', 'PROGRESS', 'CLOSED', 'REVISE', 'REJECT'];
 
   public needApproval: string = '100';
@@ -137,32 +149,47 @@ export class DashboardComponent implements OnInit {
     this.status = '';
     this.type = '';
     this.dinas = '';
+    this.page = 1;
     this.getDataTable();
   }
   onChangeYears(val: any) {
     this.years = val.id;
+    this.page = 1;
     this.getDataTable();
   }
   onChangeType(val: any) {
     this.type = val.id;
+    this.page = 1;
     this.getDataTable();
   }
   onChangeDinas(val: any) {
     this.dinas = val.id;
+    this.page = 1;
     this.getDataTable();
   }
   onChangeStatus(val: any) {
     this.status = val.id;
+    this.page = 1;
     this.getDataTable();
   }
   onChangeRequestNumber(val: string) {
+    this.page = 1;
     this.requestNumber = val;
     this.getDataTable();
   }
   onPageChange(page: number) {
     this.page = page;
     // this.createArray(this.meta.last_page, this.page, 3);
-    console.log('page ', this.page);
+    this.getDataTable();
+  }
+  onChangeEntryDateFrom(val: string): void {
+    this.entryDateFrom = val;
+    this.page = 1;
+    this.getDataTable();
+  }
+  onChangeEntryDateTo(val: string): void {
+    this.entryDateTo = val;
+    this.page = 1;
     this.getDataTable();
   }
   formatDate(val: Date): string {
@@ -180,7 +207,6 @@ export class DashboardComponent implements OnInit {
         tap((result: any) => {
           if (result && result.data) {
             this.dataPercentage = result.data;
-            console.log(this.dataPercentage);
           }
         }),
         takeUntil(this._onDestroy$)
@@ -199,7 +225,9 @@ export class DashboardComponent implements OnInit {
         }`,
         `${this.status != '' ? '&status=' + this.status : ''}`,
         `${this.type != '' ? '&type=' + this.type : ''}`,
-        `${this.dinas != '' ? '&dinas=' + this.dinas : ''}`
+        `${this.dinas != '' ? '&dinas=' + this.dinas : ''}`,
+        `${this.entryDateFrom != '' ? '&entryDate=' + this.entryDateFrom : ''}`,
+        `${this.entryDateTo != '' ? '&entryDateTo=' + this.entryDateTo : ''}`
       )
       .pipe(
         catchError((err) => {
@@ -213,8 +241,6 @@ export class DashboardComponent implements OnInit {
             const meta = result.meta;
             this.meta = meta;
             this.data = allData;
-            console.log(this.meta);
-            console.log(this.data);
           }
         }),
         takeUntil(this._onDestroy$)

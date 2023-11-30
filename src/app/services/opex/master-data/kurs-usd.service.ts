@@ -20,8 +20,13 @@ export class KursUsdService {
     return this.httpClient.put<kursType>(`${this.url}/${kurs.idKurs}`, kurs);
   }
 
-  getAllKurs(): Observable<HttpResult<kursType[]>> {
-    return this.httpClient.get<HttpResult<kursType[]>>(`${this.url}/all`);
+  getAllKurs(
+    page: number,
+    perPage: number
+  ): Observable<HttpResult<kursType[]>> {
+    return this.httpClient.get<HttpResult<kursType[]>>(
+      `${this.url}?page=${page}&perPage=${perPage}&orderBy=desc`
+    );
   }
   getLastKurs(): Observable<HttpResult<kursType>> {
     const year: number = new Date().getFullYear();

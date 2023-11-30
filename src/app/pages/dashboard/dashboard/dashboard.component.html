@@ -56,6 +56,8 @@
               <app-input-date
                 id="entryDateFrom"
                 placeholder="Select One.."
+                [value]="entryDateFrom"
+                (currentValue)="onChangeEntryDateFrom($event)"
                 label="Entry Date (From)"
               ></app-input-date>
             </div>
@@ -65,6 +67,8 @@
                 id="entryDateTo"
                 placeholder="Select One.."
                 label="Entry Date (To)"
+                [value]="entryDateTo"
+                (currentValue)="onChangeEntryDateTo($event)"
               ></app-input-date>
               <app-select-box
                 id="typeSubmission"
@@ -201,7 +205,7 @@
           Row per page
         </div>
         <div class="text-p-md tracking-[0.5px] text-neutral-100">
-          {{ meta?.totalItemsPerPage }}
+          {{ meta.totalItemsPerPage }}
         </div>
       </div>
       <div class="justify-end items-center mt-2">
@@ -211,15 +215,15 @@
           <div
             class="text-p-md tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center rounded-lg w-[22px] h-[22px] flex justify-center items-center"
           >
-            {{ meta?.currentPage }}
+            {{ meta.currentPage }}
           </div>
           <div class="text-p-md tracking-[0.5px] text-neutral-60">
-            of {{ meta?.lastpage }}
+            of {{ meta.lastpage }}
           </div>
           <app-pagination
-            [numberOfItems]="meta?.totalItems"
-            [itemsPerPage]="meta?.totalItemsPerPage"
-            [currentPage]="meta?.currentPage"
+            [numberOfItems]="meta.totalItems"
+            [itemsPerPage]="meta.totalItemsPerPage"
+            [currentPage]="meta.currentPage"
             (pageChange)="onPageChange($event)"
           />
         </div>
