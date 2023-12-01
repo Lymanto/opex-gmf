@@ -16,6 +16,8 @@ export const tabledata = [
 })
 export class ViewBudgetTableComponent {
   isDisplayRkap: boolean = true;
+  isDisplayRemaining: boolean = true;
+  isDisplayActual: boolean = true;
   tabledata = tabledata;
   @Input() body!: tableBodyRkapType[];
 

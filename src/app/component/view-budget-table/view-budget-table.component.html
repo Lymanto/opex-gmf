@@ -20,8 +20,9 @@
       </app-button>
     </div>
   </div>
+
   <ng-container *ngIf="!isDisplayRkap">
-    <div class="flex justify-between">
+    <div class="flex">
       <div>
         <table class="w-full">
           <tr
@@ -119,4 +120,48 @@
       </div>
     </div>
   </ng-container>
+  <div
+    class="border border-primary-border bg-neutral-10 rounded-3xl p-4 w-full mt-4"
+  >
+    <div class="flex justify-between items-center">
+      <div class="flex flex-col justify-start items-start">
+        <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">Description</p>
+        <p class="text-p-lg font-semibold text-neutral-100">
+          Actual Realization
+        </p>
+      </div>
+      <app-button
+        [icon]="
+          isDisplayActual
+            ? 'assets/images/icons/ic-arrow-down.svg'
+            : 'assets/images/icons/ic-arrow-up-active.svg'
+        "
+        [type]="isDisplayActual ? 'primary-not-active' : 'primary'"
+        (click)="isDisplayActual = !isDisplayActual"
+      >
+        >
+      </app-button>
+    </div>
+  </div>
+  <div
+    class="border border-primary-border bg-neutral-10 rounded-3xl p-4 w-full mt-4"
+  >
+    <div class="flex justify-between items-center">
+      <div class="flex flex-col justify-start items-start">
+        <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">Description</p>
+        <p class="text-p-lg font-semibold text-neutral-100">Remaining Budget</p>
+      </div>
+      <app-button
+        [icon]="
+          isDisplayRemaining
+            ? 'assets/images/icons/ic-arrow-down.svg'
+            : 'assets/images/icons/ic-arrow-up-active.svg'
+        "
+        [type]="isDisplayRemaining ? 'primary-not-active' : 'primary'"
+        (click)="isDisplayRemaining = !isDisplayRemaining"
+      >
+        >
+      </app-button>
+    </div>
+  </div>
 </div>

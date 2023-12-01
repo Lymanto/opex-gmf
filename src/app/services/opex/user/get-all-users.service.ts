@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { KeycloakService } from 'keycloak-angular';
+import { Observable, lastValueFrom } from 'rxjs';
 import { LocalServiceConst } from 'src/app/constanta/local-service-constanta';
 import {
   HttpResultSoeAllUser,
@@ -15,7 +16,10 @@ import { environment } from 'src/environments/environment';
 export class GetAllUsersService {
   private url = `${environment.baseUrlSoe}/v2/employee`;
   localStorageService: any;
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private readonly keycloakService: KeycloakService
+  ) {}
   getAllUsers(): Observable<HttpResultSoeAllUser<any[]>> {
     return this.httpClient.get<HttpResultSoeAllUser<any[]>>(
       `${this.url}?page=1&perPage=99999&orderColumn=personalName&orderBy=asc`,
@@ -62,5 +66,21 @@ export class GetAllUsersService {
         },
       }
     );
+  }
+
+  async getUserInfo(personalNumber?: string): Promise<UserDataDTO> {
+    if (!personalNumber) personalNumber = this.keycloakService.getUsername();
+
+    const request = this.httpClient.get(
+      environment.baseUrlSoe + '/v2/employee/' + personalNumber
+    );
+
+    const response = (await lastValueFrom(
+      request
+    )) as HttpResultSoeSpesificUser<UserDataDTO>;
+
+    const results = response['body'] as UserDataDTO;
+
+    return results;
   }
 }

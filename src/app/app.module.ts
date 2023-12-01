@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -52,6 +52,7 @@ import { TrackingApprovalComponent as TrackingApprovalReallocationComponent } fr
 import { PaginationComponent } from './component/pagination/pagination.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { environment } from 'src/environments/environment';
+import { HttpSoeApiHeader } from 'src/providers/http-soe-api-header';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -124,6 +125,11 @@ function initializeKeycloak(keycloak: KeycloakService) {
       useFactory: initializeKeycloak,
       multi: true,
       deps: [KeycloakService],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpSoeApiHeader,
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],
