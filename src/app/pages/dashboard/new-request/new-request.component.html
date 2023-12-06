@@ -80,7 +80,7 @@
           placeholder="Fill this.."
           label="Name of Request"
           [isReadOnly]="true"
-          [value]="specificUser?.personalName"
+          [value]="userInfo.personalName"
         ></app-input-text>
         <app-input-text
           type="normal"
@@ -88,7 +88,7 @@
           placeholder="Fill this.."
           label="ID Number"
           [isReadOnly]="true"
-          [value]="specificUser?.personalNumber"
+          [value]="userInfo.personalNumber"
         ></app-input-text>
 
         <app-select-box

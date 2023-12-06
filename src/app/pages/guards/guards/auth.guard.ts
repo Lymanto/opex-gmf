@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
-import { Observable, lastValueFrom } from 'rxjs';
+import { Observable, lastValueFrom, tap } from 'rxjs';
 import { LocalServiceConst } from 'src/app/constanta/local-service-constanta';
 import { UserDataDTO } from 'src/app/dto/user-data-dto';
 import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.service';
@@ -56,7 +56,6 @@ export class AuthGuard extends KeycloakAuthGuard implements CanActivateChild {
       const result = await this.userSoeService.getDetailUsers(
         userProfile.username as string
       );
-
       console.log('userProfile', userProfile);
       this.userInfo = (await lastValueFrom(result)).body;
 
@@ -72,8 +71,17 @@ export class AuthGuard extends KeycloakAuthGuard implements CanActivateChild {
       const result = await this.userSoeService.getDetailUsers(
         userProfile.username as string
       );
+      console.log(result);
 
       // console.log('userProfile', userProfile)
+      result
+        .pipe(
+          tap((v) => {
+            console.log('keluar');
+            console.log(v);
+          })
+        )
+        .subscribe();
       this.userInfo = (await lastValueFrom(result)).body;
 
       // this.localStorageService.saveData(LocalServiceConst.KEYCLOACK_INFO, JSON.stringify(userProfile));
@@ -118,12 +126,12 @@ export class AuthGuard extends KeycloakAuthGuard implements CanActivateChild {
       //   VP_ICT: 16,
       // };
       const keycloackRole = this.keycloak.getUserRoles();
-      // console.log('role', this.role)
+      // console.log(this.keycloak.getUserRoles());
       const activeRole = [
         'user',
         'sm_user',
         'vp_user',
-        'manager_pmo',
+        'manager_user',
         'pmo',
         'sm_pmo',
         'manager_sme_sda',
@@ -148,15 +156,91 @@ export class AuthGuard extends KeycloakAuthGuard implements CanActivateChild {
         !keycloackRole?.includes('sm_user')
       ) {
         this.role.push('SM_USER');
-        // console.log('push list sm', this.role)
+        // console.log('push list sm', this.role);
       } else if (
         this.userInfo?.personalTitle?.includes('VP ') &&
         !keycloackRole?.includes('sm_user')
       ) {
         this.role.push('VP_USER');
-        // console.log('push list vp', this.role)
+        console.log('push list vp', this.role);
+      } else if (
+        this.userInfo?.personalTitle?.includes('MANAGER ') &&
+        !keycloackRole?.includes('manager_user')
+      ) {
+        this.role.push('MANAGER_USER');
+      } else if (
+        this.userInfo?.personalUnit?.includes('TA') &&
+        this.userInfo?.personalJob?.includes('VICE PRESIDENT')
+      ) {
+        this.role.push('VP TA');
+      } else if (
+        this.userInfo.personalUnit.includes('TAB') &&
+        this.userInfo?.personalJob.includes('SENIOR MANAGER')
+      ) {
+        this.role.push('SM TAB');
+      } else if (
+        this.userInfo.personalUnit.includes('TAB') &&
+        this.userInfo?.personalJob.includes('PROFESSIONAL')
+      ) {
+        this.role.push('TAB');
+      } else if (
+        this.userInfo.personalUnit.includes('TAM') &&
+        this.userInfo?.personalJob.includes('PROFESSIONAL')
+      ) {
+        this.role.push('TAM');
+      } else if (
+        this.userInfo.personalUnit.includes('TAM') &&
+        this.userInfo?.personalJob.includes('SENIOR MANAGER')
+      ) {
+        this.role.push('SM TAM');
+      } else if (
+        this.userInfo.personalUnit.includes('TAM') &&
+        this.userInfo?.personalJob.includes('VICE PRESIDENT')
+      ) {
+        this.role.push('VP TAM');
+      } else if (
+        this.userInfo.personalUnit.includes('TAP') &&
+        this.userInfo?.personalJob.includes('PROFESSIONAL')
+      ) {
+        this.role.push('TAP');
+      } else if (
+        this.userInfo.personalUnit.includes('TAP') &&
+        this.userInfo?.personalJob.includes('SENIOR MANAGER')
+      ) {
+        this.role.push('SM TAP');
+      } else if (
+        this.userInfo.personalUnit.includes('TAP') &&
+        this.userInfo?.personalJob.includes('VICE PRESIDENT')
+      ) {
+        this.role.push('VP TAP');
+      } else if (
+        this.userInfo.personalUnit.includes('TX') &&
+        this.userInfo?.personalJob.includes('VICE PRESIDENT')
+      ) {
+        this.role.push('VP TX');
+      } else if (
+        this.userInfo.personalUnit.includes('TX') &&
+        this.userInfo?.personalJob.includes('SENIOR MANAGER')
+      ) {
+        this.role.push('SM TX');
+      } else if (
+        this.userInfo.personalUnit.includes('TXC-3') &&
+        this.userInfo?.personalJob.includes('PROFESSIONAL')
+      ) {
+        this.role.push('TXC-3');
+      } else if (
+        this.userInfo.personalUnit.includes('DF') &&
+        this.userInfo?.personalJob.includes('DIRECTOR')
+      ) {
+        this.role.push('DF');
+      } else if (
+        this.userInfo.personalUnit.includes('DT') &&
+        this.userInfo?.personalJob.includes('DIRECTOR')
+      ) {
+        this.role.push('DT');
       } else {
-        if (!keycloackRole.includes('user')) {
+        !keycloackRole.includes('user');
+        {
           this.role.push('USER');
           // console.log('push list user', this.role)
         }

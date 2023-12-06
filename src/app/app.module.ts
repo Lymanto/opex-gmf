@@ -53,6 +53,7 @@ import { PaginationComponent } from './component/pagination/pagination.component
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { environment } from 'src/environments/environment';
 import { HttpSoeApiHeader } from 'src/providers/http-soe-api-header';
+import { CommonModule } from '@angular/common';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -144,6 +145,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     CKEditorModule,
     FormsModule,
     KeycloakAngularModule,
+    CommonModule,
   ],
 })
 export class AppModule {}

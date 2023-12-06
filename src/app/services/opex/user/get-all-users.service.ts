@@ -61,9 +61,6 @@ export class GetAllUsersService {
         headers: {
           'x-api-key': environment.apiKey,
         },
-        params: {
-          superior: true,
-        },
       }
     );
   }

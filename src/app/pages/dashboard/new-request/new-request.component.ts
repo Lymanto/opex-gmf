@@ -18,6 +18,9 @@ import { NewRequestService } from 'src/app/services/opex/dashboard/new-request.s
 import { DocumentCategoryService } from 'src/app/services/opex/document-category/document-category.service';
 import { KursUsdService } from 'src/app/services/opex/master-data/kurs-usd.service';
 import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.service';
+import { LocalStorageService } from 'src/app/services/opex/local-storage/local-storage.service';
+import { LocalServiceConst } from 'src/app/constanta/local-service-constanta';
+import { UserDataDTO } from 'src/app/dto/user-data-dto';
 
 @Component({
   selector: 'app-new-request',
@@ -27,6 +30,7 @@ import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.ser
 export class NewRequestComponent implements OnInit {
   userData: selectType[] = [];
   requestBody: newRequestUploadType[] = [];
+  userInfo: UserDataDTO = <UserDataDTO>{};
   files: File[] = [];
   docCategories: string[] = [];
   docNames: string[] = [];
@@ -69,18 +73,19 @@ export class NewRequestComponent implements OnInit {
     private fb: FormBuilder,
     private newRequest: NewRequestService,
     private kurs: KursUsdService,
-    private docCategory: DocumentCategoryService
+    private docCategory: DocumentCategoryService,
+    private readonly localStorageService: LocalStorageService
   ) {}
   private readonly _onDestroy$: Subject<void> = new Subject<void>();
   ngOnInit() {
     this.users.getAllUsers().subscribe((response: any) => {
       this.refactorUser(response.body?.data);
     });
-    this.getSpecificUser(582127);
+    // this.getSpecificUser(582127);
     this.getCurrentKurs();
     this.fetchGlAccount();
     this.fetchDocumentCategory();
-
+    this.getUserInfo();
     this.itemsForm = this.fb.group({
       items: new FormArray([this.createItem]),
     });
@@ -93,25 +98,46 @@ export class NewRequestComponent implements OnInit {
     this.personalUnit = dinas.slice(0, 3);
     this.getCostCenter(this.personalUnit);
   }
-  getSpecificUser(id: number): void {
-    this.users
-      .getSpecificUsers(id)
-      .pipe(
-        catchError((err) => {
-          console.error('Error occurred:', err);
-          return EMPTY;
-        }),
-        tap((result: any) => {
-          if (result) {
-            // Ensure result.data is a single array of glAccountType objects
-            this.specificUser = result.body;
-            this.generateDinas(this.specificUser?.personalUnit);
-          }
-        }),
-        takeUntil(this._onDestroy$)
-      )
-      .subscribe();
+  // getSpecificUser(id: number): void {
+  //   this.users
+  //     .getSpecificUsers(id)
+  //     .pipe(
+  //       catchError((err) => {
+  //         console.error('Error occurred:', err);
+  //         return EMPTY;
+  //       }),
+  //       tap((result: any) => {
+  //         if (result) {
+  //           // Ensure result.data is a single array of glAccountType objects
+  //           this.specificUser = result.body;
+  //           this.generateDinas(this.specificUser?.personalUnit);
+  //         }
+  //       }),
+  //       takeUntil(this._onDestroy$)
+  //     )
+  //     .subscribe();
+  // }
+  async getUserInfo(): Promise<void> {
+    if (!this.users.getPersonalInformationFromCache()) {
+      try {
+        let _data = await this.users.getUserInfo();
+        this.userInfo = _data;
+      } catch {
+        Swal.fire({
+          title: 'Alert!',
+          html: 'failed to get user info',
+          // icon: 'success',
+          confirmButtonColor: '#1F569D',
+        });
+      }
+    } else {
+      let _userInfo: any = {
+        ...this.localStorageService.getData(LocalServiceConst.USER_INFO),
+      };
+      this.userInfo = JSON.parse(_userInfo?._result);
+    }
   }
+
   getCostCenter(bidang: string): void {
     this.costCenter
       .getCostCenterByBidang(bidang)
@@ -307,9 +333,9 @@ export class NewRequestComponent implements OnInit {
     this.createRequest.type = this.idTypeSubmission;
     this.createRequest.responsibleNopeg = this
       .idResponsibleNumber as unknown as number;
-    this.createRequest.personalNumber = this.specificUser?.personalNumber;
+    this.createRequest.personalNumber = this.userInfo.personalNumber;
     this.createRequest.costCenterId = 1;
-    this.createRequest.createdBy = this.specificUser?.personalNumber;
+    this.createRequest.createdBy = this.userInfo.personalNumber;
     this.createRequest.realizationItems = this.refactorItemsData(
       this.itemsForm.value.items
     );
@@ -399,8 +425,7 @@ export class NewRequestComponent implements OnInit {
         }),
         tap((result) => {
           if (result && result.data) {
-            // Ensure result.data is a single array of glAccountType objects
-            const allData = result.data.flatMap((item) => item); // Convert array of arrays to a single array
+            const allData = result.data.flatMap((item) => item);
             this.refactorSelectDocumentCategoryData(allData);
           }
         }),

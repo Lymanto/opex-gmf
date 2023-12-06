@@ -7,6 +7,6 @@ export interface UserDataDTO {
   personalBirthPlace: string;
   personalBirthDate: Date;
   personalGrade: string;
-  personalJobDesc: string;
+  personalJob: string;
   personalEmail: string;
 }

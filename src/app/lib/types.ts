@@ -109,7 +109,7 @@ export interface kursType {
 export interface CreateRequestRealizationType {
   type: string;
   responsibleNopeg: number;
-  personalNumber: number;
+  personalNumber: string;
   costCenterId: number;
   createdBy: string;
   titleRequest: string;
