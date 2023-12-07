@@ -152,23 +152,6 @@ export class AuthGuard extends KeycloakAuthGuard implements CanActivateChild {
 
       // injecting user, sm_user and vp_user keycloackRole by userinfo
       if (
-        this.userInfo?.personalTitle?.includes('SM ') &&
-        !keycloackRole?.includes('sm_user')
-      ) {
-        this.role.push('SM_USER');
-        // console.log('push list sm', this.role);
-      } else if (
-        this.userInfo?.personalTitle?.includes('VP ') &&
-        !keycloackRole?.includes('sm_user')
-      ) {
-        this.role.push('VP_USER');
-        console.log('push list vp', this.role);
-      } else if (
-        this.userInfo?.personalTitle?.includes('MANAGER ') &&
-        !keycloackRole?.includes('manager_user')
-      ) {
-        this.role.push('MANAGER_USER');
-      } else if (
         this.userInfo?.personalUnit?.includes('TA') &&
         this.userInfo?.personalJob?.includes('VICE PRESIDENT')
       ) {
@@ -238,6 +221,24 @@ export class AuthGuard extends KeycloakAuthGuard implements CanActivateChild {
         this.userInfo?.personalJob.includes('DIRECTOR')
       ) {
         this.role.push('DT');
+      }
+      if (
+        this.userInfo?.personalTitle?.includes('SM ') &&
+        !keycloackRole?.includes('sm_user')
+      ) {
+        this.role.push('SM_USER');
+        // console.log('push list sm', this.role);
+      } else if (
+        this.userInfo?.personalTitle?.includes('VP ') &&
+        !keycloackRole?.includes('vp_user')
+      ) {
+        this.role.push('VP_USER');
+        console.log('push list vp', this.role);
+      } else if (
+        this.userInfo?.personalTitle?.includes('MANAGER ') &&
+        !keycloackRole?.includes('manager_user')
+      ) {
+        this.role.push('MANAGER_USER');
       } else {
         !keycloackRole.includes('user');
         {
