@@ -90,6 +90,23 @@ export interface glAccountType {
   updatedBy: string | null;
 }
 
+export interface mGlAccountType {
+  idGlAccount: number;
+  glAccount: string;
+  groupGL: string;
+  groupDetail: string;
+}
+export interface mCostCenterType {
+  idCostCenter: number;
+  costCenter: string;
+  bidang: string;
+  dinas: string;
+}
+export interface availableType {
+  available: number;
+  mGlAccount: mGlAccountType;
+  mCostCenter: mCostCenterType;
+}
 export interface selectType {
   id: string | number;
   value: string;
@@ -153,4 +170,10 @@ export interface CostCenterType {
   createdBy: string;
   updatedAt: Date;
   updatedBy: string | null;
+}
+
+export interface UploadRKAP {
+  years: string;
+  file: File;
+  createdBy: string;
 }

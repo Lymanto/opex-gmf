@@ -19,9 +19,12 @@ export class NewRequestService {
   constructor(private httpClient: HttpClient) {}
 
   getAllGroup(): Observable<HttpResult<glAccountType[]>> {
-    return this.httpClient.get<HttpResult<glAccountType[]>>(this.url, {
-      headers: this.headers,
-    });
+    return this.httpClient.get<HttpResult<glAccountType[]>>(
+      `${this.url}/all/group`,
+      {
+        headers: this.headers,
+      }
+    );
   }
   getAllRealization(
     page: number = 1,
@@ -47,6 +50,22 @@ export class NewRequestService {
     return this.httpClient.post<FormData>(
       `${environment.baseUrlOpex}/realization/status/OPEN`,
       data
+    );
+  }
+  getAllGroupGL(groupGl: string): Observable<HttpResult<glAccountType[]>> {
+    return this.httpClient.get<HttpResult<glAccountType[]>>(
+      `${this.url}/all/group/${groupGl}`,
+      {
+        headers: this.headers,
+      }
+    );
+  }
+  getAvailable(
+    idGlAccount: number,
+    idCostCenter: number | null | undefined
+  ): Observable<HttpResult<any[]>> {
+    return this.httpClient.get<HttpResult<any[]>>(
+      `${environment.baseUrlOpex}/realization/${idGlAccount}/${idCostCenter}/calculate-total`
     );
   }
 }
