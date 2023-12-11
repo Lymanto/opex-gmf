@@ -1,6 +1,5 @@
 const RoleEmpty = {
   USER: {},
-  MANAGER_USER: {},
   SM_USER: {},
   VP_USER: {},
   TAB: {},
@@ -84,12 +83,45 @@ export const DataByRole = {
               submit: true,
               edit: true,
               editRealokasi: true,
+              preview: true,
             },
           },
           statusId: '1',
           statusToId: '2',
           status: 'OPEN',
         },
+      },
+      editRealokasi: {
+        USER: {
+          config: {
+            button: {
+              save: true,
+              submit: true,
+              edit: true,
+              editRealokasi: true,
+              preview: true,
+            },
+          },
+        },
+        statusId: '1',
+        statusToId: '2',
+        status: 'OPEN',
+      },
+      edit: {
+        USER: {
+          config: {
+            button: {
+              save: true,
+              submit: true,
+              edit: true,
+              editRealokasi: true,
+              preview: true,
+            },
+          },
+        },
+        statusId: '1',
+        statusToId: '2',
+        status: 'OPEN',
       },
     },
     2: {
@@ -119,7 +151,7 @@ export const DataByRole = {
       reject: {
         // OK
         USER: {},
-        MANAGER_USER: { status: 'Reject', statusId: '3' },
+        SM_USER: { status: 'Reject', statusId: '3' },
       },
       revise: {
         USER: {
@@ -161,10 +193,9 @@ export const DataByRole = {
     },
     4: {
       reject: {
-        // OK
         USER: {},
-        MANAGER_USER: {},
-        SM_USER: { status: 'Reject', statusId: '4' },
+        SM_USER: {},
+        VP_USER: { status: 'Reject', statusId: '4' },
       },
       revise: {
         USER: {
@@ -182,7 +213,7 @@ export const DataByRole = {
           statusToId: '1',
         },
       },
-      confirmTAB: {
+      confirm: {
         VP_USER: {
           config: {
             button: {},
@@ -205,12 +236,28 @@ export const DataByRole = {
       },
     },
     5: {
-      reject: {
+      rejectTAB: {
         // OK
         USER: {},
-        MANAGER_USER: {},
         SM_USER: {},
-        VP_USER: { status: 'Reject', statusId: '5' },
+        VP_USER: {},
+        TAB: { status: 'Reject', statusId: '5' },
+      },
+      rejectTAM: {
+        // OK
+        USER: {},
+
+        SM_USER: {},
+        VP_USER: {},
+        TAM: { status: 'Reject', statusId: '5' },
+      },
+      rejectTAP: {
+        // OK
+        USER: {},
+
+        SM_USER: {},
+        VP_USER: {},
+        TAP: { status: 'Reject', statusId: '5' },
       },
       revise: {
         USER: {
@@ -228,8 +275,8 @@ export const DataByRole = {
           statusToId: '1',
         },
       },
-      confirm: {
-        VP_USER: {
+      confirmSMTAB: {
+        SM_TAB: {
           config: {
             button: {},
           },
@@ -244,72 +291,6 @@ export const DataByRole = {
               reject: true,
               revise: true,
               approve: true,
-              takeProject: true,
-              untakeProject: true,
-              needHPS: true,
-              preview: true,
-            },
-          },
-        },
-      },
-    },
-    6: {
-      rejectTAB: {
-        // OK
-        USER: {},
-        MANAGER_USER: {},
-        SM_USER: {},
-        VP_USER: {},
-        TAB: { status: 'Reject', statusId: '6' },
-      },
-      rejectTAM: {
-        // OK
-        USER: {},
-        MANAGER_USER: {},
-        SM_USER: {},
-        VP_USER: {},
-        TAM: { status: 'Reject', statusId: '6' },
-      },
-      rejectTAP: {
-        // OK
-        USER: {},
-        MANAGER_USER: {},
-        SM_USER: {},
-        VP_USER: {},
-        TAP: { status: 'Reject', statusId: '6' },
-      },
-      revise: {
-        USER: {
-          config: {
-            button: {
-              edit: true,
-              editRealokasi: true,
-              save: true,
-              submit: true,
-              preview: true,
-            },
-          },
-          status: 'Revise',
-          statusId: '6',
-          statusToId: '1',
-        },
-      },
-      confirmSMTAB: {
-        SM_TAB: {
-          config: {
-            button: {},
-          },
-          status: 'PROGRESS',
-          statusId: '6',
-          statusToId: '7',
-        },
-        7: {
-          as: 'REQUESTER',
-          config: {
-            button: {
-              reject: true,
-              revise: true,
-              approve: true,
               preview: true,
             },
           },
@@ -321,10 +302,10 @@ export const DataByRole = {
             button: {},
           },
           status: 'PROGRESS',
-          statusId: '6',
-          statusToId: '7',
+          statusId: '5',
+          statusToId: '6',
         },
-        7: {
+        6: {
           as: 'REQUESTER',
           config: {
             button: {
@@ -341,10 +322,10 @@ export const DataByRole = {
             button: {},
           },
           status: 'PROGRESS',
-          statusId: '6',
-          statusToId: '7',
+          statusId: '5',
+          statusToId: '6',
         },
-        7: {
+        6: {
           as: 'REQUESTER',
           config: {
             button: {
@@ -354,33 +335,30 @@ export const DataByRole = {
         },
       },
     },
-    7: {
+    6: {
       rejectSMTAB: {
         // OK
         USER: {},
-        MANAGER_USER: {},
         SM_USER: {},
         VP_USER: {},
         TAB: {},
-        SM_TAB: { status: 'Reject', statusId: '7' },
+        SM_TAB: { status: 'Reject', statusId: '6' },
       },
       rejectSMTAM: {
         // OK
         USER: {},
-        MANAGER_USER: {},
         SM_USER: {},
         VP_USER: {},
         TAM: {},
-        SM_TAM: { status: 'Reject', statusId: '7' },
+        SM_TAM: { status: 'Reject', statusId: '6' },
       },
       rejectSMTAP: {
         // OK
         USER: {},
-        MANAGER_USER: {},
         SM_USER: {},
         VP_USER: {},
         TAP: {},
-        SM_TAP: { status: 'Reject', statusId: '7' },
+        SM_TAP: { status: 'Reject', statusId: '6' },
       },
       revise: {
         USER: {
@@ -394,7 +372,7 @@ export const DataByRole = {
             },
           },
           status: 'Revise',
-          statusId: '7',
+          statusId: '6',
           statusToId: '1',
         },
       },
@@ -404,10 +382,10 @@ export const DataByRole = {
             button: {},
           },
           status: 'PROGRESS',
-          statusId: '7',
-          statusToId: '8',
+          statusId: '6',
+          statusToId: '7',
         },
-        8: {
+        7: {
           as: 'REQUESTER',
           config: {
             button: {
@@ -425,10 +403,10 @@ export const DataByRole = {
             button: {},
           },
           status: 'PROGRESS',
-          statusId: '7',
-          statusToId: '8',
+          statusId: '6',
+          statusToId: '7',
         },
-        8: {
+        7: {
           as: 'REQUESTER',
           config: {
             button: {
@@ -446,10 +424,10 @@ export const DataByRole = {
             button: {},
           },
           status: 'PROGRESS',
-          statusId: '7',
-          statusToId: '8',
+          statusId: '6',
+          statusToId: '7',
         },
-        8: {
+        7: {
           as: 'REQUESTER',
           config: {
             button: {
@@ -462,33 +440,121 @@ export const DataByRole = {
         },
       },
     },
-    8: {
+    7: {
       rejectVPTA_TAB: {
         USER: {},
-        MANAGER_USER: {},
+
         SM_USER: {},
         VP_USER: {},
         TAB: {},
         SM_TAB: {},
-        VP_TA: { status: 'Reject', statusId: '8' },
+        VP_TA: { status: 'Reject', statusId: '7' },
       },
       rejectVPTA_TAM: {
         USER: {},
-        MANAGER_USER: {},
+
         SM_USER: {},
         VP_USER: {},
         TAM: {},
         SM_TAM: {},
-        VP_TA: { status: 'Reject', statusId: '8' },
+        VP_TA: { status: 'Reject', statusId: '7' },
       },
       rejectVPTA_TAP: {
         USER: {},
-        MANAGER_USER: {},
+
         SM_USER: {},
         VP_USER: {},
         TAP: {},
         SM_TAP: {},
-        VP_TA: { status: 'Reject', statusId: '8' },
+        VP_TA: { status: 'Reject', statusId: '7' },
+      },
+      revise: {
+        USER: {
+          config: {
+            button: {
+              edit: true,
+              editRealokasi: true,
+              save: true,
+              submit: true,
+              preview: true,
+            },
+          },
+          status: 'Revise',
+          statusId: '7',
+          statusToId: '1',
+        },
+        TAB: {
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              approve: true,
+              takeProject: true,
+              untakeProject: true,
+              needHPS: true,
+              preview: true,
+            },
+          },
+          status: 'Revise',
+          statusId: '7',
+          statusToId: '5',
+        },
+      },
+      confirm: {
+        VP_TA: {
+          config: {
+            button: {},
+          },
+          status: 'PROGRESS',
+          statusId: '7',
+          statusToId: '8',
+        },
+        8: {
+          as: 'REQUESTER',
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              takeProject: true,
+              untakeProject: true,
+              needHPS: true,
+              preview: true,
+              confirm: true,
+            },
+          },
+        },
+      },
+    },
+    8: {
+      rejectTXC_TAB: {
+        USER: {},
+
+        SM_USER: {},
+        VP_USER: {},
+        TAB: {},
+        SM_TAB: {},
+        VP_TA: {},
+        TXC_3: { status: 'Reject', statusId: '8' },
+      },
+      rejectTXC_TAM: {
+        USER: {},
+
+        SM_USER: {},
+        VP_USER: {},
+        TAM: {},
+        SM_TAM: {},
+        VP_TA: {},
+        TXC_3: { status: 'Reject', statusId: '8' },
+      },
+      rejectTXC_TAP: {
+        USER: {},
+
+        SM_USER: {},
+        VP_USER: {},
+        TAP: {},
+        SM_TAP: {},
+        VP_TA: {},
+        TXC_3: { status: 'Reject', statusId: '8' },
       },
       revise: {
         USER: {
@@ -523,7 +589,7 @@ export const DataByRole = {
         },
       },
       confirm: {
-        VP_TA: {
+        TXC_3: {
           config: {
             button: {},
           },
@@ -537,46 +603,49 @@ export const DataByRole = {
             button: {
               reject: true,
               revise: true,
-              takeProject: true,
-              untakeProject: true,
-              needHPS: true,
               preview: true,
-              confirm: true,
+              approve: true,
             },
           },
         },
       },
     },
     9: {
-      rejectTXC_TAB: {
+      rejectSMTXC_TAB: {
         USER: {},
-        MANAGER_USER: {},
+
         SM_USER: {},
         VP_USER: {},
         TAB: {},
         SM_TAB: {},
         VP_TA: {},
-        TXC_3: { status: 'Reject', statusId: '9' },
+        TXC_3: {},
+        SM_TXC: { status: 'Reject', statusId: '9' },
       },
-      rejectTXC_TAM: {
+      rejectSMTXC_TAM: {
         USER: {},
-        MANAGER_USER: {},
+
         SM_USER: {},
         VP_USER: {},
         TAM: {},
         SM_TAM: {},
         VP_TA: {},
-        TXC_3: { status: 'Reject', statusId: '9' },
+        TXC_3: {},
+        SM_TXC: { status: 'Reject', statusId: '9' },
       },
-      rejectTXC_TAP: {
+      rejectSMTXC_TAP: {
         USER: {},
-        MANAGER_USER: {},
+
         SM_USER: {},
         VP_USER: {},
         TAP: {},
         SM_TAP: {},
         VP_TA: {},
-        TXC_3: { status: 'Reject', statusId: '9' },
+        TXC_3: {},
+        SM_TXC: {
+          status: 'Reject',
+          statusId: '9',
+        },
       },
       revise: {
         USER: {
@@ -609,9 +678,25 @@ export const DataByRole = {
           statusId: '9',
           statusToId: '6',
         },
+        TXC_3: {
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              confirm: true,
+              takeProject: true,
+              untakeProject: true,
+              needHPS: true,
+              preview: true,
+            },
+          },
+          status: 'Revise',
+          statusId: '9',
+          statusToId: '8',
+        },
       },
       confirm: {
-        TXC_3: {
+        SM_TXC: {
           config: {
             button: {},
           },
@@ -634,38 +719,47 @@ export const DataByRole = {
     },
 
     10: {
-      rejectSMTXC_TAB: {
+      rejectVPTX_TAB: {
         USER: {},
-        MANAGER_USER: {},
+
         SM_USER: {},
         VP_USER: {},
         TAB: {},
         SM_TAB: {},
         VP_TA: {},
         TXC_3: {},
-        SM_TXC: { status: 'Reject', statusId: '10' },
+        SM_TXC: {},
+        VP_TX: {
+          status: 'Reject',
+          statusId: '10',
+        },
       },
-      rejectSMTXC_TAM: {
+      rejectVPTX_TAM: {
         USER: {},
-        MANAGER_USER: {},
+
         SM_USER: {},
         VP_USER: {},
         TAM: {},
         SM_TAM: {},
         VP_TA: {},
         TXC_3: {},
-        SM_TXC: { status: 'Reject', statusId: '10' },
+        SM_TXC: {},
+        VP_TX: {
+          status: 'Reject',
+          statusId: '10',
+        },
       },
-      rejectSMTXC_TAP: {
+      rejectVPTX_TAP: {
         USER: {},
-        MANAGER_USER: {},
+
         SM_USER: {},
         VP_USER: {},
         TAP: {},
         SM_TAP: {},
         VP_TA: {},
         TXC_3: {},
-        SM_TXC: {
+        SM_TXC: {},
+        VP_TX: {
           status: 'Reject',
           statusId: '10',
         },
@@ -715,11 +809,11 @@ export const DataByRole = {
           },
           status: 'Revise',
           statusId: '10',
-          statusToId: '9',
+          statusToId: '8',
         },
       },
-      confirm: {
-        SM_TXC: {
+      confirmVP_TX: {
+        VP_TX: {
           config: {
             button: {},
           },
@@ -738,137 +832,21 @@ export const DataByRole = {
             },
           },
         },
-      },
-    },
-    11: {
-      rejectVPTX_TAB: {
-        USER: {},
-        MANAGER_USER: {},
-        SM_USER: {},
-        VP_USER: {},
-        TAB: {},
-        SM_TAB: {},
-        VP_TA: {},
-        TXC_3: {},
-        SM_TXC: {},
-        VP_TX: {
-          status: 'Reject',
-          statusId: '11',
-        },
-      },
-      rejectVPTX_TAM: {
-        USER: {},
-        MANAGER_USER: {},
-        SM_USER: {},
-        VP_USER: {},
-        TAM: {},
-        SM_TAM: {},
-        VP_TA: {},
-        TXC_3: {},
-        SM_TXC: {},
-        VP_TX: {
-          status: 'Reject',
-          statusId: '11',
-        },
-      },
-      rejectVPTX_TAP: {
-        USER: {},
-        MANAGER_USER: {},
-        SM_USER: {},
-        VP_USER: {},
-        TAP: {},
-        SM_TAP: {},
-        VP_TA: {},
-        TXC_3: {},
-        SM_TXC: {},
-        VP_TX: {
-          status: 'Reject',
-          statusId: '11',
-        },
-      },
-      revise: {
-        USER: {
-          config: {
-            button: {
-              edit: true,
-              editRealokasi: true,
-              save: true,
-              submit: true,
-              preview: true,
-            },
-          },
-          status: 'Revise',
-          statusId: '11',
-          statusToId: '1',
-        },
-        TAB: {
-          config: {
-            button: {
-              reject: true,
-              revise: true,
-              approve: true,
-              takeProject: true,
-              untakeProject: true,
-              needHPS: true,
-              preview: true,
-            },
-          },
-          status: 'Revise',
-          statusId: '11',
-          statusToId: '6',
-        },
-        TXC_3: {
-          config: {
-            button: {
-              reject: true,
-              revise: true,
-              confirm: true,
-              takeProject: true,
-              untakeProject: true,
-              needHPS: true,
-              preview: true,
-            },
-          },
-          status: 'Revise',
-          statusId: '11',
-          statusToId: '9',
-        },
-      },
-      confirmVP_TA: {
-        VP_TX: {
-          config: {
-            button: {},
-          },
-          status: 'PROGRESS',
-          statusId: '11',
-          statusToId: '12',
-        },
-        12: {
-          as: 'REQUESTER',
-          config: {
-            button: {
-              reject: true,
-              revise: true,
-              preview: true,
-              approve: true,
-            },
-          },
-        },
         confirmVP_TX: {
           VP_TX: {
             config: {
               button: {},
             },
             status: 'CLOSED',
-            statusId: '11',
+            statusId: '10',
           },
         },
       },
     },
-    12: {
+    11: {
       rejectDF_TAB: {
         USER: {},
-        MANAGER_USER: {},
+
         SM_USER: {},
         VP_USER: {},
         TAB: {},
@@ -879,12 +857,12 @@ export const DataByRole = {
         VP_TX: {},
         DF: {
           status: 'Reject',
-          statusId: '12',
+          statusId: '11',
         },
       },
       rejectDF_TAM: {
         USER: {},
-        MANAGER_USER: {},
+
         SM_USER: {},
         VP_USER: {},
         TAM: {},
@@ -895,12 +873,12 @@ export const DataByRole = {
         VP_TX: {},
         DF: {
           status: 'Reject',
-          statusId: '12',
+          statusId: '11',
         },
       },
       rejectDF_TAP: {
         USER: {},
-        MANAGER_USER: {},
+
         SM_USER: {},
         VP_USER: {},
         TAP: {},
@@ -911,7 +889,7 @@ export const DataByRole = {
         VP_TX: {},
         DF: {
           status: 'Reject',
-          statusId: '12',
+          statusId: '11',
         },
       },
       revise: {
@@ -926,7 +904,7 @@ export const DataByRole = {
             },
           },
           status: 'Revise',
-          statusId: '12',
+          statusId: '11',
           statusToId: '1',
         },
         TAB: {
@@ -942,7 +920,7 @@ export const DataByRole = {
             },
           },
           status: 'Revise',
-          statusId: '12',
+          statusId: '11',
           statusToId: '6',
         },
         TXC_3: {
@@ -958,7 +936,7 @@ export const DataByRole = {
             },
           },
           status: 'Revise',
-          statusId: '12',
+          statusId: '11',
           statusToId: '9',
         },
       },
@@ -968,9 +946,10 @@ export const DataByRole = {
             button: {},
           },
           status: 'CLOSED',
-          statusId: '12',
+          statusId: '11',
         },
       },
     },
   },
+  createReallocationGeneral: {},
 };
