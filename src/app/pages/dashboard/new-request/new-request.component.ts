@@ -43,13 +43,15 @@ export class NewRequestComponent implements OnInit {
   titleRequest: string = '';
   noteRequest: string = '';
   console = console;
-
+  isGroupSelected: boolean = false;
   itemsForm!: FormGroup;
   isDisplay: boolean = true;
 
   currentKurs!: number;
 
   selectGroupData: selectType[] = [];
+  selectGroupDetailData: selectType[] = [];
+
   available: number = 1500; //usd
   dataGL!: glAccountType[];
 
@@ -84,8 +86,8 @@ export class NewRequestComponent implements OnInit {
     // this.getSpecificUser(582127);
     this.getCurrentKurs();
     this.fetchGlAccount();
-    this.fetchDocumentCategory();
     this.getUserInfo();
+    this.fetchDocumentCategory();
     this.itemsForm = this.fb.group({
       items: new FormArray([this.createItem]),
     });
@@ -95,33 +97,16 @@ export class NewRequestComponent implements OnInit {
     this._onDestroy$.complete();
   }
   generateDinas(dinas: string): void {
-    this.personalUnit = dinas.slice(0, 3);
+    this.personalUnit = dinas.slice(3, 6);
     this.getCostCenter(this.personalUnit);
   }
-  // getSpecificUser(id: number): void {
-  //   this.users
-  //     .getSpecificUsers(id)
-  //     .pipe(
-  //       catchError((err) => {
-  //         console.error('Error occurred:', err);
-  //         return EMPTY;
-  //       }),
-  //       tap((result: any) => {
-  //         if (result) {
-  //           // Ensure result.data is a single array of glAccountType objects
-  //           this.specificUser = result.body;
-  //           this.generateDinas(this.specificUser?.personalUnit);
-  //         }
-  //       }),
-  //       takeUntil(this._onDestroy$)
-  //     )
-  //     .subscribe();
-  // }
+
   async getUserInfo(): Promise<void> {
     if (!this.users.getPersonalInformationFromCache()) {
       try {
         let _data = await this.users.getUserInfo();
         this.userInfo = _data;
+        this.generateDinas(this.userInfo?.personalUnit);
       } catch {
         Swal.fire({
           title: 'Alert!',
@@ -234,21 +219,52 @@ export class NewRequestComponent implements OnInit {
     });
   }
 
+  getValueGLDetailItem(val: any, index: number): void {
+    let temp = this.dataGL.filter((item) => item.glAccount == val.id);
+    this.newRequest
+      .getAvailable(temp[0].idGlAccount, this.costCenterData?.idCostCenter)
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred', err);
+          return EMPTY;
+        }),
+        tap((result: { data: any }) => {
+          if (result && result.data) {
+            // Ensure result.data is a single array of glAccountType objects
+            const allData = result.data.flatMap((item: any) => item);
+            this.getItems.controls[index]
+              .get('GLNumberIdControl')
+              ?.setValue(temp[0].glAccount);
+            this.getItems.controls[index]
+              .get('availableControl')
+              ?.setValue(allData[0].available);
+          }
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
+  }
   getValueGLItem(val: any, index: number): void {
-    this.dataGL.filter((item) => {
-      if (item.glAccount === val.id) {
-        this.getItems.controls[index]
-          .get('groupControl')
-          ?.setValue(item.groupGl);
-        this.getItems.controls[index]
-          .get('groupDetailControl')
-          ?.setValue(item.groupDetail);
-        this.getItems.controls[index]
-          .get('GLNumberIdControl')
-          ?.setValue(item.idGlAccount);
-      }
-    });
-    this.getItems.controls[index].get('GLNumberControl')?.setValue(val.id);
+    this.isGroupSelected = true;
+    this.newRequest
+      .getAllGroupGL(val.value)
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred', err);
+          return EMPTY;
+        }),
+        tap((result: { data: any }) => {
+          if (result && result.data) {
+            // Ensure result.data is a single array of glAccountType objects
+            const allData = result.data.flatMap((item: any) => item);
+            this.selectGroupDetailData = [];
+            this.dataGL = result.data;
+            this.refactorSelectGroupDetailData(allData);
+          }
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
   }
   getCurrentKurs() {
     return this.kurs
@@ -280,7 +296,7 @@ export class NewRequestComponent implements OnInit {
           if (result && result.data) {
             // Ensure result.data is a single array of glAccountType objects
             const allData = result.data.flatMap((item) => item); // Convert array of arrays to a single array
-            this.dataGL = allData;
+
             this.refactorSelectGroupData(allData);
           }
         }),
@@ -289,11 +305,19 @@ export class NewRequestComponent implements OnInit {
       .subscribe();
   }
 
-  refactorSelectGroupData(data: glAccountType[]): void {
-    data.forEach((element: glAccountType) => {
+  refactorSelectGroupData(data: any): void {
+    data.forEach((element: any, index: number) => {
       this.selectGroupData.push({
+        id: index,
+        value: element,
+      });
+    });
+  }
+  refactorSelectGroupDetailData(data: glAccountType[]): void {
+    data.forEach((element: glAccountType, index: number) => {
+      this.selectGroupDetailData.push({
         id: element.glAccount,
-        value: element.description,
+        value: element.groupDetail,
       });
     });
   }

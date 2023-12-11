@@ -206,7 +206,13 @@
               </app-select-box>
             </div> -->
             <div class="grid grid-cols-3 gap-4">
-              <app-input-text
+              <app-select-box
+                id="group"
+                label="Group"
+                [data]="selectGroupData"
+                (selectedValue)="getValueGLItem($event, i)"
+              />
+              <!-- <app-input-text
                 id="group"
                 label="Group"
                 [isAsk]="true"
@@ -214,16 +220,24 @@
                 formControlName="groupControl"
                 [value]="item.get('groupControl')?.value"
                 [isReadOnly]="true"
-              />
-              <app-input-text
-                id="groupDetail"
-                label="Group Detail"
-                [isAsk]="true"
-                type="normalControl"
-                formControlName="groupDetailControl"
-                [value]="item.get('groupDetailControl')?.value"
-                [isReadOnly]="true"
-              />
+              /> -->
+              <ng-container *ngIf="isGroupSelected">
+                <app-select-box
+                  id="groupDetail"
+                  label="Group Detail"
+                  [data]="selectGroupDetailData"
+                  (selectedValue)="getValueGLDetailItem($event, i)"
+                />
+              </ng-container>
+              <ng-container *ngIf="!isGroupSelected">
+                <app-input-text
+                  id="groupDetail"
+                  label="Group Detail"
+                  [isAsk]="true"
+                  type="normalControl"
+                  [isReadOnly]="true"
+                />
+              </ng-container>
               <app-input-text
                 label="G/L Number"
                 [isAsk]="true"
