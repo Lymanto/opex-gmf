@@ -52,7 +52,7 @@ export class NewRequestComponent implements OnInit {
   selectGroupData: selectType[] = [];
   selectGroupDetailData: selectType[] = [];
 
-  available: number = 1500; //usd
+  available: number = 0; //usd
   dataGL!: glAccountType[];
 
   costCenterData: CostCenterType | null = <CostCenterType>{};
@@ -97,7 +97,7 @@ export class NewRequestComponent implements OnInit {
     this._onDestroy$.complete();
   }
   generateDinas(dinas: string): void {
-    this.personalUnit = dinas.slice(3, 6);
+    this.personalUnit = dinas.slice(3, 5);
     this.getCostCenter(this.personalUnit);
   }
 
@@ -202,8 +202,8 @@ export class NewRequestComponent implements OnInit {
   }
   get createItem(): FormGroup {
     return this.fb.group({
-      GLNumberIdControl: new FormControl<string>(''),
       GLNumberControl: new FormControl<string>(''),
+      idGlAccount: new FormControl<string>(''),
       groupControl: new FormControl<string>(''),
       groupDetailControl: new FormControl<string>(''),
       availableControl: new FormControl<number>(this.available),
@@ -231,13 +231,16 @@ export class NewRequestComponent implements OnInit {
         tap((result: { data: any }) => {
           if (result && result.data) {
             // Ensure result.data is a single array of glAccountType objects
-            const allData = result.data.flatMap((item: any) => item);
+
             this.getItems.controls[index]
-              .get('GLNumberIdControl')
+              .get('idGlAccount')
+              ?.setValue(temp[0].idGlAccount);
+            this.getItems.controls[index]
+              .get('GLNumberControl')
               ?.setValue(temp[0].glAccount);
             this.getItems.controls[index]
               .get('availableControl')
-              ?.setValue(allData[0].available);
+              ?.setValue(result.data.available);
           }
         }),
         takeUntil(this._onDestroy$)
@@ -335,7 +338,7 @@ export class NewRequestComponent implements OnInit {
         ).toISOString() as unknown as Date,
         descPby: element.descriptionControl,
         remarkPby: element.remarkControl,
-        glAccountId: element.GLNumberIdControl,
+        glAccountId: element.idGlAccount,
       });
     });
     return items;
@@ -358,7 +361,7 @@ export class NewRequestComponent implements OnInit {
     this.createRequest.responsibleNopeg = this
       .idResponsibleNumber as unknown as number;
     this.createRequest.personalNumber = this.userInfo.personalNumber;
-    this.createRequest.costCenterId = 1;
+    this.createRequest.costCenterId = this.costCenterData!.idCostCenter;
     this.createRequest.createdBy = this.userInfo.personalNumber;
     this.createRequest.realizationItems = this.refactorItemsData(
       this.itemsForm.value.items
@@ -374,7 +377,58 @@ export class NewRequestComponent implements OnInit {
     });
     this.console.log(this.createRequest);
     this.newRequest
-      .postCreateRequestRealization(formdata)
+      .postSaveCreateRequestRealization(formdata)
+      .pipe(
+        catchError((error: any) => {
+          this.console.error('There was an error!', error);
+
+          return of();
+        })
+      )
+      .subscribe(
+        (data: any) => {
+          Swal.fire('', 'Create Request Realization Success', 'success');
+          this.resetAll();
+        },
+        (error: any) => {
+          this.console.error('Error', error);
+        }
+      );
+  }
+  submit(): void {
+    if (
+      this.idResponsibleNumber === '' ||
+      this.idTypeSubmission === '' ||
+      this.titleRequest === '' ||
+      this.noteRequest === '' ||
+      this.files.length === 0 ||
+      this.docCategories.length === 0 ||
+      this.docNames.length === 0
+    ) {
+      Swal.fire('', 'Please fill all the fields', 'error');
+      return;
+    }
+    this.createRequest.type = this.idTypeSubmission;
+    this.createRequest.responsibleNopeg = this
+      .idResponsibleNumber as unknown as number;
+    this.createRequest.personalNumber = this.userInfo.personalNumber;
+    this.createRequest.costCenterId = this.costCenterData!.idCostCenter;
+    this.createRequest.createdBy = this.userInfo.personalNumber;
+    this.createRequest.realizationItems = this.refactorItemsData(
+      this.itemsForm.value.items
+    );
+    this.createRequest.titleRequest = this.titleRequest;
+    this.createRequest.noteRequest = this.noteRequest;
+    this.createRequest.uploadfile = this.files;
+    this.createRequest.docCategoryId = this.docCategories;
+    this.createRequest.docName = this.docNames;
+    const formdata = this.convertToFormData(this.createRequest);
+    formdata.forEach((value, key) => {
+      console.log(key + ' ' + value);
+    });
+    this.console.log(this.createRequest);
+    this.newRequest
+      .postSubmitCreateRequestRealization(formdata)
       .pipe(
         catchError((error: any) => {
           this.console.error('There was an error!', error);
@@ -396,9 +450,20 @@ export class NewRequestComponent implements OnInit {
     const formData = new FormData();
     formData.append('type', data.type);
     formData.append('responsibleNopeg', data.responsibleNopeg);
+    formData.append('titleRequest', data.titleRequest);
+    formData.append('noteRequest', data.noteRequest);
     formData.append('personalNumber', data.personalNumber);
     formData.append('costCenterId', data.costCenterId);
     formData.append('createdBy', data.createdBy);
+    data.docCategoryId.forEach((element: any, index: number) => {
+      formData.append(`docCategoryId[${index}]`, element);
+    });
+    data.docName.forEach((element: any, index: number) => {
+      formData.append(`docName[${index}]`, element);
+    });
+    data.uploadfile.forEach((element: any, index: number) => {
+      formData.append(`uploadfile[${index}]`, element);
+    });
     data.realizationItems.forEach((element: any, index: number) => {
       formData.append(
         `realizationItems[${index}][amountSubmission]`,
@@ -422,18 +487,7 @@ export class NewRequestComponent implements OnInit {
         element.glAccountId
       );
     });
-    formData.append('titleRequest', data.titleRequest);
-    formData.append('noteRequest', data.noteRequest);
 
-    data.uploadfile.forEach((element: any, index: number) => {
-      formData.append(`uploadfile[${index}]`, element);
-    });
-    data.docCategoryId.forEach((element: any, index: number) => {
-      formData.append(`docCategoryId[${index}]`, element);
-    });
-    data.docName.forEach((element: any, index: number) => {
-      formData.append(`docName[${index}]`, element);
-    });
     // formData.append('uploadfile', data.uploadfile);
     // formData.append('docCategoryId', data.docCategoryId);
     // formData.append('docName', data.docName);

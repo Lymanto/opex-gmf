@@ -26,7 +26,6 @@ export class PaginationComponent {
   // when input changes, update the pagination
   ngOnChanges() {
     this.numberOfPages = Math.ceil(this.numberOfItems / this.itemsPerPage);
-    this.console.log('ss', this.numberOfPages);
     this.updatePages();
 
     if (this.currentPage > this.numberOfPages) {

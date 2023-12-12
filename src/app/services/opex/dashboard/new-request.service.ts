@@ -46,9 +46,15 @@ export class NewRequestService {
       `${environment.baseUrlOpex}/dashboard/type`
     );
   }
-  postCreateRequestRealization(data: FormData) {
+  postSaveCreateRequestRealization(data: FormData) {
     return this.httpClient.post<FormData>(
-      `${environment.baseUrlOpex}/realization/status/OPEN`,
+      `${environment.baseUrlOpex}/realization/save`,
+      data
+    );
+  }
+  postSubmitCreateRequestRealization(data: FormData) {
+    return this.httpClient.post<FormData>(
+      `${environment.baseUrlOpex}/realization/submit`,
       data
     );
   }
