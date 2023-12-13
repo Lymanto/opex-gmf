@@ -30,13 +30,13 @@ export interface tableBodyRkapType {
   nov: string;
   des: string;
 }
-export interface tableBodyType {
-  id: string;
-  taReff: string;
-  numberOfRequest: string;
+export interface ApprovalType {
+  idRealization: string;
+  taReff: string | null;
+  requestNumber: string;
   typeOfLetter: string;
-  entryDate: string;
-  amountSubmission: string;
+  entryDate: Date;
+  amountSubmission: number;
   status: string;
   statusTo: string;
   departmentTo: string;

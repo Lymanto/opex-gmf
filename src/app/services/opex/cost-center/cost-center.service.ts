@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class CostCenterService {
-  private url = `${environment.baseUrlOpex}/m-cost-center/bidang`;
+  private url = `${environment.baseUrlOpex}/m-cost-center`;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -17,7 +17,10 @@ export class CostCenterService {
     bidang: string
   ): Observable<HttpResult<CostCenterType[]>> {
     return this.httpClient.get<HttpResult<CostCenterType[]>>(
-      `${this.url}/${bidang}`
+      `${this.url}/bidang/${bidang}`
     );
+  }
+  getDinas(): Observable<HttpResult<string[]>> {
+    return this.httpClient.get<HttpResult<string[]>>(`${this.url}/all/group`);
   }
 }
