@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivationEnd } from '@angular/router';
-import { tableBodyRkapType } from 'src/app/lib/types';
+import { tableBodyRkapType, viewBudgetUploadType } from 'src/app/lib/types';
+import { ViewBudgetService } from 'src/app/services/opex/master-data/view-budget.service';
 
 export const tabledata = [
   {
@@ -19,11 +21,15 @@ export class ViewBudgetTableComponent {
   isDisplayRemaining: boolean = true;
   isDisplayActual: boolean = true;
   tabledata = tabledata;
-  @Input() body!: tableBodyRkapType[];
+  activeId: string | number = 'not-active';
+  renderer: any;
 
-  headers: string[] = ['Financial Indicator', 'G/L Number', 'Total'];
+  @Input() body!: viewBudgetUploadType[];
 
-  head: string[] = [
+  headers: string[] = [
+    'Financial Indicator',
+    'G/L Number',
+    'Total',
     'Jan',
     'Feb',
     'Mar',
@@ -38,10 +44,9 @@ export class ViewBudgetTableComponent {
     'Des',
   ];
 
-  activeId: string = 'not-active';
-  renderer: any;
+  constructor(private viewBudget: ViewBudgetService) {}
 
-  onClick(value: string) {
+  onClick(value: string | number) {
     if (this.activeId == 'not-active') {
       this.activeId = value;
     } else if (this.activeId != value) {
@@ -49,5 +54,9 @@ export class ViewBudgetTableComponent {
     } else {
       this.activeId = 'not-active';
     }
+  }
+  getUploadFile(): void {
+    const formData = new FormData();
+    formData.append;
   }
 }

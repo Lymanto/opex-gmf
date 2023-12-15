@@ -60,32 +60,6 @@
               <td class="h-[56px] px-4">{{ item.financialIndicators }}</td>
               <td class="h-[56px] px-4">{{ item.glNumber }}</td>
               <td class="h-[56px] px-4">{{ item.total }}</td>
-            </tr>
-            <tr
-              *ngIf="item.id === activeId"
-              class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px] whitespace-nowrap"
-            >
-              <td></td>
-              <td>Travel</td>
-              <td>40011000</td>
-              <td>111111</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <tr
-            class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] whitespace-nowrap sticky top-0"
-          >
-            <th *ngFor="let column of head" class="px-4">
-              {{ column }}
-            </th>
-          </tr>
-          <tbody *ngFor="let item of body">
-            <tr
-              class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px] whitespace-nowrap"
-            >
               <td class="h-[56px] px-4">{{ item.jan }}</td>
               <td class="h-[56px] px-4">{{ item.feb }}</td>
               <td class="h-[56px] px-4">{{ item.mar }}</td>
@@ -102,6 +76,10 @@
               *ngIf="item.id === activeId"
               class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px] whitespace-nowrap"
             >
+              <td></td>
+              <td>Travel</td>
+              <td>40011000</td>
+              <td>111111</td>
               <td>115.864</td>
               <td>115.864</td>
               <td>773.24</td>

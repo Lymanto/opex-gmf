@@ -123,6 +123,21 @@ export const DataByRole = {
         statusToId: '2',
         status: 'OPEN',
       },
+      preview: {
+        USER: {
+          config: {
+            button: {
+              save: true,
+              submit: true,
+              edit: true,
+              editRealokasi: true,
+              preview: true,
+            },
+          },
+        },
+        statusId: '1',
+        status: 'OPEN',
+      },
     },
     2: {
       submit: {
@@ -190,6 +205,20 @@ export const DataByRole = {
           },
         },
       },
+      preview: {
+        SM_USER: {
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              confirm: true,
+              preview: true,
+            },
+          },
+        },
+        statusId: '3',
+        status: 'OPEN',
+      },
     },
     4: {
       reject: {
@@ -233,6 +262,20 @@ export const DataByRole = {
             },
           },
         },
+      },
+      preview: {
+        VP_USER: {
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              confirm: true,
+              preview: true,
+            },
+          },
+        },
+        statusId: '4',
+        status: 'OPEN',
       },
     },
     5: {
@@ -333,6 +376,48 @@ export const DataByRole = {
             },
           },
         },
+      },
+      previewTAM: {
+        USER: {
+          config: {
+            button: {
+              preview: true,
+            },
+          },
+        },
+        statusId: '5',
+        status: 'OPEN',
+      },
+      previewTAB: {
+        USER: {
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              approve: true,
+              takeProject: true,
+              untakeProject: true,
+              needHPS: true,
+              preview: true,
+            },
+          },
+        },
+        statusId: '5',
+        status: 'OPEN',
+      },
+      previewTAP: {
+        USER: {
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              approve: true,
+              preview: true,
+            },
+          },
+        },
+        statusId: '5',
+        status: 'OPEN',
       },
     },
     6: {
@@ -439,6 +524,46 @@ export const DataByRole = {
           },
         },
       },
+      previewSM_TAB: {
+        SM_TAB: {
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              approve: true,
+              preview: true,
+            },
+          },
+        },
+
+        statusId: '6',
+        status: 'OPEN',
+      },
+      previewSM_TAM: {
+        SM_TAM: {
+          config: {
+            button: {
+              preview: true,
+            },
+          },
+        },
+
+        statusId: '6',
+        status: 'OPEN',
+      },
+      previewSM_TAP: {
+        SM_TAM: {
+          config: {
+            button: {
+              preview: true,
+              revise: true,
+            },
+          },
+        },
+
+        statusId: '6',
+        status: 'OPEN',
+      },
     },
     7: {
       rejectVPTA_TAB: {
@@ -524,6 +649,20 @@ export const DataByRole = {
           },
         },
       },
+      preview: {
+        VP_TA: {
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              approve: true,
+              preview: true,
+            },
+          },
+        },
+        statusId: '7',
+        status: 'OPEN',
+      },
     },
     8: {
       rejectTXC_TAB: {
@@ -608,6 +747,23 @@ export const DataByRole = {
             },
           },
         },
+      },
+      preview: {
+        TXC_3: {
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              takeProject: true,
+              untakeProject: true,
+              needHPS: true,
+              preview: true,
+              confirm: true,
+            },
+          },
+        },
+        statusId: '8',
+        status: 'OPEN',
       },
     },
     9: {
@@ -715,6 +871,20 @@ export const DataByRole = {
             },
           },
         },
+      },
+      preview: {
+        SM_TX: {
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              approve: true,
+              preview: true,
+            },
+          },
+        },
+        statusId: '9',
+        status: 'PROGRESS',
       },
     },
 
@@ -842,6 +1012,20 @@ export const DataByRole = {
           },
         },
       },
+      preview: {
+        VP_TX: {
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              approve: true,
+              preview: true,
+            },
+          },
+        },
+        statusId: '10',
+        status: 'PROGRESS',
+      },
     },
     11: {
       rejectDF_TAB: {
@@ -948,6 +1132,20 @@ export const DataByRole = {
           status: 'CLOSED',
           statusId: '11',
         },
+      },
+      preview: {
+        DF: {
+          config: {
+            button: {
+              reject: true,
+              revise: true,
+              approve: true,
+              preview: true,
+            },
+          },
+        },
+        statusId: '11',
+        status: 'PROGRESS',
       },
     },
   },

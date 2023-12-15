@@ -155,6 +155,26 @@ export interface newRequestUploadType {
   uploadDate: string;
   file: File;
 }
+
+export interface viewBudgetUploadType {
+  id: number;
+  financialIndicators: string;
+  glNumber: number;
+  total: number;
+  jan: number;
+  feb: number;
+  mar: number;
+  apr: number;
+  mei: number;
+  jun: number;
+  jul: number;
+  agu: number;
+  sep: number;
+  okt: number;
+  nov: number;
+  des: number;
+}
+
 export interface CostCenterType {
   idCostCenter: number;
   uniqueId: string;

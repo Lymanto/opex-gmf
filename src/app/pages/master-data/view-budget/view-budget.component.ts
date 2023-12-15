@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { format } from 'date-fns';
 import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
 import { UserDataDTO } from 'src/app/dto/user-data-dto';
@@ -6,6 +6,7 @@ import {
   glAccountType,
   selectType,
   tableBodyRkapType,
+  viewBudgetUploadType,
 } from 'src/app/lib/types';
 import { NewRequestService } from 'src/app/services/opex/dashboard/new-request.service';
 import { ViewBudgetService } from 'src/app/services/opex/master-data/view-budget.service';
@@ -20,6 +21,25 @@ import Swal from 'sweetalert2';
   styleUrls: ['./view-budget.component.css'],
 })
 export class ViewBudgetComponent implements OnInit {
+  simulatedData: any = [];
+  simulatedArrayData: any[] = [];
+  data: any = [];
+  percentageNumber: number = 1;
+  months: string[] = [
+    'JANUARI',
+    'FEBRUARI',
+    'MARET',
+    'APRIL',
+    'MEI',
+    'JUNI',
+    'JULI',
+    'AGUSTUS',
+    'SEPTEMBER',
+    'OKTOBER',
+    'NOVEMBER',
+    'DESEMBER',
+  ];
+
   yearsSelected!: number;
   currentYear: string = format(new Date(), 'yyyy');
   isUploadSuccess: boolean = false;
@@ -29,6 +49,31 @@ export class ViewBudgetComponent implements OnInit {
   userInfo: UserDataDTO = <UserDataDTO>{};
   fileSize: string = '';
   dataRKAP: any = [];
+  isDisplayRkap: boolean = true;
+  isDisplayRemaining: boolean = true;
+  isDisplayActual: boolean = true;
+  activeId: string | number = 'not-active';
+  renderer: any;
+  @Input() body!: viewBudgetUploadType[];
+
+  headers: string[] = [
+    'Financial Indicator',
+    'G/L Number',
+    'Total',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'Mei',
+    'Jun',
+    'Jul',
+    'Agu',
+    'Sep',
+    'Okt',
+    'Nov',
+    'Des',
+  ];
+
   yearsData: selectType[] = [
     {
       id: (parseInt(this.currentYear) + 1).toString(),
@@ -50,44 +95,7 @@ export class ViewBudgetComponent implements OnInit {
   getValueSelectBox(val: any): void {
     this.yearsSelected = parseInt(val.id);
   }
-  tableBody: tableBodyRkapType[] = [
-    {
-      id: '1',
-      financialIndicators: 'Company Accommodation',
-      glNumber: '-',
-      total: '579.32',
-      jan: '579.32',
-      feb: '579.32',
-      mar: '579.32',
-      apr: '579.32',
-      mei: '579.32',
-      jun: '579.32',
-      jul: '579.32',
-      agu: '579.32',
-      sep: '579.32',
-      okt: '579.32',
-      nov: '579.32',
-      des: '579.32',
-    },
-    {
-      id: '2',
-      financialIndicators: 'Staff Expenses',
-      glNumber: '-',
-      total: '579.32',
-      jan: '579.32',
-      feb: '579.32',
-      mar: '579.32',
-      apr: '579.32',
-      mei: '579.32',
-      jun: '579.32',
-      jul: '579.32',
-      agu: '579.32',
-      sep: '579.32',
-      okt: '579.32',
-      nov: '579.32',
-      des: '579.32',
-    },
-  ];
+  tableBody: viewBudgetUploadType[] = [];
   NewRequestService: any;
   selectGroupData: selectType[] = [];
   selectGroupDetail: selectType[] = [];
@@ -245,6 +253,11 @@ export class ViewBudgetComponent implements OnInit {
             this.uploadError = '';
             this.uploadedFile = null;
             this.fileSize = '';
+
+            this.dataRKAP = result.data;
+            console.log('result', this.dataRKAP);
+
+            this.getSimulatedData(result.data);
             Swal.fire({
               title: 'Success!',
               html: 'RKAP uploaded successfully',
@@ -255,19 +268,54 @@ export class ViewBudgetComponent implements OnInit {
         }),
         takeUntil(this._onDestroy$)
       )
-      .subscribe(
-        (result) => {
-          this.dataRKAP = result.data;
-          console.log('result', this.dataRKAP);
-        },
-        (error) => {
-          console.log('error', error);
-        }
-      );
+      .subscribe();
   }
   generateSize(bytes: number): string {
     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
     const i = Math.floor(Math.log(bytes) / Math.log(1024));
     return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i];
+  }
+  onClick(value: string | number) {
+    if (this.activeId == 'not-active') {
+      this.activeId = value;
+    } else if (this.activeId != value) {
+      this.activeId = value;
+    } else {
+      this.activeId = 'not-active';
+    }
+  }
+
+  getSimulatedData(data: any) {
+    const keysArray = Object.keys(data);
+    keysArray.forEach((valkey) => {
+      this.simulatedArrayData.push({
+        [valkey]: [],
+        ['total' + keysArray]:
+          data['total' + keysArray] * this.percentageNumber,
+      });
+      this.simulatedData.valkey = {
+        ['total' + keysArray]:
+          data['total' + keysArray] * this.percentageNumber,
+      }; // menambahkan objek keys pada data simulasi yg dibikin
+      const nkeysArray = Object.keys(valkey);
+      nkeysArray.forEach((valnkey) => {
+        this.simulatedArrayData[valkey].push({
+          ['total' + valkey]: data.valkey.nkey * this.percentageNumber,
+          ['month' + valkey]: [],
+        });
+        this.simulatedData.valkey['total' + valnkey] =
+          data.valkey.nkey * this.percentageNumber; // menambahkan total pada data simulasi yg dibikin
+        this.months.forEach((month) => {
+          this.simulatedArrayData[valkey]['month' + valkey].push({
+            [month]:
+              data.valkey.nkey['month' + valnkey]['month'] *
+              this.percentageNumber,
+          });
+          this.simulatedData.valkey['month' + valnkey][month] =
+            data.valkey.nkey['month' + valnkey]['month'] *
+            this.percentageNumber;
+        });
+      });
+    });
   }
 }
