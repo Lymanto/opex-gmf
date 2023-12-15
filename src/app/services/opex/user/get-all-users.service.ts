@@ -9,16 +9,18 @@ import {
 } from 'src/app/dto/http-result.dto';
 import { UserDataDTO } from 'src/app/dto/user-data-dto';
 import { environment } from 'src/environments/environment';
+import { LocalStorageService } from '../local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GetAllUsersService {
   private url = `${environment.baseUrlSoe}/v2/employee`;
-  localStorageService: any;
+  // localStorageService: any;
   constructor(
     private httpClient: HttpClient,
-    private readonly keycloakService: KeycloakService
+    private readonly keycloakService: KeycloakService,
+    private readonly localStorageService: LocalStorageService
   ) {}
   getAllUsers(): Observable<HttpResultSoeAllUser<any[]>> {
     return this.httpClient.get<HttpResultSoeAllUser<any[]>>(
@@ -43,15 +45,16 @@ export class GetAllUsersService {
 
   getPersonalInformationFromCache(): UserDataDTO | null {
     if (localStorage.getItem(LocalServiceConst.USER_INFO)) {
-      return JSON.parse(
-        this.localStorageService.getData(
-          LocalServiceConst.USER_INFO
-        ) as unknown as string
-      ) as UserDataDTO;
+      let _userInfo: any = {
+        ...this.localStorageService.getData(LocalServiceConst.USER_INFO),
+      };
+      const _result = JSON.parse(_userInfo?._result);
+      return _result;
     } else {
       return null;
     }
   }
+
   getDetailUsers(
     id: string
   ): Observable<HttpResultSoeSpesificUser<UserDataDTO>> {

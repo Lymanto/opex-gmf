@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { KeycloakService } from 'keycloak-angular';
+import { lastValueFrom, of, switchMap } from 'rxjs';
 import { LocalServiceConst } from 'src/app/constanta/local-service-constanta';
 import { UserDataDTO } from 'src/app/dto/user-data-dto';
 import { LocalStorageService } from 'src/app/services/opex/local-storage/local-storage.service';
@@ -39,6 +40,8 @@ export class TopnavComponent implements OnInit {
       try {
         let _data = await this.GetAllUsersService.getUserInfo();
         this.userInfo = _data;
+        console.log('ngambil dari getUserInfo');
+        console.log('userInfo', this.userInfo);
       } catch {
         Swal.fire({
           title: 'Alert!',
@@ -51,6 +54,7 @@ export class TopnavComponent implements OnInit {
       let _userInfo: any = {
         ...this.localStorageService.getData(LocalServiceConst.USER_INFO),
       };
+      console.log('ngambil dari local');
       this.userInfo = JSON.parse(_userInfo?._result);
     }
   }
@@ -67,94 +71,187 @@ export class TopnavComponent implements OnInit {
         this.inputPersonalNumber.value as string
       );
 
+      console.log('this is result => ', result);
+
+      const result$ = of(result).pipe(switchMap((item) => item));
+      const hasil = await lastValueFrom(result$);
+
+      console.log('this is hasil => ', hasil);
+
+      this.localStorageService.clearData();
       this.localStorageService.saveData(
         LocalServiceConst.USER_INFO,
-        JSON.stringify(result)
+        JSON.stringify(hasil.body)
       );
 
       if (
-        this.userInfo?.personalUnit?.includes('TA') &&
-        this.userInfo?.personalJob?.includes('VICE PRESIDENT')
+        hasil.body?.personalUnit === 'TA' &&
+        hasil.body?.personalJob === 'VICE PRESIDENT'
       ) {
         this.role = 'VP TA';
       } else if (
-        this.userInfo.personalUnit.includes('TAB') &&
-        this.userInfo?.personalJob.includes('SENIOR MANAGER')
+        hasil.body?.personalUnit === 'TAB' &&
+        hasil.body?.personalJob === 'SENIOR MANAGER'
       ) {
         this.role = 'SM TAB';
       } else if (
-        this.userInfo.personalUnit.includes('TAB') &&
-        this.userInfo?.personalJob.includes('PROFESSIONAL')
+        hasil.body?.personalUnit === 'TAB' &&
+        hasil.body?.personalJob === 'PROFESSIONAL'
       ) {
         this.role = 'TAB';
       } else if (
-        this.userInfo.personalUnit.includes('TAM') &&
-        this.userInfo?.personalJob.includes('PROFESSIONAL')
+        hasil.body?.personalUnit === 'TAM' &&
+        hasil.body?.personalJob === 'PROFESSIONAL'
       ) {
         this.role = 'TAM';
       } else if (
-        this.userInfo.personalUnit.includes('TAM') &&
-        this.userInfo?.personalJob.includes('SENIOR MANAGER')
+        hasil.body?.personalUnit === 'TAM' &&
+        hasil.body?.personalJob === 'SENIOR MANAGER'
       ) {
         this.role = 'SM TAM';
       } else if (
-        this.userInfo.personalUnit.includes('TAM') &&
-        this.userInfo?.personalJob.includes('VICE PRESIDENT')
+        hasil.body?.personalUnit === 'TAM' &&
+        hasil.body?.personalJob === 'VICE PRESIDENT'
       ) {
         this.role = 'VP TAM';
       } else if (
-        this.userInfo.personalUnit.includes('TAP') &&
-        this.userInfo?.personalJob.includes('PROFESSIONAL')
+        hasil.body?.personalUnit === 'TAP' &&
+        hasil.body?.personalJob === 'PROFESSIONAL'
       ) {
         this.role = 'TAP';
       } else if (
-        this.userInfo.personalUnit.includes('TAP') &&
-        this.userInfo?.personalJob.includes('SENIOR MANAGER')
+        hasil.body?.personalUnit === 'TAP' &&
+        hasil.body?.personalJob === 'SENIOR MANAGER'
       ) {
         this.role = 'SM TAP';
       } else if (
-        this.userInfo.personalUnit.includes('TAP') &&
-        this.userInfo?.personalJob.includes('VICE PRESIDENT')
+        hasil.body?.personalUnit === 'TAP' &&
+        hasil.body?.personalJob === 'VICE PRESIDENT'
       ) {
         this.role = 'VP TAP';
       } else if (
-        this.userInfo.personalUnit.includes('TX') &&
-        this.userInfo?.personalJob.includes('VICE PRESIDENT')
+        hasil.body?.personalUnit === 'TX' &&
+        hasil.body?.personalJob === 'VICE PRESIDENT'
       ) {
         this.role = 'VP TX';
       } else if (
-        this.userInfo.personalUnit.includes('TX') &&
-        this.userInfo?.personalJob.includes('SENIOR MANAGER')
+        hasil.body?.personalUnit === 'TX' &&
+        hasil.body?.personalJob === 'SENIOR MANAGER'
       ) {
         this.role = 'SM TX';
       } else if (
-        this.userInfo.personalUnit.includes('TXC-3') &&
-        this.userInfo?.personalJob.includes('PROFESSIONAL')
+        hasil.body?.personalUnit === 'TXC-3' &&
+        hasil.body?.personalJob === 'PROFESSIONAL'
       ) {
         this.role = 'TXC-3';
       } else if (
-        this.userInfo.personalUnit.includes('DF') &&
-        this.userInfo?.personalJob.includes('DIRECTOR')
+        hasil.body?.personalUnit === 'DF' &&
+        hasil.body?.personalJob === 'DIRECTOR'
       ) {
         this.role = 'DF';
       } else if (
-        this.userInfo.personalUnit.includes('DT') &&
-        this.userInfo?.personalJob.includes('DIRECTOR')
+        hasil.body?.personalUnit === 'DT' &&
+        hasil.body?.personalJob === 'DIRECTOR'
       ) {
         this.role = 'DT';
-      } else if (this.userInfo?.personalTitle?.includes('SM ')) {
+      } else if (hasil.body?.personalJob === 'SM ') {
         this.role = 'SM_USER';
         // console.log('push list sm', this.role);
-      } else if (this.userInfo?.personalTitle?.includes('VP ')) {
+      } else if (hasil.body?.personalJob === 'VP ') {
         this.role = 'VP_USER';
         console.log('push list vp', this.role);
-      } else if (this.userInfo?.personalTitle?.includes('MANAGER ')) {
+      } else if (hasil.body?.personalJob === 'MANAGER ') {
         this.role = 'MANAGER_USER';
       } else {
         this.role = 'USER';
         // console.log('push list user', this.role)
         // console.log('NOT PUSHING user', this.role)
       }
+      console.log('ROLE INI ' + this.role);
+      // console.log(hasil.body.personalJob);
+      // if (
+      //   this.userInfo?.personalUnit?.includes('TA') &&
+      //   this.userInfo?.personalJob?.includes('VICE PRESIDENT')
+      // ) {
+      //   this.role = 'VP TA';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('TAB') &&
+      //   this.userInfo?.personalJob.includes('SENIOR MANAGER')
+      // ) {
+      //   this.role = 'SM TAB';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('TAB') &&
+      //   this.userInfo?.personalJob.includes('PROFESSIONAL')
+      // ) {
+      //   this.role = 'TAB';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('TAM') &&
+      //   this.userInfo?.personalJob.includes('PROFESSIONAL')
+      // ) {
+      //   this.role = 'TAM';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('TAM') &&
+      //   this.userInfo?.personalJob.includes('SENIOR MANAGER')
+      // ) {
+      //   this.role = 'SM TAM';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('TAM') &&
+      //   this.userInfo?.personalJob.includes('VICE PRESIDENT')
+      // ) {
+      //   this.role = 'VP TAM';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('TAP') &&
+      //   this.userInfo?.personalJob.includes('PROFESSIONAL')
+      // ) {
+      //   this.role = 'TAP';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('TAP') &&
+      //   this.userInfo?.personalJob.includes('SENIOR MANAGER')
+      // ) {
+      //   this.role = 'SM TAP';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('TAP') &&
+      //   this.userInfo?.personalJob.includes('VICE PRESIDENT')
+      // ) {
+      //   this.role = 'VP TAP';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('TX') &&
+      //   this.userInfo?.personalJob.includes('VICE PRESIDENT')
+      // ) {
+      //   this.role = 'VP TX';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('TX') &&
+      //   this.userInfo?.personalJob.includes('SENIOR MANAGER')
+      // ) {
+      //   this.role = 'SM TX';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('TXC-3') &&
+      //   this.userInfo?.personalJob.includes('PROFESSIONAL')
+      // ) {
+      //   this.role = 'TXC-3';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('DF') &&
+      //   this.userInfo?.personalJob.includes('DIRECTOR')
+      // ) {
+      //   this.role = 'DF';
+      // } else if (
+      //   this.userInfo.personalUnit.includes('DT') &&
+      //   this.userInfo?.personalJob.includes('DIRECTOR')
+      // ) {
+      //   this.role = 'DT';
+      // } else if (this.userInfo?.personalJob?.includes('SM ')) {
+      //   this.role = 'SM_USER';
+      //   // console.log('push list sm', this.role);
+      // } else if (this.userInfo?.personalJob?.includes('VP ')) {
+      //   this.role = 'VP_USER';
+      //   console.log('push list vp', this.role);
+      // } else if (this.userInfo?.personalJob?.includes('MANAGER ')) {
+      //   this.role = 'MANAGER_USER';
+      // } else {
+      //   this.role = 'USER';
+      //   // console.log('push list user', this.role)
+      //   // console.log('NOT PUSHING user', this.role)
+      // }
 
       // this.role.sort((a, b) => {
       //   const orderA = customOrder[a] || Number.MAX_SAFE_INTEGER;
@@ -162,13 +259,14 @@ export class TopnavComponent implements OnInit {
       //   return orderA - orderB;
       // });
       this.localStorageService.saveData(LocalServiceConst.ROLE, this.role);
-
+      this.getUserInfo();
+      this.getRoleFromLocalStorage();
       Swal.fire({
         title: 'Success!',
         html:
           'User has changed : ' +
-          this.userInfo.personalNumber +
-          'with role: ' +
+          hasil.body.personalNumber +
+          ' with role: ' +
           this.role,
         icon: 'success',
         confirmButtonColor: '#1F569D',
