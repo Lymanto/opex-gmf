@@ -47,7 +47,7 @@ export class TopnavComponent implements OnInit {
           title: 'Alert!',
           html: 'failed to get user info',
           // icon: 'success',
-          confirmButtonColor: '#1F569D',
+          confirmButtonColor: '#276BC5',
         });
       }
     } else {
@@ -269,7 +269,7 @@ export class TopnavComponent implements OnInit {
           ' with role: ' +
           this.role,
         icon: 'success',
-        confirmButtonColor: '#1F569D',
+        confirmButtonColor: '#276BC5',
       });
     } catch (error) {
       console.log('error: ', error);
@@ -277,7 +277,7 @@ export class TopnavComponent implements OnInit {
         title: 'Failed!',
         html: 'failed changed user info ',
         icon: 'error',
-        confirmButtonColor: '#1F569D',
+        confirmButtonColor: '#276BC5',
       });
     }
   }

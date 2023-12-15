@@ -124,7 +124,7 @@ export class ViewBudgetComponent implements OnInit {
           title: 'Alert!',
           html: 'failed to get user info',
           // icon: 'success',
-          confirmButtonColor: '#1F569D',
+          confirmButtonColor: '#276BC5',
         });
       }
     } else {
@@ -214,7 +214,7 @@ export class ViewBudgetComponent implements OnInit {
         title: 'Alert!',
         html: 'Please select file',
         icon: 'error',
-        confirmButtonColor: '#1F569D',
+        confirmButtonColor: '#276BC5',
       });
       return;
     }
@@ -223,7 +223,7 @@ export class ViewBudgetComponent implements OnInit {
         title: 'Alert!',
         html: 'Please select year',
         icon: 'error',
-        confirmButtonColor: '#1F569D',
+        confirmButtonColor: '#276BC5',
       });
       return;
     }
@@ -242,7 +242,7 @@ export class ViewBudgetComponent implements OnInit {
             title: 'Alert!',
             html: 'failed to upload RKAP',
             icon: 'error',
-            confirmButtonColor: '#1F569D',
+            confirmButtonColor: '#276BC5',
           });
           return EMPTY;
         }),
@@ -262,7 +262,7 @@ export class ViewBudgetComponent implements OnInit {
               title: 'Success!',
               html: 'RKAP uploaded successfully',
               icon: 'success',
-              confirmButtonColor: '#1F569D',
+              confirmButtonColor: '#276BC5',
             });
           }
         }),
@@ -298,24 +298,24 @@ export class ViewBudgetComponent implements OnInit {
           data['total' + keysArray] * this.percentageNumber,
       }; // menambahkan objek keys pada data simulasi yg dibikin
       const nkeysArray = Object.keys(valkey);
-      nkeysArray.forEach((valnkey, index) => {
-        this.simulatedArrayData[index].push({
-          ['total' + valkey]: data.valkey.nkey * this.percentageNumber,
-          ['month' + valkey]: [],
-        });
-        this.simulatedData.valkey['total' + valnkey] =
-          data.valkey.nkey * this.percentageNumber; // menambahkan total pada data simulasi yg dibikin
-        this.months.forEach((month) => {
-          this.simulatedArrayData[index]['month' + valkey].push({
-            [month]:
-              data.valkey.nkey['month' + valnkey]['month'] *
-              this.percentageNumber,
-          });
-          this.simulatedData.valkey['month' + valnkey][month] =
-            data.valkey.nkey['month' + valnkey]['month'] *
-            this.percentageNumber;
-        });
-      });
+      // nkeysArray.forEach((valnkey, index) => {
+      //   this.simulatedArrayData[index].push({
+      //     ['total' + valkey]: data.valkey.nkey * this.percentageNumber,
+      //     ['month' + valkey]: [],
+      //   });
+      //   this.simulatedData.valkey['total' + valnkey] =
+      //     data.valkey.nkey * this.percentageNumber; // menambahkan total pada data simulasi yg dibikin
+      //   this.months.forEach((month) => {
+      //     this.simulatedArrayData[index]['month' + valkey].push({
+      //       [month]:
+      //         data.valkey.nkey['month' + valnkey]['month'] *
+      //         this.percentageNumber,
+      //     });
+      //     this.simulatedData.valkey['month' + valnkey][month] =
+      //       data.valkey.nkey['month' + valnkey]['month'] *
+      //       this.percentageNumber;
+      //   });
+      // });
     });
   }
 }

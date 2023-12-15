@@ -411,9 +411,11 @@ export class NewRequestComponent implements OnInit {
     this.createRequest.type = this.idTypeSubmission;
     this.createRequest.responsibleNopeg = this
       .idResponsibleNumber as unknown as number;
-    this.createRequest.personalNumber = this.userInfo.personalNumber;
+    // this.createRequest.personalNumber = this.userInfo.personalNumber;
+    this.createRequest.personalNumber = '582127';
     this.createRequest.costCenterId = this.costCenterData!.idCostCenter;
-    this.createRequest.createdBy = this.userInfo.personalNumber;
+    // this.createRequest.createdBy = this.userInfo.personalNumber;
+    this.createRequest.createdBy = '582127';
     this.createRequest.realizationItems = this.refactorItemsData(
       this.itemsForm.value.items
     );
