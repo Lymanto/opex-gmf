@@ -22,6 +22,7 @@
     <ckeditor
       (change)="setValEditor($event)"
       [(ngModel)]="editorData"
+      [config]="editorConfig"
       [editor]="Editor"
     ></ckeditor>
   </ng-container>

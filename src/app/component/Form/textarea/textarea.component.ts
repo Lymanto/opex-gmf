@@ -21,6 +21,32 @@ export class TextareaComponent {
   console = console;
   @Output() value: EventEmitter<string> = new EventEmitter<string>();
   public Editor = ClassicEditor;
+  editorConfig = {
+    toolbar: {
+      items: [
+        'heading',
+        '|',
+        'bold',
+        'italic',
+        '|',
+        'bulletedList',
+        'numberedList',
+        '|',
+        'insertTable',
+        '|',
+        '|',
+        '|',
+        'undo',
+        'redo',
+      ],
+    },
+
+    table: {
+      contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+    },
+    language: 'en',
+  };
+
   setVal(value: any) {
     this.value.emit(value.target.value);
   }

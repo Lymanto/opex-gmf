@@ -51,6 +51,28 @@ export class NeedApprovalComponent implements OnInit {
     totalItems: 0,
     currentPage: 0,
   };
+  dataStatus: selectType[] = [
+    {
+      id: 'REJECT',
+      value: 'Reject',
+    },
+    {
+      id: 'OPEN',
+      value: 'Open',
+    },
+    {
+      id: 'CLOSE',
+      value: 'Close',
+    },
+    {
+      id: 'REVISE',
+      value: 'Revise',
+    },
+    {
+      id: 'PROGRESS',
+      value: 'Progress',
+    },
+  ];
   statusType: string[] = ['OPEN', 'PROGRESS', 'CLOSED', 'REVISE', 'REJECT'];
   activeId: string = 'not-active';
   onClick(value: string) {
@@ -79,7 +101,7 @@ export class NeedApprovalComponent implements OnInit {
           title: 'Alert!',
           html: 'failed to get user info',
           // icon: 'success',
-          confirmButtonColor: '#1F569D',
+          confirmButtonColor: '#276BC5',
         });
       }
     } else {
@@ -178,6 +200,9 @@ export class NeedApprovalComponent implements OnInit {
     this.typeOfLetter = '';
     this.dinas = '';
     this.page = 1;
+    this.entryDate = '';
+    this.entryDateTo = '';
+
     this.getApproval();
   }
   onTaReff(val: any) {
@@ -200,9 +225,19 @@ export class NeedApprovalComponent implements OnInit {
     this.page = 1;
     this.getApproval();
   }
+  onChangeTypeOfLetter(val: any) {
+    this.typeOfLetter = val.id;
+    this.page = 1;
+    this.getApproval();
+  }
   onChangeStatusTo(val: any) {
     this.statusTo = val.id;
     this.page = 1;
+    this.getApproval();
+  }
+  onChangeTAReff(val: string) {
+    this.page = 1;
+    this.taReff = val;
     this.getApproval();
   }
   onChangeRequestNumber(val: string) {
