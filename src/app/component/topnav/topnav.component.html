@@ -11,6 +11,10 @@
     </div>
   </div>
   <div class="flex flex-row gap-3 items-center">
+    <input type="text" [formControl]="inputPersonalNumber" />
+    <button class="text-p-md text-neutral-100" (click)="changeUserInfo()">
+      Submit
+    </button>
     <div
       class="w-[48px] h-[48px] box-border p-3 bg-slate-50 border border-primary-border rounded-xl cursor-pointer"
     >

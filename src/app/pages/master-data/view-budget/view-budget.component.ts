@@ -298,15 +298,15 @@ export class ViewBudgetComponent implements OnInit {
           data['total' + keysArray] * this.percentageNumber,
       }; // menambahkan objek keys pada data simulasi yg dibikin
       const nkeysArray = Object.keys(valkey);
-      nkeysArray.forEach((valnkey) => {
-        this.simulatedArrayData[valkey].push({
+      nkeysArray.forEach((valnkey, index) => {
+        this.simulatedArrayData[index].push({
           ['total' + valkey]: data.valkey.nkey * this.percentageNumber,
           ['month' + valkey]: [],
         });
         this.simulatedData.valkey['total' + valnkey] =
           data.valkey.nkey * this.percentageNumber; // menambahkan total pada data simulasi yg dibikin
         this.months.forEach((month) => {
-          this.simulatedArrayData[valkey]['month' + valkey].push({
+          this.simulatedArrayData[index]['month' + valkey].push({
             [month]:
               data.valkey.nkey['month' + valnkey]['month'] *
               this.percentageNumber,

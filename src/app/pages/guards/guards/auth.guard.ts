@@ -18,7 +18,7 @@ import { LocalStorageService } from 'src/app/services/opex/local-storage/local-s
 })
 export class AuthGuard extends KeycloakAuthGuard implements CanActivateChild {
   userInfo: UserDataDTO = <UserDataDTO>{};
-  role: string[] = [];
+  role: string = '';
   localStorageService: any;
 
   constructor(
@@ -105,160 +105,147 @@ export class AuthGuard extends KeycloakAuthGuard implements CanActivateChild {
       ...this.localStorageService.getData(LocalServiceConst.ROLE),
     };
 
-    if (!_role._result) {
-      // Define a custom sorting order based on prefixes
-      // const customOrder: { [key: string]: number } = {
-      //   USER: 1,
-      //   SM_USER: 2,
-      //   VP_USER: 3,
-      //   MANAGER_PMO: 4,
-      //   PMO: 5,
-      //   SM_PMO: 6,
-      //   MANAGER_SME_SDA: 7,
-      //   MANAGER_SME_SAP: 8,
-      //   MANAGER_SME_INFRA: 9,
-      //   SME_SDA: 10,
-      //   SME_SAP: 11,
-      //   SME_INFRA: 12,
-      //   SM_ICT_SDA: 13,
-      //   SM_ICT_SAP: 14,
-      //   SM_ICT_INFRA: 15,
-      //   VP_ICT: 16,
-      // };
-      const keycloackRole = this.keycloak.getUserRoles();
-      // console.log(this.keycloak.getUserRoles());
-      const activeRole = [
-        'user',
-        'sm_user',
-        'vp_user',
-        'manager_user',
-        'pmo',
-        'sm_pmo',
-        'manager_sme_sda',
-        'manager_sme_sap',
-        'manager_sme_infra',
-        'sme_sda',
-        'sme_sap',
-        'sme_infra',
-        'sm_ict_sda',
-        'sm_ict_sap',
-        'sm_ict_infra',
-        'vp_ict',
-      ];
-      // FILTERING ROLE
-      this.role = keycloackRole
-        .filter((v) => activeRole.includes(v))
-        .map((v) => v.toUpperCase());
+    // if (!_role._result) {
+    // Define a custom sorting order based on prefixes
+    // const customOrder: { [key: string]: number } = {
+    //   USER: 1,
+    //   SM_USER: 2,
+    //   VP_USER: 3,
+    //   MANAGER_PMO: 4,
+    //   PMO: 5,
+    //   SM_PMO: 6,
+    //   MANAGER_SME_SDA: 7,
+    //   MANAGER_SME_SAP: 8,
+    //   MANAGER_SME_INFRA: 9,
+    //   SME_SDA: 10,
+    //   SME_SAP: 11,
+    //   SME_INFRA: 12,
+    //   SM_ICT_SDA: 13,
+    //   SM_ICT_SAP: 14,
+    //   SM_ICT_INFRA: 15,
+    //   VP_ICT: 16,
+    // };
+    const keycloackRole = this.keycloak.getUserRoles();
+    // console.log(this.keycloak.getUserRoles());
+    const activeRole = [
+      'user',
+      'sm_user',
+      'vp_user',
+      'manager_user',
+      'pmo',
+      'sm_pmo',
+      'manager_sme_sda',
+      'manager_sme_sap',
+      'manager_sme_infra',
+      'sme_sda',
+      'sme_sap',
+      'sme_infra',
+      'sm_ict_sda',
+      'sm_ict_sap',
+      'sm_ict_infra',
+      'vp_ict',
+    ];
+    // FILTERING ROLE
+    // this.role = keycloackRole
+    //   .filter((v) => activeRole.includes(v))
+    //   .map((v) => v.toUpperCase());
 
-      // injecting user, sm_user and vp_user keycloackRole by userinfo
-      if (
-        this.userInfo?.personalUnit?.includes('TA') &&
-        this.userInfo?.personalJob?.includes('VICE PRESIDENT')
-      ) {
-        this.role.push('VP TA');
-      } else if (
-        this.userInfo.personalUnit.includes('TAB') &&
-        this.userInfo?.personalJob.includes('SENIOR MANAGER')
-      ) {
-        this.role.push('SM TAB');
-      } else if (
-        this.userInfo.personalUnit.includes('TAB') &&
-        this.userInfo?.personalJob.includes('PROFESSIONAL')
-      ) {
-        this.role.push('TAB');
-      } else if (
-        this.userInfo.personalUnit.includes('TAM') &&
-        this.userInfo?.personalJob.includes('PROFESSIONAL')
-      ) {
-        this.role.push('TAM');
-      } else if (
-        this.userInfo.personalUnit.includes('TAM') &&
-        this.userInfo?.personalJob.includes('SENIOR MANAGER')
-      ) {
-        this.role.push('SM TAM');
-      } else if (
-        this.userInfo.personalUnit.includes('TAM') &&
-        this.userInfo?.personalJob.includes('VICE PRESIDENT')
-      ) {
-        this.role.push('VP TAM');
-      } else if (
-        this.userInfo.personalUnit.includes('TAP') &&
-        this.userInfo?.personalJob.includes('PROFESSIONAL')
-      ) {
-        this.role.push('TAP');
-      } else if (
-        this.userInfo.personalUnit.includes('TAP') &&
-        this.userInfo?.personalJob.includes('SENIOR MANAGER')
-      ) {
-        this.role.push('SM TAP');
-      } else if (
-        this.userInfo.personalUnit.includes('TAP') &&
-        this.userInfo?.personalJob.includes('VICE PRESIDENT')
-      ) {
-        this.role.push('VP TAP');
-      } else if (
-        this.userInfo.personalUnit.includes('TX') &&
-        this.userInfo?.personalJob.includes('VICE PRESIDENT')
-      ) {
-        this.role.push('VP TX');
-      } else if (
-        this.userInfo.personalUnit.includes('TX') &&
-        this.userInfo?.personalJob.includes('SENIOR MANAGER')
-      ) {
-        this.role.push('SM TX');
-      } else if (
-        this.userInfo.personalUnit.includes('TXC-3') &&
-        this.userInfo?.personalJob.includes('PROFESSIONAL')
-      ) {
-        this.role.push('TXC-3');
-      } else if (
-        this.userInfo.personalUnit.includes('DF') &&
-        this.userInfo?.personalJob.includes('DIRECTOR')
-      ) {
-        this.role.push('DF');
-      } else if (
-        this.userInfo.personalUnit.includes('DT') &&
-        this.userInfo?.personalJob.includes('DIRECTOR')
-      ) {
-        this.role.push('DT');
-      }
-      if (
-        this.userInfo?.personalTitle?.includes('SM ') &&
-        !keycloackRole?.includes('sm_user')
-      ) {
-        this.role.push('SM_USER');
-        // console.log('push list sm', this.role);
-      } else if (
-        this.userInfo?.personalTitle?.includes('VP ') &&
-        !keycloackRole?.includes('vp_user')
-      ) {
-        this.role.push('VP_USER');
-        console.log('push list vp', this.role);
-      } else if (
-        this.userInfo?.personalTitle?.includes('MANAGER ') &&
-        !keycloackRole?.includes('manager_user')
-      ) {
-        this.role.push('MANAGER_USER');
-      } else {
-        !keycloackRole.includes('user');
-        {
-          this.role.push('USER');
-          // console.log('push list user', this.role)
-        }
-        // console.log('NOT PUSHING user', this.role)
-      }
-
-      // this.role.sort((a, b) => {
-      //   const orderA = customOrder[a] || Number.MAX_SAFE_INTEGER;
-      //   const orderB = customOrder[b] || Number.MAX_SAFE_INTEGER;
-      //   return orderA - orderB;
-      // });
-      this.localStorageService.saveData(LocalServiceConst.ROLE, this.role[0]);
+    // injecting user, sm_user and vp_user keycloackRole by userinfo
+    if (
+      this.userInfo?.personalUnit?.includes('TA') &&
+      this.userInfo?.personalJob?.includes('VICE PRESIDENT')
+    ) {
+      this.role = 'VP TA';
+    } else if (
+      this.userInfo.personalUnit.includes('TAB') &&
+      this.userInfo?.personalJob.includes('SENIOR MANAGER')
+    ) {
+      this.role = 'SM TAB';
+    } else if (
+      this.userInfo.personalUnit.includes('TAB') &&
+      this.userInfo?.personalJob.includes('PROFESSIONAL')
+    ) {
+      this.role = 'TAB';
+    } else if (
+      this.userInfo.personalUnit.includes('TAM') &&
+      this.userInfo?.personalJob.includes('PROFESSIONAL')
+    ) {
+      this.role = 'TAM';
+    } else if (
+      this.userInfo.personalUnit.includes('TAM') &&
+      this.userInfo?.personalJob.includes('SENIOR MANAGER')
+    ) {
+      this.role = 'SM TAM';
+    } else if (
+      this.userInfo.personalUnit.includes('TAM') &&
+      this.userInfo?.personalJob.includes('VICE PRESIDENT')
+    ) {
+      this.role = 'VP TAM';
+    } else if (
+      this.userInfo.personalUnit.includes('TAP') &&
+      this.userInfo?.personalJob.includes('PROFESSIONAL')
+    ) {
+      this.role = 'TAP';
+    } else if (
+      this.userInfo.personalUnit.includes('TAP') &&
+      this.userInfo?.personalJob.includes('SENIOR MANAGER')
+    ) {
+      this.role = 'SM TAP';
+    } else if (
+      this.userInfo.personalUnit.includes('TAP') &&
+      this.userInfo?.personalJob.includes('VICE PRESIDENT')
+    ) {
+      this.role = 'VP TAP';
+    } else if (
+      this.userInfo.personalUnit.includes('TX') &&
+      this.userInfo?.personalJob.includes('VICE PRESIDENT')
+    ) {
+      this.role = 'VP TX';
+    } else if (
+      this.userInfo.personalUnit.includes('TX') &&
+      this.userInfo?.personalJob.includes('SENIOR MANAGER')
+    ) {
+      this.role = 'SM TX';
+    } else if (
+      this.userInfo.personalUnit.includes('TXC-3') &&
+      this.userInfo?.personalJob.includes('PROFESSIONAL')
+    ) {
+      this.role = 'TXC-3';
+    } else if (
+      this.userInfo.personalUnit.includes('DF') &&
+      this.userInfo?.personalJob.includes('DIRECTOR')
+    ) {
+      this.role = 'DF';
+    } else if (
+      this.userInfo.personalUnit.includes('DT') &&
+      this.userInfo?.personalJob.includes('DIRECTOR')
+    ) {
+      this.role = 'DT';
+    } else if (this.userInfo?.personalTitle?.includes('SM ')) {
+      this.role = 'SM_USER';
+      // console.log('push list sm', this.role);
+    } else if (this.userInfo?.personalTitle?.includes('VP ')) {
+      this.role = 'VP_USER';
+      console.log('push list vp', this.role);
+    } else if (this.userInfo?.personalTitle?.includes('MANAGER ')) {
+      this.role = 'MANAGER_USER';
     } else {
-      // console.log('masuk 2');
-      this.role = [_role?._result];
-      // console.log('ROLE =>', _role);
+      this.role = 'USER';
+      // console.log('push list user', this.role)
+      // console.log('NOT PUSHING user', this.role)
     }
+
+    // this.role.sort((a, b) => {
+    //   const orderA = customOrder[a] || Number.MAX_SAFE_INTEGER;
+    //   const orderB = customOrder[b] || Number.MAX_SAFE_INTEGER;
+    //   return orderA - orderB;
+    // });
+    this.localStorageService.saveData(LocalServiceConst.ROLE, this.role);
+    // } else {
+    //   // console.log('masuk 2');
+    //   this.role = [_role?._result];
+    //   // console.log('ROLE =>', _role);
+    // }
 
     // const userProfile = await this.keycloak.loadUserProfile(true);
 
