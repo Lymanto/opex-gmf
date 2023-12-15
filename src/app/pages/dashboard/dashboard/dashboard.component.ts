@@ -121,13 +121,7 @@ export class DashboardComponent implements OnInit {
     this.getDataTable();
     this.getDataPercentage();
   }
-  createArray(lastPage: number, page: number, long: number) {
-    const arr = [];
-    for (let i = 0; i < long; i++) {
-      arr.push(page + i);
-    }
-    return arr;
-  }
+
   checkStatus(value: string): boolean {
     if (this.statusType.includes(value)) {
       return true;

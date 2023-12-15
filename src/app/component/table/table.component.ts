@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivationEnd } from '@angular/router';
-import { newRequestUploadType, tableBodyType } from 'src/app/lib/types';
+import { newRequestUploadType } from 'src/app/lib/types';
 
 export const tabledata = [
   {
@@ -18,7 +18,6 @@ export class TableComponent implements OnInit {
   tabledata = tabledata;
   @Input() requestBody: newRequestUploadType[] = [];
   @Input() header!: string[];
-  @Input() body!: tableBodyType[];
   statusType: string[] = ['Open', 'Progress', 'Closed', 'Revise', 'Reject'];
   ngOnInit() {}
   checkStatus(value: string): boolean {
