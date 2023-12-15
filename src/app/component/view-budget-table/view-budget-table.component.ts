@@ -58,5 +58,5 @@ export class ViewBudgetTableComponent {
   getUploadFile(): void {
     const formData = new FormData();
     formData.append;
-  }
+  } //
 }
