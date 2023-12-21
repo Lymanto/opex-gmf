@@ -230,7 +230,6 @@ export class NewRequestComponent implements OnInit {
         }),
         tap((result: { data: any }) => {
           if (result && result.data) {
-            // Ensure result.data is a single array of glAccountType objects
 
             this.getItems.controls[index]
               .get('idGlAccount')
