@@ -43,7 +43,7 @@ const routes: Routes = [
     component: NeedApprovalComponent,
   },
   {
-    path: 'need-approval/detail',
+    path: 'need-approval/detail/:id',
     component: DetailComponent,
   },
   {

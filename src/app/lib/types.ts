@@ -12,24 +12,7 @@ export interface tableBodyReallocationType {
   uploadDate: string;
   description: string;
 }
-export interface tableBodyRkapType {
-  id: string;
-  financialIndicators: string;
-  glNumber: string;
-  total: string;
-  jan: string;
-  feb: string;
-  mar: string;
-  apr: string;
-  mei: string;
-  jun: string;
-  jul: string;
-  agu: string;
-  sep: string;
-  okt: string;
-  nov: string;
-  des: string;
-}
+
 export interface ApprovalType {
   idRealization: string;
   taReff: string | null;
@@ -41,6 +24,33 @@ export interface ApprovalType {
   statusTo: string;
   departmentTo: string;
   description: string;
+}
+export interface ApprovalDetailType {
+  idRealization: number;
+  uniqueId: string;
+  years: number;
+  month: number;
+  costCenterId: number;
+  draftNumber: number;
+  requestNumber: string;
+  taReff: string | null | undefined;
+  type: string;
+  typeOfLetter: string;
+  responsibleNopeg: string;
+  titleRequest: string;
+  noteRequest: string;
+  status: string;
+  statusId: number;
+  department: string;
+  personalNumber: string;
+  statusToId: number;
+  departmentTo: string;
+  personalNumberTo: string;
+  createdAt: Date;
+  createdBy: string;
+  updatedAt: Date;
+  updatedBy: Date | null;
+  contributors: null;
 }
 
 export interface userType {
@@ -156,23 +166,43 @@ export interface newRequestUploadType {
   file: File;
 }
 
-export interface viewBudgetUploadType {
-  id: number;
-  financialIndicators: string;
-  glNumber: number;
+export interface RKAPType {
+  title: string;
   total: number;
-  jan: number;
-  feb: number;
-  mar: number;
-  apr: number;
-  mei: number;
-  jun: number;
-  jul: number;
-  agu: number;
-  sep: number;
-  okt: number;
-  nov: number;
-  des: number;
+  month: {
+    JANUARI: number;
+    FEBRUARI: number;
+    MARET: number;
+    APRIL: number;
+    MEI: number;
+    JUNI: number;
+    JULI: number;
+    AGUSTUS: number;
+    SEPTEMBER: number;
+    OKTOBER: number;
+    NOVEMBER: number;
+    DESEMBER: number;
+  };
+  groupDetail?: RKAPGroupDetailType[];
+}
+export interface RKAPGroupDetailType {
+  title: string;
+  total: number;
+  glNumber: number;
+  month: {
+    JANUARI: number;
+    FEBRUARI: number;
+    MARET: number;
+    APRIL: number;
+    MEI: number;
+    JUNI: number;
+    JULI: number;
+    AGUSTUS: number;
+    SEPTEMBER: number;
+    OKTOBER: number;
+    NOVEMBER: number;
+    DESEMBER: number;
+  };
 }
 
 export interface CostCenterType {

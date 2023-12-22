@@ -38,7 +38,6 @@ import { ViewBudgetComponent as ViewBudgetMasterData } from './pages/master-data
 import { ItemReallocationComponent } from './component/item-reallocation/item-reallocation.component';
 import { StatusComponent } from './component/status/status.component';
 import { RequestVerificationComponent } from './component/need-approval-detail/request-verification/request-verification.component';
-import { ViewBudgetTableComponent } from './component/view-budget-table/view-budget-table.component';
 import { ReallocationRequestComponent } from './pages/reallocation-budget/reallocation-request/reallocation-request.component';
 import { RequestRealokasiComponent } from './pages/reallocation-budget/detail/request-realokasi/request-realokasi.component';
 import { DetailComponent } from './pages/need-approval/detail/detail.component';
@@ -107,7 +106,6 @@ function initializeKeycloak(keycloak: KeycloakService) {
     ItemReallocationComponent,
     StatusComponent,
     RequestVerificationComponent,
-    ViewBudgetTableComponent,
     ReallocationRequestComponent,
     RequestRealokasiComponent,
     DetailComponent,

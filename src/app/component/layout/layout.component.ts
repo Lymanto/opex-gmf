@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Flowbite } from 'src/app/lib/flowbite';
-
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -10,5 +9,4 @@ import { Flowbite } from 'src/app/lib/flowbite';
 export class LayoutComponent {
   @Input() currentUrl: string = '';
   @Input() currentUrlSubMenu: string = '';
-  @Input() needApproval: string = '50';
 }

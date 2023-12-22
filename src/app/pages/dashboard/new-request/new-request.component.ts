@@ -97,7 +97,7 @@ export class NewRequestComponent implements OnInit {
     this._onDestroy$.complete();
   }
   generateDinas(dinas: string): void {
-    this.personalUnit = dinas.slice(3, 5);
+    this.personalUnit = dinas.slice(0, 2);
     this.getCostCenter(this.personalUnit);
   }
 
@@ -120,6 +120,7 @@ export class NewRequestComponent implements OnInit {
         ...this.localStorageService.getData(LocalServiceConst.USER_INFO),
       };
       this.userInfo = JSON.parse(_userInfo?._result);
+      this.generateDinas(this.userInfo?.personalUnit);
     }
   }
 
@@ -168,7 +169,6 @@ export class NewRequestComponent implements OnInit {
       this.selectGroupData = this.selectGroupData.filter((item) => {
         return !this.selectedGroupData.includes(item.id);
       });
-      this.console.log(this.selectedGroupData);
       (this.itemsForm.get('items') as FormArray).push(this.createItem);
     }
   }
@@ -178,7 +178,6 @@ export class NewRequestComponent implements OnInit {
     if (itemsArray.length > 1) {
       itemsArray.removeAt(index);
     }
-    this.console.log('delete', this.selectedGroupData);
     const currentGl = this.selectedGroupData[index];
     this.selectedGroupData.splice(index, 1);
     const currentData = this.dataGL.filter((item) => {
@@ -371,10 +370,7 @@ export class NewRequestComponent implements OnInit {
     this.createRequest.docCategoryId = this.docCategories;
     this.createRequest.docName = this.docNames;
     const formdata = this.convertToFormData(this.createRequest);
-    formdata.forEach((value, key) => {
-      console.log(key + ' ' + value);
-    });
-    this.console.log(this.createRequest);
+
     this.newRequest
       .postSaveCreateRequestRealization(formdata)
       .pipe(
@@ -410,11 +406,9 @@ export class NewRequestComponent implements OnInit {
     this.createRequest.type = this.idTypeSubmission;
     this.createRequest.responsibleNopeg = this
       .idResponsibleNumber as unknown as number;
-    // this.createRequest.personalNumber = this.userInfo.personalNumber;
-    this.createRequest.personalNumber = '582127';
+    this.createRequest.personalNumber = this.userInfo.personalNumber;
     this.createRequest.costCenterId = this.costCenterData!.idCostCenter;
-    // this.createRequest.createdBy = this.userInfo.personalNumber;
-    this.createRequest.createdBy = '582127';
+    this.createRequest.createdBy = this.userInfo.personalNumber;
     this.createRequest.realizationItems = this.refactorItemsData(
       this.itemsForm.value.items
     );
@@ -427,7 +421,6 @@ export class NewRequestComponent implements OnInit {
     formdata.forEach((value, key) => {
       console.log(key + ' ' + value);
     });
-    this.console.log(this.createRequest);
     this.newRequest
       .postSubmitCreateRequestRealization(formdata)
       .pipe(

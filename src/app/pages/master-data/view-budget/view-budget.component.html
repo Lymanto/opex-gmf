@@ -147,22 +147,22 @@
                   {{ column }}
                 </th>
               </tr>
-              <tbody *ngFor="let item of body">
+              <tbody *ngFor="let item of dataRKAP; let i = index">
                 <tr
                   class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px] whitespace-nowrap"
                 >
                   <td>
-                    <button (click)="onClick(item.id)" type="button" class="">
+                    <button (click)="onClick(i)" type="button" class="">
                       <div
                         class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
                         [ngClass]="{
-                            'bg-primary-hover':item.id === activeId,
-                            'border-primary-hover':item.id === activeId,
+                            'bg-primary-hover':i === activeId,
+                            'border-primary-hover':i === activeId,
                           }"
                       >
                         <img
                           [src]="
-                            item.id === activeId
+                            i === activeId
                               ? 'assets/images/icons/ic-arrow-up-active.svg'
                               : 'assets/images/icons/ic-arrow-down.svg'
                           "
@@ -171,42 +171,45 @@
                       </div>
                     </button>
                   </td>
-                  <td class="h-[56px] px-4">{{ item.financialIndicators }}</td>
-                  <td class="h-[56px] px-4">{{ item.glNumber }}</td>
+                  <td class="h-[56px] px-4">{{ item.title }}</td>
+                  <td class="h-[56px] px-4">-</td>
                   <td class="h-[56px] px-4">{{ item.total }}</td>
-                  <td class="h-[56px] px-4">{{ item.jan }}</td>
-                  <td class="h-[56px] px-4">{{ item.feb }}</td>
-                  <td class="h-[56px] px-4">{{ item.mar }}</td>
-                  <td class="h-[56px] px-4">{{ item.apr }}</td>
-                  <td class="h-[56px] px-4">{{ item.jun }}</td>
-                  <td class="h-[56px] px-4">{{ item.jul }}</td>
-                  <td class="h-[56px] px-4">{{ item.agu }}</td>
-                  <td class="h-[56px] px-4">{{ item.sep }}</td>
-                  <td class="h-[56px] px-4">{{ item.okt }}</td>
-                  <td class="h-[56px] px-4">{{ item.nov }}</td>
-                  <td class="h-[56px] px-4">{{ item.des }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.JANUARI }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.FEBRUARI }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.MARET }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.APRIL }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.MEI }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.JUNI }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.JULI }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.AGUSTUS }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.SEPTEMBER }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.OKTOBER }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.NOVEMBER }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.DESEMBER }}</td>
                 </tr>
-                <tr
-                  *ngIf="item.id === activeId"
-                  class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px] whitespace-nowrap"
-                >
-                  <td></td>
-                  <td>Travel</td>
-                  <td>40011000</td>
-                  <td>111111</td>
-                  <td>115.864</td>
-                  <td>115.864</td>
-                  <td>773.24</td>
-                  <td>773.24</td>
-                  <td>773.24</td>
-                  <td>773.24</td>
-                  <td>773.24</td>
-                  <td>773.24</td>
-                  <td>773.24</td>
-                  <td>773.24</td>
-                  <td>773.24</td>
-                  <td>773.24</td>
-                </tr>
+                <ng-container *ngIf="i === activeId">
+                  <tr
+                    *ngFor="let subItem of item.groupDetail; let j = index"
+                    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px] whitespace-nowrap"
+                  >
+                    <td class="h-[56px] px-4"></td>
+                    <td class="h-[56px] px-4">{{ subItem.title }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.glNumber }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.total }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.JANUARI }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.FEBRUARI }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.MARET }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.APRIL }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.MEI }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.JUNI }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.JULI }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.AGUSTUS }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.SEPTEMBER }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.OKTOBER }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.NOVEMBER }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.DESEMBER }}</td>
+                  </tr>
+                </ng-container>
               </tbody>
             </table>
           </div>

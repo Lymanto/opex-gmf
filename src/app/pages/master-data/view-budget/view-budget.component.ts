@@ -2,12 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { format } from 'date-fns';
 import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
 import { UserDataDTO } from 'src/app/dto/user-data-dto';
-import {
-  glAccountType,
-  selectType,
-  tableBodyRkapType,
-  viewBudgetUploadType,
-} from 'src/app/lib/types';
+import { glAccountType, selectType, RKAPType } from 'src/app/lib/types';
 import { NewRequestService } from 'src/app/services/opex/dashboard/new-request.service';
 import { ViewBudgetService } from 'src/app/services/opex/master-data/view-budget.service';
 import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.service';
@@ -48,13 +43,12 @@ export class ViewBudgetComponent implements OnInit {
   uploadedFile: File | null = null;
   userInfo: UserDataDTO = <UserDataDTO>{};
   fileSize: string = '';
-  dataRKAP: any = [];
+  dataRKAP: RKAPType[] = [];
   isDisplayRkap: boolean = true;
   isDisplayRemaining: boolean = true;
   isDisplayActual: boolean = true;
   activeId: string | number = 'not-active';
   renderer: any;
-  @Input() body!: viewBudgetUploadType[];
 
   headers: string[] = [
     'Financial Indicator',
@@ -95,8 +89,6 @@ export class ViewBudgetComponent implements OnInit {
   getValueSelectBox(val: any): void {
     this.yearsSelected = parseInt(val.id);
   }
-  tableBody: viewBudgetUploadType[] = [];
-  NewRequestService: any;
   selectGroupData: selectType[] = [];
   selectGroupDetail: selectType[] = [];
 
@@ -113,6 +105,7 @@ export class ViewBudgetComponent implements OnInit {
     this.fetchGlAccount();
     this.generateYears();
     this.getUserInfo();
+    this.getRKAP();
   }
   async getUserInfo(): Promise<void> {
     if (!this.users.getPersonalInformationFromCache()) {
@@ -168,7 +161,25 @@ export class ViewBudgetComponent implements OnInit {
       )
       .subscribe();
   }
-
+  getRKAP(): void {
+    this.viewBudget
+      .getRKAP()
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred:', err);
+          return EMPTY;
+        }),
+        tap((result) => {
+          if (result && result.data) {
+            // Ensure result.data is a single array of glAccountType objects
+            const allData = result.data.flatMap((item) => item); // Convert array of arrays to a single array
+            this.dataRKAP = allData;
+          }
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
+  }
   refactorSelectGroupData(data: glAccountType[]): void {
     data.forEach((element: glAccountType) => {
       this.selectGroupData.push({
@@ -255,9 +266,7 @@ export class ViewBudgetComponent implements OnInit {
             this.fileSize = '';
 
             this.dataRKAP = result.data;
-            console.log('result', this.dataRKAP);
 
-            this.getSimulatedData(result.data);
             Swal.fire({
               title: 'Success!',
               html: 'RKAP uploaded successfully',
@@ -283,39 +292,5 @@ export class ViewBudgetComponent implements OnInit {
     } else {
       this.activeId = 'not-active';
     }
-  }
-
-  getSimulatedData(data: any) {
-    const keysArray = Object.keys(data);
-    keysArray.forEach((valkey) => {
-      this.simulatedArrayData.push({
-        [valkey]: [],
-        ['total' + keysArray]:
-          data['total' + keysArray] * this.percentageNumber,
-      });
-      this.simulatedData.valkey = {
-        ['total' + keysArray]:
-          data['total' + keysArray] * this.percentageNumber,
-      }; // menambahkan objek keys pada data simulasi yg dibikin
-      const nkeysArray = Object.keys(valkey);
-      // nkeysArray.forEach((valnkey, index) => {
-      //   this.simulatedArrayData[index].push({
-      //     ['total' + valkey]: data.valkey.nkey * this.percentageNumber,
-      //     ['month' + valkey]: [],
-      //   });
-      //   this.simulatedData.valkey['total' + valnkey] =
-      //     data.valkey.nkey * this.percentageNumber; // menambahkan total pada data simulasi yg dibikin
-      //   this.months.forEach((month) => {
-      //     this.simulatedArrayData[index]['month' + valkey].push({
-      //       [month]:
-      //         data.valkey.nkey['month' + valnkey]['month'] *
-      //         this.percentageNumber,
-      //     });
-      //     this.simulatedData.valkey['month' + valnkey][month] =
-      //       data.valkey.nkey['month' + valnkey]['month'] *
-      //       this.percentageNumber;
-      //   });
-      // });
-    });
   }
 }
