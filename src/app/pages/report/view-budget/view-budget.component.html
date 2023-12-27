@@ -81,53 +81,161 @@
         </div>
       </div>
     </div>
-    <div
-      class="border border-primary-border bg-neutral-10 rounded-3xl p-4 w-full h-16 mt-4"
-    >
-      <div class="flex justify-between items-center">
-        <div class="flex flex-col justify-center items-center">
-          <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">Description</p>
-          <p class="text-p-lg font-semibold text-neutral-100">RKAP Budget</p>
+
+    <div class="flex flex-col gap-3 min-w-full overflow-x-auto">
+      <div
+        class="border border-primary-border bg-neutral-10 rounded-3xl p-4 w-full mt-4"
+      >
+        <div class="flex justify-between items-center">
+          <div class="flex flex-col justify-start items-start">
+            <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">
+              Description
+            </p>
+            <p class="text-p-lg font-semibold text-neutral-100">RKAP Budget</p>
+          </div>
+          <app-button
+            [icon]="
+              isDisplayRkap
+                ? 'assets/images/icons/ic-arrow-down.svg'
+                : 'assets/images/icons/ic-arrow-up-active.svg'
+            "
+            [type]="isDisplayRkap ? 'primary-not-active' : 'primary'"
+            (click)="isDisplayRkap = !isDisplayRkap"
+          >
+            >
+          </app-button>
         </div>
-        <app-button
-          icon="assets/images/icons/ic-arrow-down.svg"
-          type="primary-not-active"
-        >
-        </app-button>
       </div>
-    </div>
-    <div
-      class="border border-primary-border bg-neutral-10 rounded-3xl p-4 w-full h-16 mt-4"
-    >
-      <div class="flex justify-between items-center">
-        <div class="flex flex-col justify-center items-center">
-          <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">Description</p>
-          <p class="text-p-lg font-semibold text-neutral-100">
-            Plan Realization
-          </p>
+
+      <ng-container *ngIf="!isDisplayRkap">
+        <div class="flex">
+          <div>
+            <table class="w-full">
+              <tr
+                class="text-center border border-b-2 border-x-white border-t-white border-b-primary-hover text-p-md tracking-[0.5px] whitespace-nowrap sticky top-0"
+              >
+                <th class="px-4">Action</th>
+                <th *ngFor="let column of headers" class="px-4">
+                  {{ column }}
+                </th>
+              </tr>
+              <tbody *ngFor="let item of dataRKAP; let i = index">
+                <tr
+                  class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px] whitespace-nowrap"
+                >
+                  <td>
+                    <button (click)="onClick(i)" type="button" class="">
+                      <div
+                        class="text-p-sm mx-auto tracking-[0.5px] border-solid border-2 border-primary-border text-primary-hover text-center w-[22px] h-[22px] rounded-full bg-tertiary-white"
+                        [ngClass]="{
+                            'bg-primary-hover':i === activeId,
+                            'border-primary-hover':i === activeId,
+                          }"
+                      >
+                        <img
+                          [src]="
+                            i === activeId
+                              ? 'assets/images/icons/ic-arrow-up-active.svg'
+                              : 'assets/images/icons/ic-arrow-down.svg'
+                          "
+                          alt="Arrow down"
+                        />
+                      </div>
+                    </button>
+                  </td>
+                  <td class="h-[56px] px-4">{{ item.title }}</td>
+                  <td class="h-[56px] px-4">-</td>
+                  <td class="h-[56px] px-4">{{ item.total }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.JANUARI }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.FEBRUARI }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.MARET }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.APRIL }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.MEI }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.JUNI }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.JULI }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.AGUSTUS }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.SEPTEMBER }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.OKTOBER }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.NOVEMBER }}</td>
+                  <td class="h-[56px] px-4">{{ item.month.DESEMBER }}</td>
+                </tr>
+                <ng-container *ngIf="i === activeId">
+                  <tr
+                    *ngFor="let subItem of item.groupDetail; let j = index"
+                    class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border bg-primary-bg-2 text-p-md tracking-[0.5px] whitespace-nowrap"
+                  >
+                    <td class="h-[56px] px-4"></td>
+                    <td class="h-[56px] px-4">{{ subItem.title }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.glNumber }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.total }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.JANUARI }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.FEBRUARI }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.MARET }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.APRIL }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.MEI }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.JUNI }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.JULI }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.AGUSTUS }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.SEPTEMBER }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.OKTOBER }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.NOVEMBER }}</td>
+                    <td class="h-[56px] px-4">{{ subItem.month.DESEMBER }}</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <app-button
-          icon="assets/images/icons/ic-arrow-down.svg"
-          type="primary-not-active"
-        >
-        </app-button>
+      </ng-container>
+      <div
+        class="border border-primary-border bg-neutral-10 rounded-3xl p-4 w-full mt-4"
+      >
+        <div class="flex justify-between items-center">
+          <div class="flex flex-col justify-start items-start">
+            <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">
+              Description
+            </p>
+            <p class="text-p-lg font-semibold text-neutral-100">
+              Actual Realization
+            </p>
+          </div>
+          <app-button
+            [icon]="
+              isDisplayActual
+                ? 'assets/images/icons/ic-arrow-down.svg'
+                : 'assets/images/icons/ic-arrow-up-active.svg'
+            "
+            [type]="isDisplayActual ? 'primary-not-active' : 'primary'"
+            (click)="isDisplayActual = !isDisplayActual"
+          >
+            >
+          </app-button>
+        </div>
       </div>
-    </div>
-    <div
-      class="border border-primary-border bg-neutral-10 rounded-3xl p-4 w-full h-16 mt-4"
-    >
-      <div class="flex justify-between items-center">
-        <div class="flex flex-col justify-center items-center">
-          <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">Description</p>
-          <p class="text-p-lg font-semibold text-neutral-100">
-            Remaining Budget
-          </p>
+      <div
+        class="border border-primary-border bg-neutral-10 rounded-3xl p-4 w-full mt-4"
+      >
+        <div class="flex justify-between items-center">
+          <div class="flex flex-col justify-start items-start">
+            <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">
+              Description
+            </p>
+            <p class="text-p-lg font-semibold text-neutral-100">
+              Remaining Budget
+            </p>
+          </div>
+          <app-button
+            [icon]="
+              isDisplayRemaining
+                ? 'assets/images/icons/ic-arrow-down.svg'
+                : 'assets/images/icons/ic-arrow-up-active.svg'
+            "
+            [type]="isDisplayRemaining ? 'primary-not-active' : 'primary'"
+            (click)="isDisplayRemaining = !isDisplayRemaining"
+          >
+            >
+          </app-button>
         </div>
-        <app-button
-          icon="assets/images/icons/ic-arrow-down.svg"
-          type="primary-not-active"
-        >
-        </app-button>
       </div>
     </div>
   </div>

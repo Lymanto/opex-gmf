@@ -25,9 +25,9 @@
         class="p-2 bg-slate-50 border border-primary-border rounded-2xl flex flex-row gap-2 items-center cursor-pointer"
         (click)="active = !active"
       >
-        <div class="relative w-[34px] h-[34px] rounded-full">
+        <div class="relative w-[34px] h-[34px] rounded-full overflow-hidden">
           <img
-            src="assets/images/dummy.png"
+            [src]="userInfo.personalImage"
             class="absolute object-cover"
             alt="profile"
           />

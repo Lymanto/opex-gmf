@@ -270,7 +270,7 @@ export class TopnavComponent implements OnInit {
           this.role,
         icon: 'success',
         confirmButtonColor: '#276BC5',
-      });
+      }).then(() => window.location.reload());
     } catch (error) {
       console.log('error: ', error);
       Swal.fire({

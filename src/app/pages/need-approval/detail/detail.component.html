@@ -8,7 +8,7 @@
         type="primary-not-active"
         label="Back"
         [isHref]="true"
-        href="/dashboard"
+        href="/need-approval"
       />
       <div class="flex flex-col items-center justify-center">
         <p class="text-p-lg font-medium text-neutral-100">TD/1043/8/23</p>
@@ -82,16 +82,16 @@
         </p>
       </div>
     </div>
-    <ng-container *ngIf="tabState === 'requestVerification'">
-      <app-request-verification />
+    <ng-container *ngIf="tabState === 'requestVerification' && data">
+      <app-request-verification [data]="data" />
     </ng-container>
-    <ng-container *ngIf="tabState === 'reallocationBudget'">
+    <ng-container *ngIf="tabState === 'reallocationBudget' && data">
       <app-reallocaton-budget />
     </ng-container>
-    <ng-container *ngIf="tabState === 'remark'">
+    <ng-container *ngIf="tabState === 'remark' && data">
       <app-remark />
     </ng-container>
-    <ng-container *ngIf="tabState === 'trackingApproval'">
+    <ng-container *ngIf="tabState === 'trackingApproval' && data">
       <app-tracking-approval />
     </ng-container>
   </div>

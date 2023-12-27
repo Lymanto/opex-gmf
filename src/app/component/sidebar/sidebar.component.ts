@@ -1,4 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
+import { LocalServiceConst } from 'src/app/constanta/local-service-constanta';
+import { UserDataDTO } from 'src/app/dto/user-data-dto';
+import { LocalStorageService } from 'src/app/services/opex/local-storage/local-storage.service';
+import { ApprovalService } from 'src/app/services/opex/need-approval/approval.service';
+import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.service';
+import Swal from 'sweetalert2';
 
 type SidebarData = {
   path: string;
@@ -111,11 +118,57 @@ export const sidebarData: SidebarData[] = [
 export class SidebarComponent implements OnInit {
   @Input() active: string = '';
   @Input() activeSubMenu: string = '';
-  @Input() needApproval!: string;
+  needApproval!: string;
 
   sidebarData: SidebarData[] = sidebarData;
-  constructor() {}
   ngOnInit() {
     sidebarData[1]['needApproval'] = this.needApproval;
+    this.getUserInfo();
+    this.getNeedApprovalNumber();
+  }
+  userInfo: UserDataDTO = <UserDataDTO>{};
+  constructor(
+    private approval: ApprovalService,
+    private readonly localStorageService: LocalStorageService,
+    private users: GetAllUsersService
+  ) {}
+  private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+  async getUserInfo(): Promise<void> {
+    if (!this.users.getPersonalInformationFromCache()) {
+      try {
+        let _data = await this.users.getUserInfo();
+        this.userInfo = _data;
+      } catch {
+        Swal.fire({
+          title: 'Alert!',
+          html: 'failed to get user info',
+          // icon: 'success',
+          confirmButtonColor: '#1F569D',
+        });
+      }
+    } else {
+      let _userInfo: any = {
+        ...this.localStorageService.getData(LocalServiceConst.USER_INFO),
+      };
+      this.userInfo = JSON.parse(_userInfo?._result);
+    }
+  }
+  getNeedApprovalNumber(): void {
+    this.approval
+      .getCountApproval(this.userInfo.personalNumber)
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred:', err);
+          return EMPTY;
+        }),
+        tap((result) => {
+          const allData = result.data; // Convert array of arrays to a single array
+
+          sidebarData[1]['needApproval'] = allData as unknown as string;
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
   }
 }

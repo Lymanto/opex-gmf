@@ -5,28 +5,28 @@
       [isReadOnly]="true"
       id="entryDate"
       label="Entry Date"
-      value="30 Maret 2023"
+      [value]="formatDate(data.createdAt)"
     />
     <app-input-text
       type="normal"
       [isReadOnly]="true"
       id="userDinas"
       label="User (Dinas)"
-      value="TD"
+      [value]="data.m_cost_center.dinas"
     />
     <app-input-text
       type="normal"
       [isReadOnly]="true"
       id="taReff"
       label="TA Reff"
-      value="TAB/RA.TD/08.029/2023"
+      [value]="data.taReff"
     />
     <app-input-text
       type="normal"
       [isReadOnly]="true"
       id="typeOfSubmission"
       label="Type Of Submission"
-      value="Uang Muka"
+      [value]="data.type"
     />
   </div>
   <div class="grid grid-cols-4 gap-4">
@@ -35,14 +35,14 @@
       [isReadOnly]="true"
       id="nameOfRequest"
       label="Name of Request"
-      value="Ade Ma’rufan Amala"
+      [value]="data.roleAssignment.employee.personalName"
     />
     <app-input-text
       type="normal"
       [isReadOnly]="true"
       id="idNumberOfRequest"
       label="ID Number of Request"
-      value="582127"
+      [value]="data.createdBy"
     />
     <app-input-text
       type="normal"
@@ -56,7 +56,7 @@
       [isReadOnly]="true"
       id="idNumberOfResponsible"
       label="ID Number of Responsible"
-      value="580448"
+      [value]="data.responsibleNopeg"
     />
   </div>
   <div class="grid grid-cols-3 gap-4">
@@ -65,21 +65,21 @@
       [isReadOnly]="true"
       id="status"
       label="Status"
-      value="Progress"
+      [value]="data.status"
     />
     <app-input-text
       type="normal"
       [isReadOnly]="true"
       id="statusTo"
       label="Status To"
-      value="RIFKY SEFTI NUGROHO"
+      [value]="data.personalNumberTo"
     />
     <app-input-text
       type="normal"
       [isReadOnly]="true"
       id="departmentTo"
       label="Department To"
-      value="JKTTAB"
+      [value]="data.departmentTo"
     />
   </div>
   <app-textarea
@@ -88,16 +88,16 @@
     [required]="true"
     type="normal"
     [isReadOnly]="true"
-    content="Permohonan persetujuan realisasi anggaran perpanjagan lisensi Webex meeting, Cloud device registration, add on storage, lisensi server, lisensi VMware"
+    [content]="data.titleRequest"
     [isAsk]="true"
   />
   <app-textarea
     id="noteOfRequest"
     label="Note of Request"
     [required]="true"
-    type="normal"
+    type="rich"
     [isReadOnly]="true"
-    content="Keterangan detail : Renewal IDR 209,449,500. Lisensi aplikasi WEBEX meeting / confrence (7 ea). Lisensi Cloud device registration (5 ea). Addon Storage 100 Gb (1 ea). Lisensi Server CTI-CMS-1000-M5-K9 (2 ea). Lisensi Cisco Webex Video Integration for Microsoft Teams (5 ea). Estimasi biaya manage service infrastruktur maintenance selama 1 tahun sebesar RP 108.000.000 Total biaya yang dibutuhkan RP 317.449.500 (Konversi Kurs RKAP 2023 RP 14,350)"
+    [editorData]="data.noteRequest"
     [isAsk]="true"
   />
   <div class="flex flex-col gap-5">
@@ -116,121 +116,129 @@
       </div>
     </div>
     <form class="flex flex-col gap-4">
-      <div
-        class="flex flex-col gap-4 p-4 box-border border border-primary-border rounded-3xl bg-primary-bg-2"
-      >
-        <div class="flex justify-between items-center">
-          <div class="flex flex-col justify-center items-center">
-            <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">Item</p>
-            <p class="text-p-lg font-semibold text-neutral-100">1</p>
+      <div *ngFor="let item of data.realizationItem; let i = index">
+        <div
+          class="flex flex-col gap-4 p-4 box-border border border-primary-border rounded-3xl bg-primary-bg-2"
+        >
+          <div class="flex justify-between items-center">
+            <div class="flex flex-col justify-center items-center">
+              <p class="text-p-sm text-neutral-60 p-0 m-0 leading-3">Item</p>
+              <p class="text-p-lg font-semibold text-neutral-100">
+                {{ i + 1 }}
+              </p>
+            </div>
+            <app-button
+              label="Hide Item"
+              type="primary"
+              icon="assets/images/icons/ic-eye-white-slash.svg"
+            />
           </div>
-          <app-button
-            label="Hide Item"
-            type="primary"
-            icon="assets/images/icons/ic-eye-white-slash.svg"
+          <hr class="w-full h-px bg-primary-border border-0" />
+          <div class="grid grid-cols-3 gap-4">
+            <app-input-text
+              type="normal"
+              id="group"
+              label="Group"
+              [value]="item.m_gl_account.groupGl"
+              [isReadOnly]="true"
+            ></app-input-text>
+            <app-input-text
+              type="normal"
+              id="groupDetail"
+              label="Group Detail"
+              [value]="item.m_gl_account.groupDetail"
+              [isReadOnly]="true"
+            ></app-input-text>
+            <app-input-text
+              type="normal"
+              id="GLNumber"
+              label="G/L Number"
+              [value]="item.m_gl_account.glAccount"
+              [isAsk]="true"
+              [isReadOnly]="true"
+            />
+          </div>
+          <div class="grid grid-cols-3 gap-4">
+            <app-input-text
+              type="currency"
+              id="available"
+              label="Available"
+              value="belum"
+              [isReadOnly]="true"
+            ></app-input-text>
+            <app-input-text
+              type="normal"
+              id="periodStart"
+              label="Period Start"
+              [value]="formatDate(item.periodStart)"
+              [isReadOnly]="true"
+            ></app-input-text>
+            <app-input-text
+              type="normal"
+              id="periodFinish"
+              label="Period Finish"
+              [value]="formatDate(item.periodFinish)"
+              [isAsk]="true"
+              [isReadOnly]="true"
+            />
+          </div>
+          <div class="grid grid-cols-4 gap-4">
+            <app-input-text
+              type="currency"
+              id="submissionValue"
+              label="Submission Value"
+              [value]="item.amountSubmission"
+              [isAsk]="true"
+              [isReadOnly]="true"
+            ></app-input-text>
+            <app-input-text
+              type="currency"
+              id="HPSValue"
+              [value]="item.amountHps"
+              label="HPS Value (TAP)"
+              [isReadOnly]="true"
+            ></app-input-text>
+            <app-input-text
+              type="currency"
+              id="correctionValue"
+              label="Correction Value (TAB)"
+              [value]="item.amountCorrection"
+              [isReadOnly]="true"
+            ></app-input-text>
+            <app-input-text
+              type="currency"
+              id="approvedValue"
+              label="Approved Value (TXC)"
+              [value]="item.amount"
+              [isReadOnly]="true"
+            />
+          </div>
+          <app-input-text
+            type="normal"
+            id="descriptionPB"
+            label="Description PB-Y-02"
+            value="Pengadaan Software"
+            [value]="item.descPby"
+            [isAsk]="true"
+            [isReadOnly]="true"
           />
-        </div>
-        <hr class="w-full h-px bg-primary-border border-0" />
-        <div class="grid grid-cols-3 gap-4">
           <app-input-text
             type="normal"
-            id="group"
-            label="Group"
-            value="Rental Expense"
+            id="remarkListPB"
+            label="Remark List PB-Y-02"
+            [isAsk]="true"
+            [value]="item.remarkPby"
             [isReadOnly]="true"
-          ></app-input-text>
-          <app-input-text
+          />
+          <app-textarea
+            id="memo"
             type="normal"
-            id="groupDetail"
-            label="Group Detail"
-            value="Building Rental"
-            [isReadOnly]="true"
-          ></app-input-text>
-          <app-input-text
-            type="normal"
-            id="GLNumber"
-            label="G/L Number"
-            value="40041002"
+            label="Memo"
+            [content]="item.memo"
             [isAsk]="true"
             [isReadOnly]="true"
           />
         </div>
-        <div class="grid grid-cols-3 gap-4">
-          <app-input-text
-            type="currency"
-            id="available"
-            label="available"
-            value="62927,18"
-            [isReadOnly]="true"
-          ></app-input-text>
-          <app-input-text
-            type="normal"
-            id="periodStart"
-            label="Period Start"
-            value="30 Maret 2023"
-            [isReadOnly]="true"
-          ></app-input-text>
-          <app-input-text
-            type="normal"
-            id="periodFinish"
-            label="Period Finish"
-            value="30 Desember 2023"
-            [isAsk]="true"
-            [isReadOnly]="true"
-          />
-        </div>
-        <div class="grid grid-cols-4 gap-4">
-          <app-input-text
-            type="currency"
-            id="submissionValue"
-            label="Submission Value"
-            value="62927,18"
-            [isAsk]="true"
-            [isReadOnly]="true"
-          ></app-input-text>
-          <app-input-text
-            type="currency"
-            id="HPSValue"
-            label="HPS Value (TAP)"
-            [isReadOnly]="true"
-          ></app-input-text>
-          <app-input-text
-            type="currency"
-            id="correctionValue"
-            label="Correction Value (TAB)"
-            [isReadOnly]="true"
-          ></app-input-text>
-          <app-input-text
-            type="currency"
-            id="approvedValue"
-            label="Approved Value (TXC)"
-            [isReadOnly]="true"
-          />
-        </div>
-        <app-input-text
-          type="normal"
-          id="descriptionPB"
-          label="Description PB-Y-02"
-          value="Pengadaan Software"
-          [isAsk]="true"
-          [isReadOnly]="true"
-        />
-        <app-input-text
-          type="normal"
-          id="remarkListPB"
-          label="Remark List PB-Y-02"
-          [isAsk]="true"
-          value="Skilled"
-          [isReadOnly]="true"
-        />
-        <app-textarea
-          id="memo"
-          type="normal"
-          label="Memo"
-          content="Permohonan persetujuan realisasi anggaran perpanjagan lisensi Webex meeting, Cloud device registration, add on storage, lisensi server, lisensi VMware dengan nilai 20.949,75 USD menggunakan budget Building-Rental (40041002)"
-          [isAsk]="true"
-          [isReadOnly]="true"
-        />
       </div>
     </form>
     <div class="flex flex-col gap-3">
@@ -368,7 +376,34 @@
       data-modal-toggle="uploadFile"
     />
   </div>
-  <app-table type="createNewRequestTable"></app-table>
+  <app-table type="createNewRequestTable">
+    <tbody *ngFor="let item of data.fileUploads; let i = index">
+      <tr
+        class="text-center border border-x-white border-t-white border-b-1 border-b-primary-border text-p-md tracking-[0.5px]"
+      >
+        <td class="p-4">
+          {{ i + 1 }}
+        </td>
+        <td>
+          {{ item.docName }}
+        </td>
+        <td>
+          {{ item.docType }}
+        </td>
+        <td>{{ item.docSize }} MB</td>
+        <td>
+          {{ item.createdBy }}
+        </td>
+        <td>
+          {{ item.department }}
+        </td>
+        <td>
+          {{ formatDate(item.createdAt) }}
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </app-table>
   <div class="flex gap-2 mt-5 w-full items-center justify-center">
     <app-button
       icon="assets/images/icons/ic-save.svg"

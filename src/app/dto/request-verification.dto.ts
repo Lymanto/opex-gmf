@@ -1,3 +1,5 @@
+import { CostCenterType, glAccountType, mGlAccountType } from '../lib/types';
+
 interface Employee {
   personalJob: string;
   personalName: string;
@@ -27,15 +29,16 @@ interface RealizationItem {
   amountSubmission: number;
   amountHps: number | null;
   amountCorrection: number | null;
-  periodStart: string;
-  periodFinish: string;
+  periodStart: Date;
+  periodFinish: Date;
   descPby: string;
   remarkPby: string;
   memo: string | null;
-  createdAt: string;
+  createdAt: Date;
   createdBy: string;
-  updatedAt: string;
+  updatedAt: Date;
   updatedBy: string | null;
+  m_gl_account: glAccountType;
 }
 
 interface FileUpload {
@@ -49,9 +52,9 @@ interface FileUpload {
   docSize: number;
   docType: string;
   department: string;
-  createdAt: string;
+  createdAt: Date;
   createdBy: string;
-  updatedAt: string;
+  updatedAt: Date;
   updatedBy: string | null;
 }
 
@@ -60,7 +63,7 @@ export interface RealizationDTO {
   uniqueId: string;
   years: number;
   month: number;
-  costCenterId: number;
+  m_cost_center: CostCenterType;
   draftNumber: number;
   requestNumber: string;
   taReff: string | null;
@@ -76,12 +79,12 @@ export interface RealizationDTO {
   statusToId: number;
   departmentTo: string;
   personalNumberTo: string;
-  createdAt: string;
+  createdAt: Date;
   createdBy: string;
-  updatedAt: string;
+  updatedAt: Date;
   updatedBy: string | null;
   contributors: any;
-  roleAssignment: RoleAssignment[];
+  roleAssignment: RoleAssignment;
   realizationItem: RealizationItem[];
   fileUploads: FileUpload[];
 }
