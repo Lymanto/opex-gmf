@@ -18,4 +18,13 @@ export class ViewBudgetService {
   getRKAP(): Observable<HttpResult<RKAPType[]>> {
     return this.httpClient.get<HttpResult<RKAPType[]>>(`${this.url}/all`);
   }
+  getRKAPByFilter(
+    years: string | null,
+    costCenter: string | null,
+    percentage: string | null
+  ): Observable<HttpResult<RKAPType[]>> {
+    return this.httpClient.get<HttpResult<RKAPType[]>>(
+      `${this.url}/all/filter?years=${years}${costCenter}${percentage}`
+    );
+  }
 }

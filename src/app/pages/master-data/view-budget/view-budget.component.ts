@@ -35,7 +35,7 @@ export class ViewBudgetComponent implements OnInit {
     'DESEMBER',
   ];
 
-  yearsSelected!: number;
+  yearsSelected: number = new Date().getFullYear();
   currentYear: string = format(new Date(), 'yyyy');
   isUploadSuccess: boolean = false;
   isUploadError: boolean = false;
@@ -163,7 +163,7 @@ export class ViewBudgetComponent implements OnInit {
   }
   getRKAP(): void {
     this.viewBudget
-      .getRKAP()
+      .getRKAPByFilter(this.yearsSelected.toString(), '', '')
       .pipe(
         catchError((err) => {
           console.error('Error occurred:', err);

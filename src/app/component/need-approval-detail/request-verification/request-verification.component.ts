@@ -11,7 +11,9 @@ import { RequestVerificationService } from 'src/app/services/opex/need-approval/
 })
 export class RequestVerificationComponent implements OnInit {
   @Input() data!: RealizationDTO;
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
   formatDate(val: Date): string {
     return format(new Date(val), 'dd MMM yyyy');
   }

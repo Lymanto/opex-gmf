@@ -53,8 +53,7 @@
         [disabled]="isDisabled"
         [required]="required"
         [value]="value"
-        [(ngModel)]="text"
-        (blur)="touched($event)"
+        (change)="getValue($event)"
       />
       <div class="absolute right-3 top-1/2 -translate-y-1/2">USD</div>
     </div>

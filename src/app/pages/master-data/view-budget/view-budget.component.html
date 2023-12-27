@@ -31,7 +31,11 @@
       <div
         class="grow grid justify-between items-center grid-cols-3 gap-3 border-r border-r-primary-border pr-3"
       >
-        <app-select-box id="years" label="Years"></app-select-box>
+        <app-select-box
+          id="years"
+          label="Years"
+          [data]="yearsData"
+        ></app-select-box>
         <app-select-box id="dinas" label="Dinas"></app-select-box>
         <app-input-text
           type="normal"
