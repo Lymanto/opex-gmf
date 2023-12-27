@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import NeedApprovalComponent from './need-approval.component';
+import { NeedApprovalComponent } from './need-approval.component';
 
 describe('NeedApprovalComponent', () => {
   let component: NeedApprovalComponent;

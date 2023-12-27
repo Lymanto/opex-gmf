@@ -374,6 +374,7 @@
       icon="assets/images/icons/ic-save.svg"
       type="primary"
       label="Save"
+      *ngIf=""
     />
     <!-- get data dari BE untuk request verification , panggil si phasenya (dari statusId) kirim data sesuai yang diminta BE statusId,statusToId,status,config{button} -->
 
@@ -393,7 +394,7 @@
       type="primary"
       label="Take Project"
     />
-    <app-button 
+    <app-button
       icon="assets/images/icons/ic-check-circle.svg"
       type="primary-not-active"
       label="Untake Project"

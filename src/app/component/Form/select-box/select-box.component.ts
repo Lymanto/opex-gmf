@@ -21,15 +21,15 @@ import { selectType } from 'src/app/lib/types';
   selector: 'app-select-box',
   templateUrl: './select-box.component.html',
   styleUrls: ['./select-box.component.css'],
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    NgFor,
-    NgIf,
-    AsyncPipe,
-  ],
+  // standalone: true,
+  // imports: [
+  //   FormsModule,
+  //   MatAutocompleteModule,
+  //   ReactiveFormsModule,
+  //   NgFor,
+  //   NgIf,
+  //   AsyncPipe,
+  // ],
 })
 export class SelectBoxComponent implements OnInit {
   @Input() label: string = '';

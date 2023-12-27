@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { EMPTY, Subject, catchError, takeUntil } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
 import { RequestVerificationService } from 'src/app/services/opex/need-approval/request-verification.service';
 
 @Component({
@@ -7,8 +8,17 @@ import { RequestVerificationService } from 'src/app/services/opex/need-approval/
   templateUrl: './request-verification.component.html',
   styleUrls: ['./request-verification.component.css'],
 })
-export class RequestVerificationComponent{
-  constructor(private requestVerification : RequestVerificationService){}
+export class RequestVerificationComponent {
+  id: number;
+  constructor(
+    private requestVerification: RequestVerificationService,
+    private readonly route: ActivatedRoute
+  ) {
+    const _id: number = parseInt(
+      this.route.snapshot.paramMap.get('id') as string
+    );
+    this.id = _id;
+  }
   private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
   ngOnDestroy(): void {
@@ -16,25 +26,25 @@ export class RequestVerificationComponent{
     this._onDestroy$.complete();
   }
 
-  ngOnInit(){
-  // this.fetchRequestVerification()
+  ngOnInit() {
+    this.fetchRequestVerification();
   }
 
-  // fetchRequestVerification(): void {
-  //   this.requestVerification
-  //     .getRequestVerification()
-  //     .pipe(
-  //       catchError((err) => {
-  //         console.error('Error occurred:', err);
-  //         return EMPTY;
-  //       }),
-  //       tap((result) => {
-  //         if (result && result.data) {
-  //           const allData = result.data.flatMap((item) => item); 
-  //         }
-  //       }),
-  //       takeUntil(this._onDestroy$)
-  //     )
-  //     .subscribe();
-  // }
+  fetchRequestVerification(): void {
+    this.requestVerification
+      .getRequestVerification(this.id)
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred:', err);
+          return EMPTY;
+        }),
+        tap((result) => {
+          if (result && result.data) {
+            const allData = result.data.flatMap((item) => item);
+          }
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
+  }
 }
