@@ -12,7 +12,7 @@ export class TextareaComponent {
   @Input() id: string = '';
   @Input() placeholder: string = '';
   @Input() required: boolean = false;
-  @Input() content: string = '';
+  @Input() content: string | null = '';
   @Input() type: string = '';
   @Input() isAsk: boolean = false;
   @Input() isReadOnly: boolean = false;
@@ -40,7 +40,6 @@ export class TextareaComponent {
         'redo',
       ],
     },
-
     table: {
       contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
     },

@@ -34,7 +34,7 @@ export class InputTextComponent implements ControlValueAccessor {
   @Input() isAsk: boolean = false;
   @Input() isDisabled: boolean = false;
   @Input() isReadOnly: boolean = false;
-  @Input() value: string | number | undefined = '';
+  @Input() value: string | number | null | undefined = '';
   @Input() type: string = '';
   console = console;
   @Output() currentValue: EventEmitter<string> = new EventEmitter<string>();

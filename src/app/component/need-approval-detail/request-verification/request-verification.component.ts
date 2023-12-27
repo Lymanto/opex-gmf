@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { format } from 'date-fns';
 import { EMPTY, Subject, catchError, takeUntil } from 'rxjs';
+import { RealizationDTO } from 'src/app/dto/request-verification.dto';
 import { RequestVerificationService } from 'src/app/services/opex/need-approval/request-verification.service';
 
 @Component({
@@ -7,34 +9,10 @@ import { RequestVerificationService } from 'src/app/services/opex/need-approval/
   templateUrl: './request-verification.component.html',
   styleUrls: ['./request-verification.component.css'],
 })
-export class RequestVerificationComponent{
-  constructor(private requestVerification : RequestVerificationService){}
-  private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-  ngOnDestroy(): void {
-    this._onDestroy$.next();
-    this._onDestroy$.complete();
+export class RequestVerificationComponent implements OnInit {
+  @Input() data!: RealizationDTO;
+  ngOnInit(): void {}
+  formatDate(val: Date): string {
+    return format(new Date(val), 'dd MMM yyyy');
   }
-
-  ngOnInit(){
-  // this.fetchRequestVerification()
-  }
-
-  // fetchRequestVerification(): void {
-  //   this.requestVerification
-  //     .getRequestVerification()
-  //     .pipe(
-  //       catchError((err) => {
-  //         console.error('Error occurred:', err);
-  //         return EMPTY;
-  //       }),
-  //       tap((result) => {
-  //         if (result && result.data) {
-  //           const allData = result.data.flatMap((item) => item); 
-  //         }
-  //       }),
-  //       takeUntil(this._onDestroy$)
-  //     )
-  //     .subscribe();
-  // }
 }
