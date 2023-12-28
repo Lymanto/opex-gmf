@@ -39,4 +39,5 @@ export class ApprovalService {
       `${this.url}/count/${personalNumber}`
     );
   }
+  
 }

@@ -154,13 +154,13 @@ export class TopnavComponent implements OnInit {
         hasil.body?.personalJob === 'DIRECTOR'
       ) {
         this.role = 'DT';
-      } else if (hasil.body?.personalJob === 'SM ') {
+      } else if (hasil.body?.personalJob === 'SENIOR MANAGER') {
         this.role = 'SM_USER';
         // console.log('push list sm', this.role);
-      } else if (hasil.body?.personalJob === 'VP ') {
+      } else if (hasil.body?.personalJob === 'VICE PRESIDENT') {
         this.role = 'VP_USER';
         console.log('push list vp', this.role);
-      } else if (hasil.body?.personalJob === 'MANAGER ') {
+      } else if (hasil.body?.personalJob === 'MANAGER') {
         this.role = 'MANAGER_USER';
       } else {
         this.role = 'USER';
