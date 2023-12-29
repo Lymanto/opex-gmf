@@ -185,33 +185,33 @@
     </tbody>
   </app-table>
   <div class="flex gap-2 mt-5 w-full items-center justify-center">
-    <app-button icon="assets/images/icons/ic-save.svg" type="primary" label="Save" />
+    <app-button icon="assets/images/icons/ic-save.svg" type="primary" label="Save"  *ngIf="(data.statusId === 1 || data.statusId === 2) && userRole === 'USER'    "/>
     <!-- get data dari BE untuk request verification , panggil si phasenya (dari statusId) kirim data sesuai yang diminta BE statusId,statusToId,status,config{button} -->
 
     <app-button icon="assets/images/icons/ic-check-circle.svg" type="success" label="Confirm"
-      *ngIf="data.statusId >= 3  " />
+      *ngIf="(data.statusId < 3 && userRole === 'USER') || (userRole === 'SM_USER' && data.statusId === 4)  " (click) = "updateDataStatusId()" />
     <app-button icon="assets/images/icons/ic-check-circle.svg" type="success" label="Submit"
-      *ngIf="data.statusId === 1 || data.statusId === 2 " />
+    *ngIf="(data.statusId === 1 || data.statusId === 2) && userRole === 'USER' " (click) = "updateDataStatusId()" />
     <!-- BE bikin endpoint untuk updated data (sesuai data dari Realisasi) FE bikin service updated dipake componentnya , bikin 1 method untuk update , lalu dipake di htmlnya-->
     <app-button icon="assets/images/icons/ic-check-circle.svg" type="primary" label="Preview" />
 
     <app-button icon="assets/images/icons/ic-check-circle.svg" type="primary" label="Take Project"
-      *ngIf="data.statusId >= 3  " />
+      *ngIf="(data.statusId < 3 && userRole === 'USER') || (userRole === 'SM_USER' && data.statusId === 4)    " />
     <app-button icon="assets/images/icons/ic-check-circle.svg" type="primary-not-active" label="Untake Project"
-      *ngIf="data.statusId >= 3  " />
+      *ngIf="(data.statusId < 3 && userRole === 'USER') || (userRole === 'SM_USER' && data.statusId === 4)   " />
 
     <app-button icon="assets/images/icons/ic-pencil-square.svg" type="info" label="Edit"
       *ngIf="data.statusId === 1 || data.statusId === 2 " />
     <app-button icon="assets/images/icons/ic-pencil-square.svg" type="info" label="Edit Realokasi"
       *ngIf="data.statusId === 1 || data.statusId === 2 " />
     <app-button icon="assets/images/icons/ic-pencil-square.svg" type="info" label="Revise"
-      data-modal-target="needApprovalRevise" data-modal-toggle="needApprovalRevise" *ngIf="data.statusId >= 3  " />
+      data-modal-target="needApprovalRevise" data-modal-toggle="needApprovalRevise" *ngIf="((data.statusId < 3 && userRole === 'USER') || (userRole === 'SM_USER' && data.statusId === 4))  || userRole ==='VP_USER' || userRole ==='TAB'   " />
     <app-button icon="assets/images/icons/ic-pencil-square.svg" type="danger" label="Reject"
-      data-modal-target="needApprovalReject" data-modal-toggle="needApprovalReject" *ngIf="data.statusId >= 3  " />
+      data-modal-target="needApprovalReject" data-modal-toggle="needApprovalReject" *ngIf="((data.statusId < 3 && userRole === 'USER') || (userRole === 'SM_USER' && data.statusId === 4))  || userRole ==='VP_USER' || userRole ==='TAB'" />
     <app-button icon="assets/images/icons/ic-pencil-square.svg" type="danger" label="Need HPS"
-      data-modal-target="needApprovalNeedHps" data-modal-toggle="needApprovalNeedHps" *ngIf="data.statusId >= 3  " />
+      data-modal-target="needApprovalNeedHps" data-modal-toggle="needApprovalNeedHps" *ngIf="(data.statusId < 3 && userRole === 'USER') || (userRole === 'SM_USER' && data.statusId === 4)   " />
     <app-button icon="assets/images/icons/ic-check-circle.svg" type="success" label="Approve"
-      data-modal-target="needApprovalApprove" data-modal-toggle="needApprovalApprove" *ngIf="data.statusId >= 3  " />
+      data-modal-target="needApprovalApprove" data-modal-toggle="needApprovalApprove" *ngIf="(data.statusId < 3 && userRole === 'USER') || (userRole === 'SM_USER' && data.statusId === 4)   " />
   </div>
   <app-modal type="needApprovalRevise" />
   <app-modal type="needApprovalReject" />

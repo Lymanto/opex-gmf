@@ -27,8 +27,8 @@ export class ApprovalService {
       `${this.url}/all/${personalNumber}?page=${page}&orderBy=desc${taReff}${requestNumber}${status}${statusTo}${typeOfLetter}${dinas}${entryDate}${entryDateTo}`
     );
   }
-  getApprovalById(id: string): Observable<HttpResult<RealizationDTO[]>> {
-    return this.httpClient.get<HttpResult<RealizationDTO[]>>(
+  getApprovalById(id: string | number): Observable<HttpResult<RealizationDTO>> {
+    return this.httpClient.get<HttpResult<RealizationDTO>>(
       `${this.url}/${id}`
     );
   }
