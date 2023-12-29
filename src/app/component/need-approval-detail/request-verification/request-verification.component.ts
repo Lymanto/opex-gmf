@@ -3,7 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { format } from 'date-fns';
 import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
 import { LocalServiceConst } from 'src/app/constanta/local-service-constanta';
-import { RealizationUpdateDto, UpdateRealizationDto } from 'src/app/dto/approve.dto';
+import {
+  RealizationUpdateDto,
+  UpdateRealizationDto,
+} from 'src/app/dto/approve.dto';
 import { RealizationDTO } from 'src/app/dto/request-verification.dto';
 import { LocalStorageService } from 'src/app/services/opex/local-storage/local-storage.service';
 import { ApprovalService } from 'src/app/services/opex/need-approval/approval.service';
@@ -20,17 +23,16 @@ export class RequestVerificationComponent implements OnInit {
   @Input() data!: RealizationDTO;
   localStorageService: any;
   idApproval!: number | null | string;
-  userInfo : any
-  objectRole: any
-  userRole:string = ''
+  userInfo: any;
+  objectRole: any;
+  userRole: string = '';
 
   constructor(
-    private approve : ApproveService,
+    private approve: ApproveService,
     private approval: ApprovalService,
-    private route: ActivatedRoute,
-    
+    private route: ActivatedRoute
   ) {
-    this.localStorageService = new LocalStorageService()
+    this.localStorageService = new LocalStorageService();
   }
   private readonly _onDestroy$: Subject<void> = new Subject<void>();
   ngOnInit(): void {
@@ -39,10 +41,10 @@ export class RequestVerificationComponent implements OnInit {
       this.idApproval = Number(params.get('id'));
     });
     if (this.idApproval) {
-      this.getApprovalById(this.idApproval) ;
+      this.getApprovalById(this.idApproval);
     }
     this.objectRole = this.localStorageService.getData(LocalServiceConst.ROLE);
-    this.userRole = this.objectRole._result
+    this.userRole = this.objectRole._result;
   }
   formatDate(val: Date): string {
     return format(new Date(val), 'dd MMM yyyy');
@@ -68,18 +70,28 @@ export class RequestVerificationComponent implements OnInit {
       .subscribe();
   }
 
-
-
-  updateDataStatusId(){
-    this.userInfo = this.localStorageService.getData(LocalServiceConst.USER_INFO);
-    const userData = JSON.parse(this.userInfo._result) // buat data menjadi object
-    console.log(userData)
-    const object : RealizationUpdateDto = { idRealization: this.idApproval,
-      updateRealizationDto: {status : this.data.statusId >= 6? "PROGRESS" :"OPEN"
-         ,statusId : this.data.statusId + 1,statusToId : this.data.statusToId + 1,updatedBy : userData.personalNumber} ,
-      approvalDto:{name : userData.personalName , jabatan : userData.personalJob , unit : userData.personalUnit, remark : null
-      }  }
-      console.log(object)
+  updateDataStatusId() {
+    this.userInfo = this.localStorageService.getData(
+      LocalServiceConst.USER_INFO
+    );
+    const userData = JSON.parse(this.userInfo._result); // buat data menjadi object
+    console.log(userData);
+    const object: RealizationUpdateDto = {
+      idRealization: this.idApproval,
+      updateRealizationDto: {
+        status: this.data.statusId >= 6 ? 'PROGRESS' : 'OPEN',
+        statusId: this.data.statusId + 1,
+        statusToId: this.data.statusToId + 1,
+        updatedBy: userData.personalNumber,
+      },
+      approvalDto: {
+        name: userData.personalName,
+        jabatan: userData.personalJob,
+        unit: userData.personalUnit,
+        remark: null,
+      },
+    };
+    console.log(object);
     this.approve
       .updateStatus(object)
       .pipe(
@@ -104,5 +116,5 @@ export class RequestVerificationComponent implements OnInit {
         takeUntil(this._onDestroy$)
       )
       .subscribe();
-   }
-  }  
+  }
+}
