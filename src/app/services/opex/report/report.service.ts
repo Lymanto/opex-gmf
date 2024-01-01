@@ -14,8 +14,7 @@ export class ReportService {
 
   getBudgetByFilter(
     years: string | null,
-    costCenter: string | null,
-    percentage: string | null
+    costCenter: string | null
   ): Observable<HttpResult<RKAPType[]>> {
     return this.httpClient.get<HttpResult<RKAPType[]>>(
       `${this.url}/budget?years=${years}${costCenter}`

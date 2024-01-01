@@ -8,10 +8,11 @@ import {
   UpdateRealizationDto,
 } from 'src/app/dto/approve.dto';
 import { RealizationDTO } from 'src/app/dto/request-verification.dto';
+import { UserDataDTO } from 'src/app/dto/user-data-dto';
 import { LocalStorageService } from 'src/app/services/opex/local-storage/local-storage.service';
 import { ApprovalService } from 'src/app/services/opex/need-approval/approval.service';
-import { ApproveService } from 'src/app/services/opex/need-approval/approve.service';
 import { RequestVerificationService } from 'src/app/services/opex/need-approval/request-verification.service';
+import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -26,50 +27,56 @@ export class RequestVerificationComponent implements OnInit {
   userInfo: any;
   objectRole: any;
   userRole: string = '';
-
+  dataResponsibleNoPeg!: UserDataDTO;
+  dataPersonalNumberTo!: UserDataDTO;
   constructor(
-    private approve: ApproveService,
     private approval: ApprovalService,
-    private route: ActivatedRoute
+    private users: GetAllUsersService
   ) {
     this.localStorageService = new LocalStorageService();
   }
   private readonly _onDestroy$: Subject<void> = new Subject<void>();
   ngOnInit(): void {
-    console.log(this.data);
-    this.route.paramMap.subscribe((params) => {
-      this.idApproval = Number(params.get('id'));
-    });
-    if (this.idApproval) {
-      this.getApprovalById(this.idApproval);
-    }
     this.objectRole = this.localStorageService.getData(LocalServiceConst.ROLE);
     this.userRole = this.objectRole._result;
+    console.log(this.userRole);
+
+    this.getResponsibleNoPegDetail(this.data.responsibleNopeg);
+    this.getPersonalNumberToDetail(this.data.personalNumberTo);
   }
   formatDate(val: Date): string {
     return format(new Date(val), 'dd MMM yyyy');
   }
-
-  getApprovalById(id: string | number) {
-    this.approval
-      .getApprovalById(id)
+  getResponsibleNoPegDetail(noPeg: string): void {
+    this.users
+      .getDetailUsers(noPeg)
       .pipe(
         catchError((err) => {
           console.error('Error occurred:', err);
           return EMPTY;
         }),
-        tap((result: any) => {
-          if (result) {
-            // Ensure result.data is a single array of glAccountType objects
-
-            this.data = result.realization;
-          }
+        tap((res) => {
+          this.dataResponsibleNoPeg = res.body;
         }),
         takeUntil(this._onDestroy$)
       )
       .subscribe();
   }
-
+  getPersonalNumberToDetail(noPeg: string): void {
+    this.users
+      .getDetailUsers(noPeg)
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred:', err);
+          return EMPTY;
+        }),
+        tap((res) => {
+          this.dataPersonalNumberTo = res.body;
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
+  }
   updateDataStatusId() {
     this.userInfo = this.localStorageService.getData(
       LocalServiceConst.USER_INFO
@@ -92,7 +99,7 @@ export class RequestVerificationComponent implements OnInit {
       },
     };
     console.log(object);
-    this.approve
+    this.approval
       .updateStatus(object)
       .pipe(
         catchError((err) => {

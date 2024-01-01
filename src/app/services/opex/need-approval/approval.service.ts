@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpResult } from 'src/app/dto/http-result.dto';
 import { ApprovalType } from 'src/app/lib/types';
 import { RealizationDTO } from 'src/app/dto/request-verification.dto';
+import { RealizationUpdateDto } from 'src/app/dto/approve.dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -28,9 +29,7 @@ export class ApprovalService {
     );
   }
   getApprovalById(id: string | number): Observable<HttpResult<RealizationDTO>> {
-    return this.httpClient.get<HttpResult<RealizationDTO>>(
-      `${this.url}/${id}`
-    );
+    return this.httpClient.get<HttpResult<RealizationDTO>>(`${this.url}/${id}`);
   }
   getCountApproval(
     personalNumber: string | number
@@ -39,5 +38,9 @@ export class ApprovalService {
       `${this.url}/count/${personalNumber}`
     );
   }
-  
+  updateStatus(
+    body: RealizationUpdateDto
+  ): Observable<HttpResult<RealizationUpdateDto[]>> {
+    return this.httpClient.post<any>(`${this.url}/approve`, body);
+  }
 }

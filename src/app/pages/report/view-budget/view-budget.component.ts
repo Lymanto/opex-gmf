@@ -1,10 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { format } from 'date-fns';
 import { EMPTY, Subject, catchError, takeUntil, tap } from 'rxjs';
 import { LocalServiceConst } from 'src/app/constanta/local-service-constanta';
 import { UserDataDTO } from 'src/app/dto/user-data-dto';
-import { RKAPType, glAccountType, selectType } from 'src/app/lib/types';
+import {
+  CostCenterType,
+  RKAPType,
+  glAccountType,
+  selectType,
+} from 'src/app/lib/types';
+import { CostCenterService } from 'src/app/services/opex/cost-center/cost-center.service';
 import { NewRequestService } from 'src/app/services/opex/dashboard/new-request.service';
 import { LocalStorageService } from 'src/app/services/opex/local-storage/local-storage.service';
 import { ViewBudgetService } from 'src/app/services/opex/master-data/view-budget.service';
@@ -42,7 +48,8 @@ export class ViewBudgetComponent implements OnInit {
   isDisplayRemaining: boolean = true;
   isDisplayActual: boolean = true;
   activeId: string | number = 'not-active';
-
+  costCenterData: CostCenterType | null = <CostCenterType>{};
+  personalUnit!: string;
   headers: string[] = [
     'Financial Indicator',
     'G/L Number',
@@ -81,6 +88,7 @@ export class ViewBudgetComponent implements OnInit {
   }
   getValueSelectBox(val: any): void {
     this.yearsSelected = parseInt(val.id);
+    this.getRKAP();
   }
   selectGroupData: selectType[] = [];
   selectGroupDetail: selectType[] = [];
@@ -89,6 +97,7 @@ export class ViewBudgetComponent implements OnInit {
     private service: NewRequestService,
     private viewBudget: ReportService,
     private users: GetAllUsersService,
+    private costCenter: CostCenterService,
     private readonly localStorageService: LocalStorageService
   ) {}
 
@@ -98,8 +107,8 @@ export class ViewBudgetComponent implements OnInit {
     this.fetchGlAccount();
     this.generateYears();
     this.getUserInfo();
-    this.getRKAP();
   }
+
   async getUserInfo(): Promise<void> {
     if (!this.users.getPersonalInformationFromCache()) {
       try {
@@ -118,8 +127,32 @@ export class ViewBudgetComponent implements OnInit {
         ...this.localStorageService.getData(LocalServiceConst.USER_INFO),
       };
       this.userInfo = JSON.parse(_userInfo?._result);
+      this.generateDinas(this.userInfo?.personalUnit);
     }
   }
+  getCostCenter(bidang: string): void {
+    this.costCenter
+      .getCostCenterByBidang(bidang)
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred:', err);
+          return EMPTY;
+        }),
+        tap((result) => {
+          if (result) {
+            this.costCenterData = result.data[0] as unknown as CostCenterType;
+            this.getRKAP();
+          }
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
+  }
+  generateDinas(dinas: string): void {
+    this.personalUnit = dinas.slice(0, 2);
+    this.getCostCenter(this.personalUnit);
+  }
+
   fetchGlAccount(): void {
     this.service
       .getAllGroup()
@@ -155,8 +188,12 @@ export class ViewBudgetComponent implements OnInit {
       .subscribe();
   }
   getRKAP(): void {
+    this.dataRKAP = [];
     this.viewBudget
-      .getBudgetByFilter(this.yearsSelected.toString(), '', '')
+      .getBudgetByFilter(
+        this.yearsSelected.toString(),
+        `&costCenter=${this.costCenterData?.dinas}`
+      )
       .pipe(
         catchError((err) => {
           console.error('Error occurred:', err);
