@@ -23,7 +23,7 @@ import Swal from 'sweetalert2';
 export class RequestVerificationComponent implements OnInit {
   @Input() data!: RealizationDTO;
   localStorageService: any;
-  idApproval!: number | null | string;
+  idApproval!: number | null | string ;
   userInfo: any;
   objectRole: any;
   userRole: string = '';
@@ -40,7 +40,10 @@ export class RequestVerificationComponent implements OnInit {
     this.objectRole = this.localStorageService.getData(LocalServiceConst.ROLE);
     this.userRole = this.objectRole._result;
     console.log(this.userRole);
-
+    console.log(this.data); 
+    if(this.data){
+      this.idApproval = this.data.idRealization;
+    }
     this.getResponsibleNoPegDetail(this.data.responsibleNopeg);
     this.getPersonalNumberToDetail(this.data.personalNumberTo);
   }
