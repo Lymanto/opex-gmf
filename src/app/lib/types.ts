@@ -227,3 +227,20 @@ export interface UploadRKAP {
   file: File;
   createdBy: string;
 }
+export interface personalSummaryTypes {
+  totalSubmissionValue: number;
+  data: personalSummaryDataTypes[];
+}
+export interface personalSummaryDataTypes {
+  idRealization: string;
+  dinas: string;
+  month: number;
+  years: number;
+  requestNumber: string | null;
+  typeSubmission: string;
+  submissionValue: number;
+  status: string;
+  requestBy: string;
+  responsibleOfRequest: string;
+  description: string;
+}

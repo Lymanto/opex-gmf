@@ -21,7 +21,7 @@ export class ReportService {
     );
   }
   getPersonalSummaryByFilter(
-    page: string | null,
+    page: number | null,
     dinas: string | null,
     month: string | null,
     years: string | null,

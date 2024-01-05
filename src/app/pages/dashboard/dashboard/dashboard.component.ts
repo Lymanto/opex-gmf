@@ -37,7 +37,6 @@ export class DashboardComponent implements OnInit {
   entryDateTo: string = '';
   statusType: string[] = ['OPEN', 'PROGRESS', 'CLOSED', 'REVISE', 'REJECT'];
 
-  public needApproval: string = '100';
   constructor(private requestData: NewRequestService) {}
   private readonly _onDestroy$: Subject<void> = new Subject<void>();
   dataYears: selectType[] = [
@@ -117,7 +116,6 @@ export class DashboardComponent implements OnInit {
     },
   ];
   ngOnInit(): void {
-    this.needApproval;
     this.getDataTable();
     this.getDataPercentage();
   }
