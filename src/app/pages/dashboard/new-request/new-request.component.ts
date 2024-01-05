@@ -229,7 +229,7 @@ export class NewRequestComponent implements OnInit {
         }),
         tap((result: { data: any }) => {
           if (result && result.data) {
-
+            this.console.log(result.data.available);
             this.getItems.controls[index]
               .get('idGlAccount')
               ?.setValue(temp[0].idGlAccount);

@@ -20,4 +20,18 @@ export class ReportService {
       `${this.url}/budget?years=${years}${costCenter}`
     );
   }
+  getPersonalSummaryByFilter(
+    page: string | null,
+    dinas: string | null,
+    month: string | null,
+    years: string | null,
+    type: string | null,
+    status: string | null,
+    requestBy: string | null,
+    responsibleOfRequest: string | null
+  ): Observable<HttpResult<RKAPType[]>> {
+    return this.httpClient.get<HttpResult<RKAPType[]>>(
+      `${this.url}/summary?page=${page}${dinas}${month}${years}${type}${status}${requestBy}${responsibleOfRequest}`
+    );
+  }
 }

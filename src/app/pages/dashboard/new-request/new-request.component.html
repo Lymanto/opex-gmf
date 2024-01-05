@@ -255,6 +255,7 @@
                 label="Available"
                 formControlName="availableControl"
                 [isDisabled]="true"
+                [value]="item.get('availableControl')?.value"
               />
               <app-input-text
                 type="amount-submission"
