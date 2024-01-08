@@ -34,4 +34,14 @@ export class ReportService {
       `${this.url}/summary?page=${page}${dinas}${month}${years}${type}${status}${requestBy}${responsibleOfRequest}`
     );
   }
+  getRequestBy(): Observable<HttpResult<string[]>> {
+    return this.httpClient.get<HttpResult<string[]>>(
+      `${this.url}/all/requestby`
+    );
+  }
+  getResponsible(): Observable<HttpResult<string[]>> {
+    return this.httpClient.get<HttpResult<string[]>>(
+      `${this.url}/all/responsible`
+    );
+  }
 }

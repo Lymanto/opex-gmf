@@ -20,6 +20,8 @@ import { GetAllUsersService } from 'src/app/services/opex/user/get-all-users.ser
 export class PersonnelSummaryComponent {
   isFilterActive: boolean = true;
   dataDinas: selectType[] = [];
+  dataRequestBy: selectType[] = [];
+  dataResponsible: selectType[] = [];
   userInfo: UserDataDTO = <UserDataDTO>{};
   page: number = 1;
   perPage: number = 10;
@@ -135,6 +137,8 @@ export class PersonnelSummaryComponent {
   ngOnInit(): void {
     this.getDinas();
     this.getPersonalSummary();
+    this.getResponsible();
+    this.getRequestBy();
   }
   resetFilter(): void {
     this.years = '';
@@ -160,6 +164,16 @@ export class PersonnelSummaryComponent {
   }
   onChangeDinas(val: any) {
     this.dinas = val.id;
+    this.page = 1;
+    this.getPersonalSummary();
+  }
+  onChangeResponsible(val: any) {
+    this.responsibleOfRequest = val.id;
+    this.page = 1;
+    this.getPersonalSummary();
+  }
+  onChangeRequestBy(val: any) {
+    this.requestBy = val.id;
     this.page = 1;
     this.getPersonalSummary();
   }
@@ -191,14 +205,52 @@ export class PersonnelSummaryComponent {
           if (result && result.data) {
             // Ensure result.data is a single array of glAccountType objects
 
-            this.dataDinas = this.refactorDinas(result.data);
+            this.dataDinas = this.refactorArray(result.data);
           }
         }),
         takeUntil(this._onDestroy$)
       )
       .subscribe();
   }
-  refactorDinas(data: string[]): selectType[] {
+  getResponsible() {
+    this.report
+      .getResponsible()
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred:', err);
+          return EMPTY;
+        }),
+        tap((result: any) => {
+          if (result && result.data) {
+            // Ensure result.data is a single array of glAccountType objects
+
+            this.dataResponsible = this.refactorArray(result.data);
+          }
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
+  }
+  getRequestBy() {
+    this.report
+      .getRequestBy()
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred:', err);
+          return EMPTY;
+        }),
+        tap((result: any) => {
+          if (result && result.data) {
+            // Ensure result.data is a single array of glAccountType objects
+
+            this.dataRequestBy = this.refactorArray(result.data);
+          }
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
+  }
+  refactorArray(data: string[]): selectType[] {
     return data.map((item) => {
       return {
         id: item,

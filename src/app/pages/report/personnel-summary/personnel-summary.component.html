@@ -120,11 +120,17 @@
                 type="status"
                 id="requestBy"
                 label="Request By"
+                [data]="dataRequestBy"
+                (selectedValue)="onChangeRequestBy($event)"
+                [value]="requestBy"
               ></app-select-box>
               <app-select-box
                 type="status"
                 id="responsibleRequest"
+                [data]="dataResponsible"
                 label="Responsible Of Request"
+                (selectedValue)="onChangeResponsible($event)"
+                [value]="responsibleOfRequest"
               ></app-select-box>
               <app-input-text
                 type="currency"
