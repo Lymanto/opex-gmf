@@ -127,4 +127,51 @@ export class RequestVerificationComponent implements OnInit {
       )
       .subscribe();
   }
+  rejectDataStatusId() {
+    this.userInfo = this.localStorageService.getData(
+      LocalServiceConst.USER_INFO
+    );
+    const userData = JSON.parse(this.userInfo._result); // buat data menjadi object
+    console.log(userData);
+    const object: RealizationUpdateDto = {
+      idRealization: this.idApproval,
+      updateRealizationDto: {
+        status: this.data.statusId >= 6 ? 'PROGRESS' : 'OPEN',
+        statusId: this.data.statusId + 1,
+        statusToId: null,
+        updatedBy: userData.personalNumber,
+      },
+      approvalDto: {
+        name: userData.personalName,
+        jabatan: userData.personalJob,
+        unit: userData.personalUnit,
+        remark: null,
+      },
+    };
+    console.log(object);
+    this.approval
+      .updateStatus(object)
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred:', err);
+          Swal.fire({
+            title: 'Alert!',
+            html: 'failed to reject data',
+            icon: 'error',
+            confirmButtonColor: '#276BC5',
+          });
+          return EMPTY;
+        }),
+        tap(() => {
+          Swal.fire({
+            title: 'Alert!',
+            html: 'Success',
+            icon: 'success',
+            confirmButtonColor: '#276BC5',
+          }).then(() => window.location.reload());
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
+  }
 }

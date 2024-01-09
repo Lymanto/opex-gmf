@@ -13,7 +13,7 @@ const parents = [
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'summary',
     component: SummaryComponent,
   },
   {

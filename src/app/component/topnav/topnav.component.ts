@@ -54,7 +54,6 @@ export class TopnavComponent implements OnInit {
       let _userInfo: any = {
         ...this.localStorageService.getData(LocalServiceConst.USER_INFO),
       };
-      console.log('ngambil dari local');
       this.userInfo = JSON.parse(_userInfo?._result);
     }
   }

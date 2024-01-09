@@ -123,18 +123,23 @@
         <div class="text-center mt-6">
           <h6>Reject</h6>
         </div>
-        <div class="mt-6 mx-6">
-          <app-textarea type="normal" id="remark" label="Remark" [required]="true"
-            placeholder="Please Fill this"></app-textarea>
-        </div>
-        <div class="px-6 pb-6 text-center mt-10">
-          <div class="grid grid-cols-2 items-center justify-center gap-3">
-            <app-button type="primary-not-active" label="Cancel" [hasIcon]="false" [isFull]="true"
-              data-modal-hide="needApprovalReject" />
+        <form [formGroup]="remarkForm">
 
-            <app-button [isFull]="true" type="primary" label="Confirm" [hasIcon]="false" />
+          <div class="mt-6 mx-6">
+            <app-textarea type="normal" id="remark" label="Remark" [required]="true" formControlName="remark"
+              placeholder="Please Fill this"></app-textarea>
           </div>
-        </div>
+          <div class="px-6 pb-6 text-center mt-10">
+            <div class="grid grid-cols-2 items-center justify-center gap-3">
+              <app-button type="primary-not-active" label="Cancel" [hasIcon]="false" [isFull]="true"
+                data-modal-hide="needApprovalReject" />
+
+              <app-button [isFull]="true" type="primary" label="Confirm" [hasIcon]="false"
+                (click)="rejectDataStatusId()" />
+            </div>
+          </div>
+        </form>
+
       </div>
     </div>
   </div>

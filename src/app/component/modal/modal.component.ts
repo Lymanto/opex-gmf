@@ -41,6 +41,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   password: string = "940017";
   PasswordFormControl = new FormControl<string>('');
   passwordForm!: FormGroup;
+  remarkForm!: FormGroup;
   idApproval!: number | null | string ;
   isLoading: boolean = false;
   userInfo: any;
@@ -80,6 +81,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.generateYears();
     this.createPasswordForm();
+    this.createRemarkForm();
     if(this.data){
       this.idApproval = this.data.idRealization;
     }
@@ -153,6 +155,59 @@ export class ModalComponent implements OnInit, OnDestroy {
     this.passwordForm = this.fb.group({
       password:new FormControl<string>('')
     })
+  }
+  createRemarkForm(){
+    this.remarkForm = this.fb.group({
+      remark:new FormControl<string>('')
+    })
+  }
+  rejectDataStatusId() {
+    this.userInfo = this.localStorageService.getData(
+      LocalServiceConst.USER_INFO
+    );
+    const userData = JSON.parse(this.userInfo._result); // buat data menjadi object
+    console.log(userData);
+    this.console.log(this.data)
+    const object: RealizationUpdateDto = {
+      idRealization: this.idApproval,
+      updateRealizationDto: {
+        status: this.data.status = "REJECT",
+        statusId: this.data.statusId ,
+        statusToId: null,
+        updatedBy: userData.personalNumber,
+      },
+      approvalDto: {
+        name: userData.personalName,
+        jabatan: userData.personalJob,
+        unit: userData.personalUnit,
+        remark: this.remarkForm.value.remark,
+      },
+    };
+    console.log(object);
+    this.approval
+      .updateStatus(object)
+      .pipe(
+        catchError((err) => {
+          console.error('Error occurred:', err);
+          Swal.fire({
+            title: 'Alert!',
+            html: 'failed to reject data',
+            icon: 'error',
+            confirmButtonColor: '#276BC5',
+          });
+          return EMPTY;
+        }),
+        tap(() => {
+          Swal.fire({
+            title: 'Alert!',
+            html: 'Success',
+            icon: 'success',
+            confirmButtonColor: '#276BC5',
+          }).then(() => window.location.reload());
+        }),
+        takeUntil(this._onDestroy$)
+      )
+      .subscribe();
   }
 }
 

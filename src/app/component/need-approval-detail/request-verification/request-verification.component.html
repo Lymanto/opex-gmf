@@ -194,7 +194,8 @@
 
     <app-button icon="assets/images/icons/ic-check-circle.svg" type="success" label="Confirm" *ngIf="
         (data.statusId > 3 && userRole !== 'USER') ||
-        (userRole === 'SM_USER' && data.statusId === 2) 
+        (userRole === 'SM_USER' && data.statusId === 2) ||
+        (userRole === 'TAB' && data.statusId === 4) 
       " (click)="updateDataStatusId()" />
     <app-button icon="assets/images/icons/ic-check-circle.svg" type="success" label="Submit" *ngIf="
         data.statusId === 1  && userRole === 'USER'
@@ -203,10 +204,10 @@
     <app-button icon="assets/images/icons/ic-check-circle.svg" type="primary" label="Preview" />
 
     <app-button icon="assets/images/icons/ic-check-circle.svg" type="primary" label="Take Project" *ngIf="
-        (userRole === 'TAB' && data.statusId === 6)
+        (userRole === 'TAB' && data.statusId === 4)
       " />
     <app-button icon="assets/images/icons/ic-check-circle.svg" type="primary-not-active" label="Untake Project" *ngIf="
-        (userRole === 'TAB' && data.statusId === 6)
+        (userRole === 'TAB' && data.statusId === 4)
       " />
 
     <app-button icon="assets/images/icons/ic-pencil-square.svg" type="info" label="Edit"
@@ -238,7 +239,7 @@
         userRole === 'VP_USER'" />
   </div>
   <app-modal type=" needApprovalRevise" />
-  <app-modal type="needApprovalReject" />
+  <app-modal type="needApprovalReject" [data]="data" />
   <app-modal type="needApprovalNeedHps" />
   <app-modal type="needApprovalApprove" [data]="data" />
 </section>
